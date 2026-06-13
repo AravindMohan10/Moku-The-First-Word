@@ -1,0 +1,24 @@
+[
+  {
+    "turn": 1,
+    "creature": "Lumo",
+    "action": "move_east",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Moved east using vili.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 990,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Decided to move east to gather more food without attracting danger.",
+    "intended_meaning": "move east",
+    "interpretation": {
+      "veli": "move east"
+    }
+  }
+]

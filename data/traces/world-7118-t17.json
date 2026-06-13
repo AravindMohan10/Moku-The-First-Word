@@ -1,0 +1,2464 @@
+[
+  {
+    "turn": 1,
+    "creature": "Lumo",
+    "action": "move_west",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Signaled nearby creatures to help gather food.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 973,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is anxious about his hunger and fear of danger. Moving west will allow him to signal nearby creatures to help gather food and potentially find shelter.",
+    "intended_meaning": "Signal nearby creatures to help gather food.",
+    "interpretation": {
+      "veli": "Signal"
+    }
+  },
+  {
+    "turn": 1,
+    "creature": "Nia",
+    "action": "move_north",
+    "target": null,
+    "glyphs": [
+      "ra"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Used ra glyph to move north.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 942,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Navigating the clear sky can help Nia avoid potential danger and reach higher ground where it might have shelter. She also wants to stay away from the visible danger at [6, 3].",
+    "intended_meaning": "Navigate towards higher ground",
+    "interpretation": {
+      "ra": "navigate"
+    }
+  },
+  {
+    "turn": 1,
+    "creature": "Oro",
+    "action": "signal",
+    "target": "Lumo",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "I signaled to Lumo about visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1014,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "To alert Lumo to the danger, Oro uses nim to communicate the threat.",
+    "intended_meaning": "nim: signal",
+    "interpretation": {
+      "nim": "signal"
+    }
+  },
+  {
+    "turn": 1,
+    "creature": "Pika",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Used Veliv to signal food location to Oro.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1228,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "I detected Oro nearby and saw visible food. I chose to signal Oro to share the food location as I felt it might help both of us find shelter. I used Veliv, my favorite signaling glyph, which Oro seems to understand. This action maintains trust and potentially leads to better cooperation.",
+    "intended_meaning": "veli: useful signal maybe",
+    "interpretation": {
+      "veli": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 1,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "I used nim to warn Nia.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1203,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "As Vey feels wary and has seen Oro's recent actions, warning Nia is essential to protect the forest from potential harm.",
+    "intended_meaning": "nim: warn",
+    "interpretation": {
+      "nim": "warn"
+    }
+  },
+  {
+    "turn": 1,
+    "creature": "Sora",
+    "action": "move_east",
+    "target": null,
+    "glyphs": [
+      "moku"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Used moku to move east to find more visible food at [4, 1].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1120,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Decided to move east because there is visible food at [4, 1] and the weather is clear.",
+    "intended_meaning": "moku: move east",
+    "interpretation": {
+      "moku": "move east"
+    }
+  },
+  {
+    "turn": 2,
+    "creature": "Lumo",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "vili"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Gathered visible food using vili.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 926,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is anxious and in need of food. The visible food at [0, 7] is easily accessible and safe. Using vili, Lumo will gather this food for immediate consumption.",
+    "intended_meaning": "vili: gather",
+    "interpretation": {
+      "vili": "gather"
+    }
+  },
+  {
+    "turn": 2,
+    "creature": "Nia",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "tala"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Gathered food using soma tala.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1089,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Gathering food is a priority given high hunger (31) and low scarcity level (0). Using tala, a common method to gather food, aligns with Nia's beliefs and previous actions.",
+    "intended_meaning": "gather food",
+    "interpretation": {
+      "tala": "gather"
+    }
+  },
+  {
+    "turn": 2,
+    "creature": "Oro",
+    "action": "signal",
+    "target": "Lumo",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "I used nim to signal to Lumo about visible danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 897,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Since Oro is aware of visible danger and needs to signal to Lumo, using nim is the most fitting legal action to effectively communicate his situation.",
+    "intended_meaning": "Use nim to signal to Lumo about visible danger.",
+    "interpretation": {
+      "nim": "Use nim to signal to Lumo about visible danger."
+    }
+  },
+  {
+    "turn": 2,
+    "creature": "Pika",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Used Veliv to signal food location to Oro.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1024,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Pika feels comfortable signaling Oro about the food location.",
+    "intended_meaning": "veli: signal",
+    "interpretation": {
+      "veli": "signal"
+    }
+  },
+  {
+    "turn": 2,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "I used nim to warn Nia.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 881,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "I saw Oro nearby with a negative trust rating and heard his glyphs indicating danger. As I am a tiny forest creature, I prioritize personal safety and use my last_glyphs ('nim') to signal Nia about potential danger.",
+    "intended_meaning": "Warning",
+    "interpretation": {
+      "nim": "Warning"
+    }
+  },
+  {
+    "turn": 2,
+    "creature": "Sora",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Used veli to signal Nia about the visible danger at [1, 0].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 896,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Seeing visible danger at [1, 0] and knowing that Nia has good trust, I decided to use the veli glyph to signal her urgently.",
+    "intended_meaning": "Signal about visible danger",
+    "interpretation": {
+      "veli": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 3,
+    "creature": "Lumo",
+    "action": "move_east",
+    "target": null,
+    "glyphs": [
+      "vili"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Moved east.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 953,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is moving towards the visible shelter at [1, 6] to find safety.",
+    "intended_meaning": "Move east.",
+    "interpretation": {
+      "vili": "Move east."
+    }
+  },
+  {
+    "turn": 3,
+    "creature": "Nia",
+    "action": "stay",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Nia decided to stay and observe the situation.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 927,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia's hunger is high (38), but she has already gathered food twice this turn. Staying allows her to conserve energy and potentially find more food later.",
+    "intended_meaning": "Stay where I am",
+    "interpretation": {
+      "nim": "Stay"
+    }
+  },
+  {
+    "turn": 3,
+    "creature": "Oro",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Continued to hide from visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1138,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Due to the high fear level and scarcity of resources, Oro chooses to continue hiding from visible danger using the nim glyph.",
+    "intended_meaning": "Hide from visible danger.",
+    "interpretation": {
+      "nim": "Hide"
+    }
+  },
+  {
+    "turn": 3,
+    "creature": "Pika",
+    "action": "follow",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "curious",
+    "memory_to_store": "Follow Oro for more information or potential safety.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1155,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Following Oro aligns with Pika's gentle nature and the need for information. It also allows Pika to stay close if Oro becomes dangerous.",
+    "intended_meaning": "To follow Oro for more information or potential safety.",
+    "interpretation": {
+      "nim": "follow"
+    }
+  },
+  {
+    "turn": 3,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "nim",
+      "koro"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Used nim koro to warn Nia about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 985,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia is the closest visible creature and has shown trust in Vey before. Vey uses nim and koro to warn Nia about the potential danger from Oro and Pika.",
+    "intended_meaning": "Warn Nia about danger.",
+    "interpretation": {
+      "nim": "Warn",
+      "koro": "Danger"
+    }
+  },
+  {
+    "turn": 3,
+    "creature": "Sora",
+    "action": "follow",
+    "target": "Nia",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "I followed Nia to gather food and found no visible food.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1045,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Following Nia reduces fear and increases the chance of finding food.",
+    "intended_meaning": "Follow Nia to gather food.",
+    "interpretation": {
+      "nim": "follow"
+    }
+  },
+  {
+    "turn": 4,
+    "creature": "Lumo",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "tala"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Hid from danger using tala.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1041,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "The fear level is high due to visible danger (Oro). The creature is hiding to avoid immediate harm.",
+    "intended_meaning": "To hide from danger.",
+    "interpretation": {
+      "vili": "Unknown meaning",
+      "nim": "unknown meaning",
+      "koro": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 4,
+    "creature": "Nia",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Nia used nim to signal Oro about visible food.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 873,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia feels hungry and sees visible food. She decides to signal Oro about this information to help her find more food.",
+    "intended_meaning": "Signal Oro about visible food",
+    "interpretation": {
+      "nim": "Signal"
+    }
+  },
+  {
+    "turn": 4,
+    "creature": "Oro",
+    "action": "follow",
+    "target": "Nia",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 923,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Oro follows Nia because there is no clear danger or shelter nearby, and Oro's trust in Nia (5) is higher than other creatures. Oro also wants to stay informed about Nia's activities.",
+    "intended_meaning": "nim: signal to Lumo",
+    "interpretation": {
+      "nim": "signal to Lumo"
+    }
+  },
+  {
+    "turn": 4,
+    "creature": "Pika",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "tala"
+    ],
+    "mood": "curious",
+    "memory_to_store": "I signaled Oro about the food location.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 923,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "I notice Oro is near and hungry. I think it's best to share my knowledge about the food location.",
+    "intended_meaning": "signal direction towards visible food",
+    "interpretation": {
+      "tala": "signal"
+    }
+  },
+  {
+    "turn": 4,
+    "creature": "Vey",
+    "action": "hide",
+    "target": "Oro",
+    "glyphs": [
+      "nim",
+      "tala"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Used nim tala to warn Oro about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1157,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Vey is cautious of Oro due to previous warnings. By hiding, Vey can avoid direct confrontation and potentially reduce fear.",
+    "intended_meaning": "nim: warn; tala: alert",
+    "interpretation": {
+      "nim": "warn",
+      "tala": "alert"
+    }
+  },
+  {
+    "turn": 4,
+    "creature": "Sora",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "moku"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Used moku to gather visible food at [5, 2].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1077,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Collecting visible food is a priority given Sora's high hunger level. Moving north to access the visible food at [3, 3] aligns with this need and can be done safely due to clear weather.",
+    "intended_meaning": "collect the visible food",
+    "interpretation": {
+      "moku": "moving north to find visible food at [3, 3]"
+    }
+  },
+  {
+    "turn": 5,
+    "creature": "Lumo",
+    "action": "follow",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "calm",
+    "memory_to_store": "",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 839,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is cautious and anxious, but his hunger level and fear are high. He needs to find shelter to rest and regroup.",
+    "intended_meaning": "Follow the nearest shelter.",
+    "interpretation": {
+      "veli": "Follow"
+    }
+  },
+  {
+    "turn": 5,
+    "creature": "Nia",
+    "action": "move_north",
+    "target": "Nia",
+    "glyphs": [
+      "nim",
+      "tala"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Nia signaled Oro about visible food.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1289,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia's mood remains calm as she gathers food to satisfy her hunger. The visible food is abundant, so she decides to move north to continue her exploration.",
+    "intended_meaning": "nim: signal; tala: gather",
+    "interpretation": {
+      "nim": "signal",
+      "tala": "gather"
+    }
+  },
+  {
+    "turn": 5,
+    "creature": "Oro",
+    "action": "move_west",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "I decided to move west to hide from visible danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1022,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Visible danger is present in the east, and hiding west could help avoid it.",
+    "intended_meaning": "Hide from visible danger.",
+    "interpretation": {
+      "nim": "hide"
+    }
+  },
+  {
+    "turn": 5,
+    "creature": "Pika",
+    "action": "follow",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Follow Oro for more information or potential safety.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 983,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Pika is curious about Oro's trustworthiness and fears being alone. Following Oro aligns with seeking guidance, increasing trust, and avoiding potential danger.",
+    "intended_meaning": "Seek guidance and safety.",
+    "interpretation": {
+      "nim": "follow"
+    }
+  },
+  {
+    "turn": 5,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "nim",
+      "veli"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Used nim veli to signal Nia about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1368,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Vey is cautious due to a high fear level and a low energy state. It has recently received warnings from other creatures about danger and wants to ensure Nia is aware. Vey decides to use its signal abilities to warn Nia, as they are more reliable than the warning glyphs it has already used.",
+    "intended_meaning": "nim: warning; veli: signal",
+    "interpretation": {
+      "nim": "warning",
+      "veli": "signal"
+    }
+  },
+  {
+    "turn": 5,
+    "creature": "Sora",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Used veli to signal Nia about the useful signal at [5, 0].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1098,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Sora has recently used veli to signal others. By doing so, Sora maintains a positive relationship with Nia, who is also loyal and anxious.",
+    "intended_meaning": "Useful signal",
+    "interpretation": {
+      "veli": "Useful signal"
+    }
+  },
+  {
+    "turn": 6,
+    "creature": "Lumo",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Gathered visible food using vili.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 923,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is anxious about hunger and fear but has gathered visible food using vili. He decides to continue gathering to fulfill his needs.",
+    "intended_meaning": "gather visible food",
+    "interpretation": {
+      "veli": "gather"
+    }
+  },
+  {
+    "turn": 6,
+    "creature": "Nia",
+    "action": "move_north",
+    "target": null,
+    "glyphs": [
+      "nim",
+      "tala"
+    ],
+    "mood": "calm",
+    "memory_to_store": "niamotion: north",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1024,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Moved north to follow Sora, who has a positive trust level and appears to be gathering food.",
+    "intended_meaning": "Follow Sora's lead.",
+    "interpretation": {
+      "nim": "follow",
+      "tala": "gather"
+    }
+  },
+  {
+    "turn": 6,
+    "creature": "Oro",
+    "action": "signal",
+    "target": "Lumo",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Signaled to Lumo about visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 915,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Oro used nim to signal to Lumo about visible danger, increasing Lumo's trust.",
+    "intended_meaning": "signal to Lumo about visible danger",
+    "interpretation": {
+      "nim": "signal"
+    }
+  },
+  {
+    "turn": 6,
+    "creature": "Pika",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "alert",
+    "memory_to_store": "I signaled Oro about the food location.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 829,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "To share the food location with Oro for potential safety or assistance.",
+    "intended_meaning": "share food location",
+    "interpretation": {
+      "veli": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 6,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Lumo",
+    "glyphs": [
+      "koro"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Used koro tala to warn Lumo about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1048,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo has shown distrust, so I am using the strongest warning glyph available to signal her potential threat.",
+    "intended_meaning": "warning",
+    "interpretation": {
+      "koro": "warning"
+    }
+  },
+  {
+    "turn": 6,
+    "creature": "Sora",
+    "action": "move_south",
+    "target": null,
+    "glyphs": [
+      "koro"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Used koro to move south to explore further.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 971,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Sora is exploring further south to find more food and avoid potential dangers. It's also using koro for exploration and communication.",
+    "intended_meaning": "Explore further south.",
+    "interpretation": {
+      "koro": "Explore further south."
+    }
+  },
+  {
+    "turn": 7,
+    "creature": "Lumo",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "tala"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Hid from danger using tala.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1051,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is anxious due to high fear levels. It has seen visible danger at multiple locations and needs to act quickly to reduce its exposure. The 'tala' glyph is an effective way to hide and reduce fear.",
+    "intended_meaning": "Hide from danger and reduce fear.",
+    "interpretation": {
+      "tala": "Hide"
+    }
+  },
+  {
+    "turn": 7,
+    "creature": "Nia",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "nim",
+      "tala"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Gathered food using soma tala.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1034,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia feels hungry and uses her knowledge of soma tala to gather food. She has seen Sora gathering food before and trusts her. The weather is clear, there's no danger, and she can move north without being noticed by nearby creatures.",
+    "intended_meaning": "nim: gather; tala: food",
+    "interpretation": {
+      "nim": "gather",
+      "tala": "food"
+    }
+  },
+  {
+    "turn": 7,
+    "creature": "Oro",
+    "action": "hide",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "I continued to hide from visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 872,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Oro perceives high fear and scarcity levels. He has already hidden using nim, but he continues hiding to avoid the visible danger.",
+    "intended_meaning": "Hide from visible danger",
+    "interpretation": {
+      "nim": "Useful signal maybe"
+    }
+  },
+  {
+    "turn": 7,
+    "creature": "Pika",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "I decided to hide as I sensed danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 818,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "I am cautious due to the high fear level and potential danger around me. Hiding is the safest option.",
+    "intended_meaning": "Hide from danger",
+    "interpretation": {
+      "nim": "hide"
+    }
+  },
+  {
+    "turn": 7,
+    "creature": "Vey",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Hid to avoid visible danger at location [5, 3].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1013,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Vey is cautious and aware of the nearby danger (visible_danger: [[7, 4], [6, 3]]). The immediate threat makes hiding a more appropriate and immediate action than moving out into the open.",
+    "intended_meaning": "Hide from danger",
+    "interpretation": {
+      "nim": "Hide"
+    }
+  },
+  {
+    "turn": 7,
+    "creature": "Sora",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "neli"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Hid in a nearby bush to avoid the visible danger at [1, 0].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 916,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Sora is cautious due to the visible danger at [1, 0] and decides to hide to protect itself.",
+    "intended_meaning": "To conceal oneself from perceived danger or enemies.",
+    "interpretation": {
+      "neli": "To hide"
+    }
+  },
+  {
+    "turn": 8,
+    "creature": "Lumo",
+    "action": "move_south",
+    "target": null,
+    "glyphs": [
+      "ra"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Nia: 2; Oro: 1; Pika: 2; Vey: 3; Sora: -1",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1161,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Scarcity level is high and there is visible food near the shelter. Moving south could lead to a safer location.",
+    "intended_meaning": "Move south",
+    "interpretation": {
+      "ra": "South"
+    }
+  },
+  {
+    "turn": 8,
+    "creature": "Nia",
+    "action": "move_north",
+    "target": null,
+    "glyphs": [
+      "veli",
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Moved north using soma tala.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1221,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia is moving north because she feels hungry and the nearby creatures are not threatening. She is using her knowledge of the glyphs to navigate the forest and find food.",
+    "intended_meaning": "veli: go north; nim: move",
+    "interpretation": {
+      "veli": "go north",
+      "nim": "move"
+    }
+  },
+  {
+    "turn": 8,
+    "creature": "Oro",
+    "action": "signal",
+    "target": "Lumo",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Signaled to Lumo about visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 954,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Oro signals to Lumo about visible danger using nim to maintain situational awareness and alert the larger community.",
+    "intended_meaning": "Signal",
+    "interpretation": {
+      "nim": "signal"
+    }
+  },
+  {
+    "turn": 8,
+    "creature": "Pika",
+    "action": "move_east",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Follow Oro for more information or potential safety.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 871,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Based on the available food and safety, Pika decides to move east and use a signal to indicate its movement.",
+    "intended_meaning": "Use signal to indicate move east.",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 8,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Used nim to alert Nia about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1095,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "To keep Nia informed and safe, Vey uses his knowledge of Nia's trust level and the presence of danger to signal her. This ensures that Nia remains vigilant and can respond appropriately.",
+    "intended_meaning": "Alert",
+    "interpretation": {
+      "nim": "Alert"
+    }
+  },
+  {
+    "turn": 8,
+    "creature": "Sora",
+    "action": "move_south",
+    "target": null,
+    "glyphs": [
+      "neli"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Moved south to find more visible food at [5, 0].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1016,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Sora moved south to avoid potential danger and find more food. She has a high trust in Nia, who signaled visible danger.",
+    "intended_meaning": "Move south",
+    "interpretation": {
+      "neli": "Move south"
+    }
+  },
+  {
+    "turn": 9,
+    "creature": "Lumo",
+    "action": "move_west",
+    "target": null,
+    "glyphs": [
+      "koro",
+      "moku"
+    ],
+    "mood": "hungry",
+    "memory_to_store": "I used koro moku while feeling calm.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1168,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": true,
+    "fallback_reason": "json parse: Could not parse creature JSON: line 1 column 1 (char 0)",
+    "reasoning_summary": "I acted from nearby signs, memory traces, and mood."
+  },
+  {
+    "turn": 9,
+    "creature": "Nia",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "veli",
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Gathered food using nim veli.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 912,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Gathering food satisfies Nia's hunger while avoiding visible danger. Sora's recent trust update increases Nia's confidence in her actions.",
+    "intended_meaning": "Gather food",
+    "interpretation": {
+      "veli": "North",
+      "nim": "Food"
+    }
+  },
+  {
+    "turn": 9,
+    "creature": "Oro",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Continued to hide from visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 831,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Cautiously continues to hide from visible danger using nim to deceive visible creatures and maintain stealth.",
+    "intended_meaning": "nim: signal",
+    "interpretation": {
+      "nim": "signal"
+    }
+  },
+  {
+    "turn": 9,
+    "creature": "Pika",
+    "action": "follow",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Follow Oro for more information or potential safety.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 880,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Pika is cautious after hearing Oro's last glyphs and seeing visible danger. Following Oro is a prudent move to potentially avoid immediate threats.",
+    "intended_meaning": "nim: useful signal",
+    "interpretation": {
+      "nim": "useful signal"
+    }
+  },
+  {
+    "turn": 9,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Used nim to warn Oro about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 899,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Vey is cautious due to the scarcity level and visible danger. It has already warned Oro about the danger before. Given Oro's current trust score and the threat, Vey decides to signal Oro again to be extra cautious.",
+    "intended_meaning": "alert",
+    "interpretation": {
+      "nim": "alert"
+    }
+  },
+  {
+    "turn": 9,
+    "creature": "Sora",
+    "action": "move_east",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "confident",
+    "memory_to_store": "Used veli to signal Nia about the visible danger at [1, 0].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 962,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Sora signals Nia about the visible danger using veli to ensure everyone is aware of the immediate threat.",
+    "intended_meaning": "signal nearby creatures",
+    "interpretation": {
+      "veli": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 9,
+    "creature": "Stray-6",
+    "action": "stay",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "calm",
+    "memory_to_store": "",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1039,
+    "memories_retrieved": 1,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "The creature stays due to its calm state and the low scarcity level, where staying is less risky than moving.",
+    "intended_meaning": "veli: stay",
+    "interpretation": {
+      "veli": "stay"
+    }
+  },
+  {
+    "turn": 10,
+    "creature": "Lumo",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "ra"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Signal to Oro about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 840,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is anxious due to fear of danger and hunger. He will signal Oro to alert him to potential threats.",
+    "intended_meaning": "alert Oro to danger",
+    "interpretation": {
+      "ra": "alert"
+    }
+  },
+  {
+    "turn": 10,
+    "creature": "Nia",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Shared food with Oro using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 853,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Despite hunger, Nia feels the need to share with Oro, who has shown trust.",
+    "intended_meaning": "share food",
+    "interpretation": {
+      "nim": "share food"
+    }
+  },
+  {
+    "turn": 10,
+    "creature": "Oro",
+    "action": "signal",
+    "target": "Lumo",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Signaled to Lumo about visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 878,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Oro sees visible danger and wants to alert Lumo to help. Using nim is the appropriate action to signal to Lumo.",
+    "intended_meaning": "Signal to Lumo about visible danger.",
+    "interpretation": {
+      "nim": "Signal"
+    }
+  },
+  {
+    "turn": 10,
+    "creature": "Pika",
+    "action": "move_north",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Oro is moving north.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1038,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Since Oro moved north, Pika will follow him to gather potential food sources and avoid visible danger.",
+    "intended_meaning": "follow Oro",
+    "interpretation": {
+      "nim": "follow"
+    }
+  },
+  {
+    "turn": 10,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Used nim to alert Nia about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1016,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia is the closest visible creature with trust, and the weather is dangerous because of rain. I should alert her about potential dangers.",
+    "intended_meaning": "Alert Nia about danger",
+    "interpretation": {
+      "nim": "warn"
+    }
+  },
+  {
+    "turn": 10,
+    "creature": "Sora",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "moku"
+    ],
+    "mood": "confident",
+    "memory_to_store": "Gathered visible food at [3, 3] using moku.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1254,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Given the abundance of food near Sora's current location (visible food at [5, 2], [8, 0], [5, 2]) and her anxiousness, Sora decides to act on her hunger to relieve stress and ensure survival.",
+    "intended_meaning": "obtain food",
+    "interpretation": {
+      "moku": "gather food"
+    }
+  },
+  {
+    "turn": 10,
+    "creature": "Stray-6",
+    "action": "move_north",
+    "target": null,
+    "glyphs": [
+      "moku"
+    ],
+    "mood": "calm",
+    "memory_to_store": "",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 805,
+    "memories_retrieved": 1,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Stray-6 is anxious in rainy conditions and has visible food nearby. It chooses to move north to avoid danger and find food.",
+    "intended_meaning": "moku: move",
+    "interpretation": {
+      "moku": "move"
+    }
+  },
+  {
+    "turn": 11,
+    "creature": "Lumo",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "koro"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Gathered visible food using koro.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 889,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is cautious due to fear and scarcity. It sees food that can be gathered easily and decides to act on it.",
+    "intended_meaning": "Gather food from visible sources.",
+    "interpretation": {
+      "koro": "Gather"
+    }
+  },
+  {
+    "turn": 11,
+    "creature": "Nia",
+    "action": "signal",
+    "target": "Stray-6",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 949,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Stray-6 has shown trust in Nia's signals before, and Nia is attempting to reinforce this trust by sharing food. Given the current situation of scarcity and the threat from Stray-6, this action is a prudent decision.",
+    "intended_meaning": "share food",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 11,
+    "creature": "Oro",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Used nim to hide from visible danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 853,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Scarcy weather and visible danger make hiding prudent. Oro follows previous strategy of hiding from visible danger.",
+    "intended_meaning": "nim: command to hide",
+    "interpretation": {
+      "nim": "command to hide"
+    }
+  },
+  {
+    "turn": 11,
+    "creature": "Pika",
+    "action": "follow",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Follow Oro for more information or potential safety.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 906,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Pika is cautious due to the rain and the presence of visible danger. Following Oro helps reduce fear and increases safety.",
+    "intended_meaning": "Follow Oro for more information or potential safety.",
+    "interpretation": {
+      "nim": "follow signal"
+    }
+  },
+  {
+    "turn": 11,
+    "creature": "Vey",
+    "action": "follow",
+    "target": "Nia",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Followed Nia to gather food.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 861,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia is visible but distant. Following her will allow Vey to gather food safely without risking danger.",
+    "intended_meaning": "Follow Nia to gather food safely.",
+    "interpretation": {
+      "nim": "Alert"
+    }
+  },
+  {
+    "turn": 11,
+    "creature": "Sora",
+    "action": "move_west",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Moved west to avoid danger at [5, 3].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 823,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Wanted to stay away from Nia and Pika to avoid potential danger.",
+    "intended_meaning": "Move west to avoid the dangerous creatures.",
+    "interpretation": {
+      "veli": "To move west"
+    }
+  },
+  {
+    "turn": 11,
+    "creature": "Stray-6",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "koro"
+    ],
+    "mood": "worried",
+    "memory_to_store": "Stray-6 hid due to fear of rain.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 980,
+    "memories_retrieved": 1,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Stray-6 is anxious and in fear of rain. The visibility is poor, and he is cautious about making noise or attracting further danger.",
+    "intended_meaning": "Hide and stay hidden",
+    "interpretation": {
+      "koro": "Hide"
+    }
+  },
+  {
+    "turn": 12,
+    "creature": "Lumo",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Gathered visible food using soma.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1087,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Given the presence of visible danger and the recent gathering of visible food, it is prudent to alert Oro of the situation.",
+    "intended_meaning": "nim: alert",
+    "interpretation": {
+      "nim": "alert"
+    }
+  },
+  {
+    "turn": 12,
+    "creature": "Nia",
+    "action": "stay",
+    "target": "Nia",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "I decided to stay still as I couldn't decide what to do next.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1140,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia chose to stay still because she felt uncertain about what to do next. She was aware of her hunger and fear levels, but also considered the available resources and nearby creatures. The most important decision was to not move, as moving could expose her to potential danger or leave her vulnerable to predators.",
+    "intended_meaning": "Stay calm",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 12,
+    "creature": "Oro",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "I continued to hide from visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 799,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Oro is cautious and has already successfully hidden from visible danger using nim. There is no immediate need for further action.",
+    "intended_meaning": "Hide from visible danger",
+    "interpretation": {
+      "nim": "Hide"
+    }
+  },
+  {
+    "turn": 12,
+    "creature": "Pika",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Follow Oro for more information or potential safety.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1149,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Pika notices Oro nearby and remembers using Veliv to signal food location. Oro's high trust level suggests they might be a reliable source. Pika decides to use the same signal to get Oro's attention and potentially gain more information.",
+    "intended_meaning": "Useful signal maybe",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 12,
+    "creature": "Vey",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Hid to avoid Oro's attack.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1368,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Vey is cautious due to the high scarcity and visible danger. Moving north would expose the creature to potentially more danger from Oro. Hiding is the most prudent action to avoid future attacks.",
+    "intended_meaning": "Hide to avoid danger.",
+    "interpretation": {
+      "veli": "hide"
+    }
+  },
+  {
+    "turn": 12,
+    "creature": "Sora",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Used veli to signal Nia about the visible danger at [1, 0].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1099,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Sora sensed danger and used veli to signal Nia. This maintains Nia's trust while staying cautious.",
+    "intended_meaning": "useful signal",
+    "interpretation": {
+      "veli": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 12,
+    "creature": "Stray-6",
+    "action": "move_south",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "worried",
+    "memory_to_store": "",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 825,
+    "memories_retrieved": 2,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Stray-6 is worried about the rain and is moving south to avoid it.",
+    "intended_meaning": "Move south",
+    "interpretation": {
+      "nim": "Move"
+    }
+  },
+  {
+    "turn": 13,
+    "creature": "Lumo",
+    "action": "move_north",
+    "target": null,
+    "glyphs": [
+      "ra"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Moved north.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1607,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is cautious due to its anxiety and high fear level. The clear weather and visible food at the north indicate potential opportunities for gathering. Moving north allows Lumo to explore new territory while keeping an eye on potential dangers.",
+    "intended_meaning": "ra: move north",
+    "interpretation": {
+      "ra": "move north"
+    }
+  },
+  {
+    "turn": 13,
+    "creature": "Nia",
+    "action": "move_east",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "I moved east to find more visible food.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1014,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia decided to move east in hopes of finding more visible food in her area.",
+    "intended_meaning": "To gather food in the east.",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 13,
+    "creature": "Oro",
+    "action": "stay",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Stayed in place to observe the situation.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1019,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Oro is cautious due to its hunger and fear of visible danger. Staying in place allows Oro to observe the situation and make informed decisions.",
+    "intended_meaning": "To stay in place and observe the situation.",
+    "interpretation": {
+      "nim": "Signify caution or hesitation."
+    }
+  },
+  {
+    "turn": 13,
+    "creature": "Pika",
+    "action": "move_east",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Follow Oro for more information or potential safety.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 937,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Moving east will bring me closer to Oro, who is visible at [4, 4]. I need to signal Oro about the food location to ensure their safety.",
+    "intended_meaning": "Signal Oro about the food location.",
+    "interpretation": {
+      "nim": "Signal"
+    }
+  },
+  {
+    "turn": 13,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Alerted Nia about the danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 932,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Vey is cautious and aware of the dangers in its environment. It trusts Nia but has received recent threatening signals. To ensure safety, it sends an urgent signal to Nia.",
+    "intended_meaning": "alert",
+    "interpretation": {
+      "nim": "alert"
+    }
+  },
+  {
+    "turn": 13,
+    "creature": "Sora",
+    "action": "move_north",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Used moku to gather visible food at [5, 2]. Gathered visible food at [3, 3] using moku. Used moku to move north to find visible food at [3, 3]. Used lune to move east to find more visible food at [4, 1]. Used veli to signal Nia about the vi",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1515,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Sora is cautious due to the scarcity level and the visibility of danger. She has gathered food but needs to signal Nia about it. Moving north to check for more food and signal Nia is a safe and strategic next step.",
+    "intended_meaning": "signal",
+    "interpretation": {
+      "nim": "signal"
+    }
+  },
+  {
+    "turn": 13,
+    "creature": "Stray-6",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "worried",
+    "memory_to_store": "Stray-6 hid due to fear of rain.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1055,
+    "memories_retrieved": 2,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Fear of rain is high, and there are visible dangers nearby. Hiding is necessary to protect the Stray-6 from potential harm.",
+    "intended_meaning": "Hide from danger and predators.",
+    "interpretation": {
+      "nim": "Hide"
+    }
+  },
+  {
+    "turn": 14,
+    "creature": "Lumo",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Gathered visible food using vili.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1232,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is cautious due to the high fear level. Despite the visible food, he decides to gather it to ensure survival and reduce his hunger and energy levels. The vili glyph is chosen as it is the most effective gathering method for his current environment. He also decides to signal to Oro about the danger, which will likely help in coordinating against the visible danger.",
+    "intended_meaning": "To gather food using the vili glyph.",
+    "interpretation": {
+      "veli": "Gather"
+    }
+  },
+  {
+    "turn": 14,
+    "creature": "Nia",
+    "action": "signal",
+    "target": "Sora",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Nia signaled Sora to follow her.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1000,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia wants to share information about the weather and her location. Signal helps in communicating with others without being seen.",
+    "intended_meaning": "Useful signal maybe",
+    "interpretation": {
+      "nim": "Useful signal maybe"
+    }
+  },
+  {
+    "turn": 14,
+    "creature": "Oro",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "I continued to hide from visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1127,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Due to the weather conditions and scarcity level, Oro is cautious and decides to hide from the visible danger. Its current location is safe, but it will stay put to avoid potential threats.",
+    "intended_meaning": "Hide from visible danger",
+    "interpretation": {
+      "nim": "Hide"
+    }
+  },
+  {
+    "turn": 14,
+    "creature": "Pika",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Used Veli to signal food location to Oro.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1241,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Pika needs to inform Oro about visible food sources to avoid confusion and potential danger.",
+    "intended_meaning": "Signal Oro about food locations.",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 14,
+    "creature": "Vey",
+    "action": "move_west",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Warned nearby creatures about moving west.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1031,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "To avoid danger from Oro and Pika, Vey moves west while warning nearby creatures.",
+    "intended_meaning": "Inform nearby creatures about my move",
+    "interpretation": {
+      "nim": "Warning"
+    }
+  },
+  {
+    "turn": 14,
+    "creature": "Sora",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Used veli to signal Nia about potential danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1058,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Sora senses danger near Stray-6 and Nia. Using veli to signal Nia alerts them to potential threats to Sora's safety.",
+    "intended_meaning": "alert",
+    "interpretation": {
+      "veli": "alert"
+    }
+  },
+  {
+    "turn": 14,
+    "creature": "Stray-6",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "nim",
+      "tala"
+    ],
+    "mood": "worry",
+    "memory_to_store": "Stray-6 gathered from visible food sources.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 934,
+    "memories_retrieved": 2,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Stray-6 is anxious and has low energy but sees visible food. Deciding to gather food as a potential source of energy and safety.",
+    "intended_meaning": "gather food",
+    "interpretation": {
+      "nim": "gather",
+      "tala": "food"
+    }
+  },
+  {
+    "turn": 15,
+    "creature": "Lumo",
+    "action": "stay",
+    "target": null,
+    "glyphs": [
+      "tala"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Used tala to hide from danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1047,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is cautious due to high fear levels and low energy. The visible danger is nearby, and hiding is likely the best option at this time.",
+    "intended_meaning": "tala: hide",
+    "interpretation": {
+      "tala": "hide"
+    }
+  },
+  {
+    "turn": 15,
+    "creature": "Nia",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "calm",
+    "memory_to_store": "Gathered food using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 979,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia feels hungry and uses nim, a useful signal, to gather food from visible locations.",
+    "intended_meaning": "Use nim to gather food.",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 15,
+    "creature": "Oro",
+    "action": "signal",
+    "target": "Lumo",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Continued to signal to Lumo about visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1086,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Oro perceives an increasing risk due to the visibility of danger and the scarcity level. With limited energy and hunger, Oro opts to signal Lumo to alert others, maintaining its cautious demeanor while preparing for potential threats.",
+    "intended_meaning": "nim: signal",
+    "interpretation": {
+      "nim": "signal"
+    }
+  },
+  {
+    "turn": 15,
+    "creature": "Pika",
+    "action": "follow",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Follow Oro for more information or potential safety.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1037,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "I followed Oro due to our shared knowledge of each other and Oro's reputation as a trustworthy companion.",
+    "intended_meaning": "Use Veli to signal food location to Oro.",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 15,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Lumo",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Used nim to signal Lumo about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1048,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Vey is cautious due to the weather and hunger. It has seen immediate danger near Lumo and wants to alert them in case they are unaware.",
+    "intended_meaning": "alert",
+    "interpretation": {
+      "nim": "alert"
+    }
+  },
+  {
+    "turn": 15,
+    "creature": "Sora",
+    "action": "signal",
+    "target": "Nia",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Used nim to signal Nia about potential danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1007,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Sora has identified potential danger in the area and needs to alert Nia immediately to ensure their safety.",
+    "intended_meaning": "alert",
+    "interpretation": {
+      "nim": "alert"
+    }
+  },
+  {
+    "turn": 15,
+    "creature": "Stray-6",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "ra"
+    ],
+    "mood": "worried",
+    "memory_to_store": "Stray-6 hid from the rain.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 856,
+    "memories_retrieved": 3,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Due to the heavy rain, Stray-6 decides it's prudent to hide from potential danger. The rain is both causing fear and reducing visibility, making it difficult for Stray-6 to move around safely.",
+    "intended_meaning": "Hide",
+    "interpretation": {
+      "ra": "Hide"
+    }
+  },
+  {
+    "turn": 16,
+    "creature": "Lumo",
+    "action": "move_west",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Found a new hidden location using veli.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 910,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is cautious due to fear but also needs to gather food. Moving west to find a new hiding spot seems like a prudent first step.",
+    "intended_meaning": "Find a new hidden location",
+    "interpretation": {
+      "veli": "Find a new hiding spot"
+    }
+  },
+  {
+    "turn": 16,
+    "creature": "Nia",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "content",
+    "memory_to_store": "Used nim to gather food from visible_food at [5, 1].",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 935,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Gathering food with nim is the most immediate need based on hunger and scarcity level. Oro's trust has improved as a result.",
+    "intended_meaning": "Use nim to gather food.",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 16,
+    "creature": "Oro",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Hid from visible danger using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 835,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Due to the scarcity level and the presence of visible danger nearby, Oro decides to hide to avoid potential threats.",
+    "intended_meaning": "Hide from visible danger.",
+    "interpretation": {
+      "nim": "Hide from visible danger."
+    }
+  },
+  {
+    "turn": 16,
+    "creature": "Pika",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "confident",
+    "memory_to_store": "Pika: heard_veli_last_turn: True; Pika: last_signal_velocity: 16",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 983,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Pika sensed Oro's trust in the past and decided to use Veliv to signal the food location to Oro, hoping for better protection.",
+    "intended_meaning": "veli: food location",
+    "interpretation": {
+      "veli": "food location"
+    }
+  },
+  {
+    "turn": 16,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Lumo",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Used nim tala to warn Lumo about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1073,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is the most trusted creature in the vicinity and has been previously warned by Vey. By signaling Lumo, Vey maintains good relations and prepares for potential dangers.",
+    "intended_meaning": "alert",
+    "interpretation": {
+      "nim": "alert"
+    }
+  },
+  {
+    "turn": 16,
+    "creature": "Sora",
+    "action": "move_north",
+    "target": "Nia",
+    "glyphs": [
+      "ra"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Used moku to gather visible food at [5, 2]. Gathered visible food at [3, 3] using moku. Used moku to move north to find visible food at [3, 3]. Used lune to move east to find more. Used ra to signal Nia.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1324,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia is the nearest creature with trust, and the last action was a signal. Moving north will potentially bring Nia closer for potential cooperation or assistance.",
+    "intended_meaning": "Signal",
+    "interpretation": {
+      "ra": "unknown meaning"
+    }
+  },
+  {
+    "turn": 16,
+    "creature": "Stray-6",
+    "action": "hide",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "worried",
+    "memory_to_store": "Stray-6 hid under the fern-bridge.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1090,
+    "memories_retrieved": 4,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Stray-6 is anxious and fearful in clear weather with low energy. It has visible food sources but also potential danger from rain and other creatures. Since Stray-6's last action was to hide and its hunger is high, hiding again seems prudent.",
+    "intended_meaning": "Hide from danger",
+    "interpretation": {
+      "nim": "Hide"
+    }
+  },
+  {
+    "turn": 17,
+    "creature": "Lumo",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "wary",
+    "memory_to_store": "Signaled danger to Oro.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1050,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Lumo is cautious due to the low energy level and high fear levels. She senses danger near Oro and decides to signal Oro immediately to alert them to potential threats.",
+    "intended_meaning": "nim: signal danger",
+    "interpretation": {
+      "nim": "signal danger"
+    }
+  },
+  {
+    "turn": 17,
+    "creature": "Nia",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "content",
+    "memory_to_store": "Signaled food found using nim.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 801,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Nia feels content with her current situation and has gathered enough food. She signals Oro about the food found for potential sharing.",
+    "intended_meaning": "signal food found",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 17,
+    "creature": "Oro",
+    "action": "move_east",
+    "target": null,
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "Signaled to Lumo about visible danger using veli.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1325,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Oro is cautious and follows its beliefs about safety. Since the weather is rainy and there is visible danger, Oro decides to move east to a safer area away from the river. It signals to Lumo about the danger to alert it.",
+    "intended_meaning": "Signal to Lumo about visible danger",
+    "interpretation": {
+      "veli": "signal"
+    }
+  },
+  {
+    "turn": 17,
+    "creature": "Pika",
+    "action": "signal",
+    "target": "Oro",
+    "glyphs": [
+      "veli"
+    ],
+    "mood": "contented",
+    "memory_to_store": "Follow Oro for more information or potential safety.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 890,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Pika used Veli to signal food location to Oro, indicating a desire for Oro's help and potentially gaining safety.",
+    "intended_meaning": "food location",
+    "interpretation": {
+      "veli": "signal food location"
+    }
+  },
+  {
+    "turn": 17,
+    "creature": "Vey",
+    "action": "signal",
+    "target": "Stray-6",
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "caution",
+    "memory_to_store": "Used nim tala to warn Stray-6 about danger.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 1086,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Stray-6 is nearby and seems to be in distress. I signal them to help.",
+    "intended_meaning": "warning",
+    "interpretation": {
+      "nim": "useful signal maybe"
+    }
+  },
+  {
+    "turn": 17,
+    "creature": "Sora",
+    "action": "stay",
+    "target": null,
+    "glyphs": [
+      "nim"
+    ],
+    "mood": "cautious",
+    "memory_to_store": "",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 828,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Sora is cautious due to the high scarcity level and fear. Staying still allows her to conserve energy and avoid potential threats.",
+    "intended_meaning": "Use 'Nim' to stay still",
+    "interpretation": {
+      "nim": "Stay still"
+    }
+  },
+  {
+    "turn": 17,
+    "creature": "Stray-6",
+    "action": "gather",
+    "target": null,
+    "glyphs": [
+      "zhi",
+      "nim"
+    ],
+    "mood": "curious",
+    "memory_to_store": "Stray-6 gathered from visible food sources.",
+    "provider": "huggingface",
+    "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "latency_ms": 999,
+    "memories_retrieved": 5,
+    "llm_ok": true,
+    "fallback": false,
+    "reasoning_summary": "Despite the rain, Stray-6 is curious about the visible food sources. Gathering food will help alleviate hunger and provide safety.",
+    "intended_meaning": "zhi: gather food; nim: indicate interest",
+    "interpretation": {
+      "zhi": "gather food",
+      "nim": "indicate interest"
+    }
+  }
+]

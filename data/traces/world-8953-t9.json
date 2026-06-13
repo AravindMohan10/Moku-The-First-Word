@@ -1,0 +1,1468 @@
+{
+  "world_id": "world-8953",
+  "turn": 9,
+  "watch_mode": "sandbox",
+  "weather": "clear",
+  "scarcity_level": 3,
+  "creatures": [
+    "Lumo",
+    "Nia",
+    "Oro",
+    "Pika",
+    "Vey",
+    "Sora",
+    "Stray-6"
+  ],
+  "dictionary_stats": {
+    "nebrni": {
+      "uses": 12,
+      "food": 0,
+      "danger": 1,
+      "shelter": 0
+    },
+    "rabr": {
+      "uses": 4,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    },
+    "niliso": {
+      "uses": 23,
+      "food": 1,
+      "danger": 1,
+      "shelter": 0
+    },
+    "soliko": {
+      "uses": 11,
+      "food": 2,
+      "danger": 3,
+      "shelter": 0
+    },
+    "kove": {
+      "uses": 5,
+      "food": 0,
+      "danger": 3,
+      "shelter": 0
+    },
+    "juluko": {
+      "uses": 2,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    },
+    "tuluku": {
+      "uses": 1,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    }
+  },
+  "glyph_history": {
+    "nebrni": {
+      "first_speaker": "Lumo",
+      "first_turn": 1,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 1,
+        "shelter": 0,
+        "neutral": 11
+      },
+      "speakers": {
+        "Lumo": 5,
+        "Nia": 1,
+        "Pika": 1,
+        "Oro": 3,
+        "Vey": 1,
+        "Sora": 1
+      },
+      "drift_noted": false
+    },
+    "rabr": {
+      "first_speaker": "Oro",
+      "first_turn": 1,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 4
+      },
+      "speakers": {
+        "Oro": 1,
+        "Nia": 2,
+        "Vey": 1
+      },
+      "drift_noted": false
+    },
+    "niliso": {
+      "first_speaker": "Vey",
+      "first_turn": 1,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 1,
+        "danger": 1,
+        "shelter": 0,
+        "neutral": 21
+      },
+      "speakers": {
+        "Vey": 5,
+        "Sora": 6,
+        "Nia": 1,
+        "Oro": 5,
+        "Pika": 5,
+        "Lumo": 1
+      },
+      "drift_noted": false
+    },
+    "soliko": {
+      "first_speaker": "Pika",
+      "first_turn": 2,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 2,
+        "danger": 3,
+        "shelter": 0,
+        "neutral": 6
+      },
+      "speakers": {
+        "Pika": 3,
+        "Vey": 4,
+        "Nia": 3,
+        "Oro": 1
+      },
+      "drift_noted": false
+    },
+    "kove": {
+      "first_speaker": "Sora",
+      "first_turn": 2,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 3,
+        "shelter": 0,
+        "neutral": 2
+      },
+      "speakers": {
+        "Sora": 1,
+        "Nia": 1,
+        "Lumo": 3
+      },
+      "drift_noted": true,
+      "drift_dominant": "danger"
+    },
+    "juluko": {
+      "first_speaker": "Nia",
+      "first_turn": 9,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 2
+      },
+      "speakers": {
+        "Nia": 1,
+        "Stray-6": 1
+      },
+      "drift_noted": false
+    },
+    "tuluku": {
+      "first_speaker": "Sora",
+      "first_turn": 9,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 1
+      },
+      "speakers": {
+        "Sora": 1
+      },
+      "drift_noted": false
+    }
+  },
+  "deception_events": [],
+  "chronicle_log": [
+    {
+      "turn": 1,
+      "text": "Lumo shares food with Oro, increasing their trust.",
+      "llm_ok": true,
+      "latency_ms": 484,
+      "provider": "huggingface"
+    },
+    {
+      "turn": 2,
+      "text": "Lumo moves east to gather more food, signaling Oro to eat.",
+      "llm_ok": true,
+      "latency_ms": 755,
+      "provider": "huggingface"
+    },
+    {
+      "turn": 3,
+      "text": "Lumo shares food with Oro using \"nebrni\" glyphs, showing loyalty and helping Oro recover from hunger.",
+      "llm_ok": true,
+      "latency_ms": 656,
+      "provider": "huggingface"
+    },
+    {
+      "turn": 4,
+      "text": "Lumo signals Oro to alert him to Lumo's presence, showing his loyalty and concern for Lumo's safety.",
+      "llm_ok": true,
+      "latency_ms": 682,
+      "provider": "huggingface"
+    },
+    {
+      "turn": 5,
+      "text": "Lumo signals Oro to share food, hoping to reduce danger.",
+      "llm_ok": true,
+      "latency_ms": 653,
+      "provider": "huggingface"
+    },
+    {
+      "turn": 6,
+      "text": "Lumo moves east towards Nia, gathering food.",
+      "llm_ok": true,
+      "latency_ms": 443,
+      "provider": "huggingface"
+    },
+    {
+      "turn": 7,
+      "text": "Lumo shares food with Oro using the kove glyph, strengthening their bond.",
+      "llm_ok": true,
+      "latency_ms": 660,
+      "provider": "huggingface"
+    },
+    {
+      "turn": 8,
+      "text": "Stray-6 shares food with Nia, showing loyalty and strengthening trust.",
+      "llm_ok": true,
+      "latency_ms": 614,
+      "provider": "huggingface"
+    },
+    {
+      "turn": 9,
+      "text": "Lumo shares food with Oro, who then shares it with Nia.",
+      "llm_ok": true,
+      "latency_ms": 653,
+      "provider": "huggingface"
+    }
+  ],
+  "run_summary": null,
+  "trace_log": [
+    {
+      "turn": 1,
+      "creature": "Lumo",
+      "action": "share_food",
+      "target": "Oro",
+      "glyphs": [
+        "nebrni"
+      ],
+      "mood": "happy",
+      "memory_to_store": "Sharing food with Oro.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1047,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is feeling hungry and has nearby allies. He shares his berries with Oro, who increases his trust.",
+      "intended_meaning": "Share food with Oro",
+      "interpretation": {
+        "nebrni": "to give"
+      }
+    },
+    {
+      "turn": 1,
+      "creature": "Nia",
+      "action": "move_west",
+      "target": null,
+      "glyphs": [
+        "nebrni"
+      ],
+      "mood": "alert",
+      "memory_to_store": "I watched the forest on turn 1.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1403,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I need to warn Vey about Stray-6's presence in case they're close. The 'nebrni' signal is a useful signal that might alert them.",
+      "intended_meaning": "Signal to Vey about Stray-6's presence.",
+      "interpretation": {
+        "nebrni": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 1,
+      "creature": "Oro",
+      "action": "gather",
+      "target": null,
+      "glyphs": [
+        "rabr"
+      ],
+      "mood": "calm",
+      "memory_to_store": "I gathered food using rabr.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1021,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Given the lack of visible food and the urgency to gather, I decide to use my hunting skill, represented by the glyph 'rabr', to find food.",
+      "intended_meaning": "Hunt",
+      "interpretation": {
+        "rabr": "hunt"
+      }
+    },
+    {
+      "turn": 1,
+      "creature": "Pika",
+      "action": "signal",
+      "target": "Nia",
+      "glyphs": [
+        "nebrni"
+      ],
+      "mood": "calm",
+      "memory_to_store": "Followed Oro Gathered food from near visible food sources. Followed Oro Staying still is the safest option given the weather and the presence of danger. I noticed an unusual sound",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1036,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Pika needs to alert Nia about the danger they encountered while following Oro. Signal Nia will ensure she is aware of the situation.",
+      "intended_meaning": "signal Nia about Pika's presence",
+      "interpretation": {
+        "nebrni": "signal"
+      }
+    },
+    {
+      "turn": 1,
+      "creature": "Vey",
+      "action": "share_food",
+      "target": "Nia",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "calm",
+      "memory_to_store": "Shared food with Nia.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1037,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Sharing food with Nia helps maintain their trust and keeps her safe.",
+      "intended_meaning": "Signal to Nia about food availability.",
+      "interpretation": {
+        "niliso": "Signal to indicate food"
+      }
+    },
+    {
+      "turn": 1,
+      "creature": "Sora",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "calm",
+      "memory_to_store": "Followed Nia after her signal. Sent a warning glyph to Nia. Sent a warning signal to Nia. Received a warning glyph response.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1074,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Nia is nearby, and I have heard she is cautious. Moving north allows me to observe her without being noticed.",
+      "intended_meaning": "Signal to Nia",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 2,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "nebrni"
+      ],
+      "mood": "happy",
+      "memory_to_store": "I am moving east to gather food.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1051,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am currently at location [3, 6] and there is visible food at [5, 5] and [2, 7]. Moving east will allow me to reach the food sources closer to me.",
+      "intended_meaning": "Move east to gather more food.",
+      "interpretation": {
+        "nebrni": "Unknown meaning"
+      }
+    },
+    {
+      "turn": 2,
+      "creature": "Nia",
+      "action": "gather",
+      "target": null,
+      "glyphs": [
+        "rabr"
+      ],
+      "mood": "alert",
+      "memory_to_store": "Gathered food from visible locations: [5, 1].",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1056,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Gathering food is the most immediate need given the high hunger level.",
+      "intended_meaning": "collect food",
+      "interpretation": {
+        "rabr": "collect food"
+      }
+    },
+    {
+      "turn": 2,
+      "creature": "Oro",
+      "action": "share_food",
+      "target": "Lumo",
+      "glyphs": [
+        "nebrni"
+      ],
+      "mood": "giving",
+      "memory_to_store": "I shared food with Lumo to help him recover.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1184,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is hungry and has visible food. Sharing food is a legal action to help an ally recover.",
+      "intended_meaning": "Signal Lumo to eat",
+      "interpretation": {
+        "nebrni": "Signal"
+      }
+    },
+    {
+      "turn": 2,
+      "creature": "Pika",
+      "action": "share_food",
+      "target": "Oro",
+      "glyphs": [
+        "soliko"
+      ],
+      "mood": "happy",
+      "memory_to_store": "Shared food with Oro",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 971,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "To feed Oro, I used the 'soliko' glyph to share my food, improving our relationship.",
+      "intended_meaning": "Share food with Oro",
+      "interpretation": {
+        "soliko": "Share"
+      }
+    },
+    {
+      "turn": 2,
+      "creature": "Vey",
+      "action": "share_food",
+      "target": "Nia",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "calm",
+      "memory_to_store": "Shared food with Nia.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1075,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Nia is hungry and I have food, so I will share it with her to help her stay safe.",
+      "intended_meaning": "Share food with Nia.",
+      "interpretation": {
+        "niliso": "Share food."
+      }
+    },
+    {
+      "turn": 2,
+      "creature": "Sora",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "kove"
+      ],
+      "mood": "calm",
+      "memory_to_store": "",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 963,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Moved east to avoid visible danger.",
+      "intended_meaning": "Move east",
+      "interpretation": {
+        "kove": "Move east"
+      }
+    },
+    {
+      "turn": 3,
+      "creature": "Lumo",
+      "action": "share_food",
+      "target": "Oro",
+      "glyphs": [
+        "nebrni"
+      ],
+      "mood": "happy",
+      "memory_to_store": "Sharing food with Oro.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1045,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Oro is nearby and hungry. I can share my food to help him and show loyalty.",
+      "intended_meaning": "Share food with Oro.",
+      "interpretation": {
+        "nebrni": "Useful signal maybe"
+      }
+    },
+    {
+      "turn": 3,
+      "creature": "Nia",
+      "action": "share_food",
+      "target": "Vey",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Shared food with Vey using 'niliso'.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 984,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I have food to share and Vey is nearby and hungry. I decide to use 'niliso' to share it with her.",
+      "intended_meaning": "shared food with Vey using 'niliso'",
+      "interpretation": {
+        "niliso": "shared food"
+      }
+    },
+    {
+      "turn": 3,
+      "creature": "Oro",
+      "action": "share_food",
+      "target": "Lumo",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "giving",
+      "memory_to_store": "I shared food with Lumo to help him recover.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1090,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is hungry and in need of food, while I have some available. Sharing is the most effective way to help him recover.",
+      "intended_meaning": "Share food to heal.",
+      "interpretation": {
+        "niliso": "Useful signal possibly"
+      }
+    },
+    {
+      "turn": 3,
+      "creature": "Pika",
+      "action": "share_food",
+      "target": "Oro",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "happy",
+      "memory_to_store": "Shared food with Oro",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 850,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Pika shares food with Oro to help them gather more food, as Oro seems hungry and needs it.",
+      "intended_meaning": "Share food with Oro",
+      "interpretation": {
+        "niliso": "Share food"
+      }
+    },
+    {
+      "turn": 3,
+      "creature": "Vey",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "soliko",
+        "rabr",
+        "nebrni"
+      ],
+      "mood": "wary",
+      "memory_to_store": "I used soliko rabr nebrni while feeling calm.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 750,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": true,
+      "fallback_reason": "json parse: 1 validation error for CreatureTurn\nglyphs\n  List should have at least 1 item after validation, not 0 [type=too_short, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/too_short",
+      "reasoning_summary": "I acted from nearby signs, memory traces, and mood."
+    },
+    {
+      "turn": 3,
+      "creature": "Sora",
+      "action": "signal",
+      "target": "Nia",
+      "glyphs": [
+        "nebrni"
+      ],
+      "mood": "calm",
+      "memory_to_store": "Sent an alert signal to Nia.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 829,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Alerting Nia about potential danger to avoid her signal being misunderstood.",
+      "intended_meaning": "alert",
+      "interpretation": {
+        "nebrni": "alert"
+      }
+    },
+    {
+      "turn": 4,
+      "creature": "Lumo",
+      "action": "signal",
+      "target": "Oro",
+      "glyphs": [
+        "nebrni"
+      ],
+      "mood": "alert",
+      "memory_to_store": "Sharing food with Oro.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1025,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Alerting Oro to my presence helps me stay safe as I continue gathering food.",
+      "intended_meaning": "alert Oro to my presence",
+      "interpretation": {
+        "nebrni": "alert"
+      }
+    },
+    {
+      "turn": 4,
+      "creature": "Nia",
+      "action": "gather",
+      "target": null,
+      "glyphs": [
+        "kove"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Gathered food from a nearby location.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 822,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hungry and low energy, need to gather food immediately.",
+      "intended_meaning": "Gather food from the nearest location.",
+      "interpretation": {
+        "kove": "food source"
+      }
+    },
+    {
+      "turn": 4,
+      "creature": "Oro",
+      "action": "gather",
+      "target": "Lumo",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "helpful",
+      "memory_to_store": "I gathered food to help Lumo recover.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 915,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Oro sensed Lumo's hunger and fear, decided to share food to show loyalty and help Lumo recover.",
+      "intended_meaning": "Share food to help Lumo recover.",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 4,
+      "creature": "Pika",
+      "action": "share_food",
+      "target": "Oro",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "happy",
+      "memory_to_store": "Shared food with Oro",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1020,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I hold food and Oro is nearby and hungry. I choose to share food with him to avoid conflict and ensure he has enough to eat.",
+      "intended_meaning": "Share food with Oro",
+      "interpretation": {
+        "niliso": "Share"
+      }
+    },
+    {
+      "turn": 4,
+      "creature": "Vey",
+      "action": "signal",
+      "target": "Nia",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "wary",
+      "memory_to_store": "Signal fear to Nia.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1060,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Nia is hungry and visible, showing fear. Shared food earlier, so using niliso as a signal.",
+      "intended_meaning": "fear",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 4,
+      "creature": "Sora",
+      "action": "follow",
+      "target": "Nia",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Followed Nia after her signal. {'Followed Nia after her signal.'}",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 921,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Following Nia will help gather food and avoid danger.",
+      "intended_meaning": "follow Nia",
+      "interpretation": {
+        "niliso": "follow"
+      }
+    },
+    {
+      "turn": 5,
+      "creature": "Lumo",
+      "action": "signal",
+      "target": "Oro",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "alert",
+      "memory_to_store": "Shared food with Oro.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1038,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "The hungry Lumo sees Oro's fear and decides to signal for food, hoping to increase Oro's trust and reduce danger.",
+      "intended_meaning": "share food",
+      "interpretation": {
+        "niliso": "share food"
+      }
+    },
+    {
+      "turn": 5,
+      "creature": "Nia",
+      "action": "share_food",
+      "target": "Vey",
+      "glyphs": [
+        "soliko"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Shared food with Vey using 'soliko'.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1064,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I noticed Vey is hungry and I have food. I think sharing will make us both happier.",
+      "intended_meaning": "To share my food with Vey.",
+      "interpretation": {
+        "soliko": "Sharing food"
+      }
+    },
+    {
+      "turn": 5,
+      "creature": "Oro",
+      "action": "gather",
+      "target": "Lumo",
+      "glyphs": [
+        "niliso",
+        "nebrni"
+      ],
+      "mood": "helpful",
+      "memory_to_store": "I gathered food using nebrni to help Lumo recover.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1025,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is hungry and in need of food. I'll use nebrni to signal Lumo to come closer and help him recover.",
+      "intended_meaning": "To gather food.",
+      "interpretation": {
+        "niliso": "Useful signal maybe",
+        "nebrni": "Unknown meaning"
+      }
+    },
+    {
+      "turn": 5,
+      "creature": "Pika",
+      "action": "share_food",
+      "target": "Oro",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "happy",
+      "memory_to_store": "Shared food with Oro",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1149,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Pika shares food with Oro because Oro is hungry and Pika has food to give. This increases Oro's trust in Pika.",
+      "intended_meaning": "Share food",
+      "interpretation": {
+        "niliso": "Share food"
+      }
+    },
+    {
+      "turn": 5,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": "Nia",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Followed Pika for safety. Used niliso to signal fear while feeling anxious. Shared food with Nia. Used niliso to signal concern while feeling anxious. Used soliko to signal concern",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1356,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Desperate for food, Vey moves east towards Nia to share food, using a signal to indicate her hunger.",
+      "intended_meaning": "signal",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 5,
+      "creature": "Sora",
+      "action": "share_food",
+      "target": "Nia",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Shared food with Nia",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 882,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Nia is hungry and I have food. I can share it with her to potentially build trust.",
+      "intended_meaning": "share food with Nia",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 6,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": "Nia",
+      "glyphs": [
+        "kove"
+      ],
+      "mood": "alert",
+      "memory_to_store": "Moving east to gather food.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 903,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Scarcity level high, need to gather food. Moving east to find food sources.",
+      "intended_meaning": "Move towards Nia",
+      "interpretation": {
+        "kove": "move east"
+      }
+    },
+    {
+      "turn": 6,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "rabr"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1098,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Nia moves east to potentially find more food in the clear weather, as she has no immediate hunger and fears are low.",
+      "intended_meaning": "Move east to find more food.",
+      "interpretation": {
+        "rabr": "Move east"
+      }
+    },
+    {
+      "turn": 6,
+      "creature": "Oro",
+      "action": "share_food",
+      "target": "Lumo",
+      "glyphs": [
+        "nebrni"
+      ],
+      "mood": "kind",
+      "memory_to_store": "I shared food to help Lumo recover.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1006,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Seeing Lumo's hunger, Oro decides to share food using the 'nebrni' glyph to help him recover from his injury.",
+      "intended_meaning": "Share food to help Lumo recover.",
+      "interpretation": {
+        "nebrni": "Share."
+      }
+    },
+    {
+      "turn": 6,
+      "creature": "Pika",
+      "action": "follow",
+      "target": "Oro",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 916,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Following Oro will help gather food from the visible food sources while avoiding the dangerous area around Oro.",
+      "intended_meaning": "Follow Oro to gather food from visible food sources.",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 6,
+      "creature": "Vey",
+      "action": "follow",
+      "target": "Nia",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 796,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Following Nia to share food and possibly get help.",
+      "intended_meaning": "signal concern",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 6,
+      "creature": "Sora",
+      "action": "share_food",
+      "target": "Nia",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Shared food with Nia.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 796,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Shared food with loyal ally Nia to build trust.",
+      "intended_meaning": "shared food with Nia",
+      "interpretation": {
+        "niliso": "shared food"
+      }
+    },
+    {
+      "turn": 7,
+      "creature": "Lumo",
+      "action": "share_food",
+      "target": "Oro",
+      "glyphs": [
+        "kove"
+      ],
+      "mood": "alert",
+      "memory_to_store": "Shared food with Oro.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 985,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Sharing food with Oro will strengthen our bond and provide extra energy.",
+      "intended_meaning": "Share food",
+      "interpretation": {
+        "kove": "Share food"
+      }
+    },
+    {
+      "turn": 7,
+      "creature": "Nia",
+      "action": "share_food",
+      "target": "Vey",
+      "glyphs": [
+        "soliko"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Shared food with Vey using 'soliko'.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 897,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "To strengthen our bond and possibly gain more trust, I'll share my food with Vey even though he's not hungry.",
+      "intended_meaning": "Share food to strengthen relationship.",
+      "interpretation": {
+        "soliko": "Share food."
+      }
+    },
+    {
+      "turn": 7,
+      "creature": "Oro",
+      "action": "share_food",
+      "target": "Lumo",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "kind",
+      "memory_to_store": "Shared food to Lumo after gathering it using niliso.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 931,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Shared food to Lumo, helping him recover and strengthening our bond.",
+      "intended_meaning": "Signal to Lumo about finding food",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 7,
+      "creature": "Pika",
+      "action": "share_food",
+      "target": "Oro",
+      "glyphs": [
+        "soliko"
+      ],
+      "mood": "curious",
+      "memory_to_store": "Shared food with Oro",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 832,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Pika is concerned about Oro's hunger and decides to share the food he found with him.",
+      "intended_meaning": "Share food with Oro to alleviate his hunger.",
+      "interpretation": {
+        "soliko": "Share food"
+      }
+    },
+    {
+      "turn": 7,
+      "creature": "Vey",
+      "action": "signal",
+      "target": "Pika",
+      "glyphs": [
+        "soliko"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Used soliko to signal concern to Pika.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 792,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Scared of Pika's negative trust and feeling anxious, I use soliko to signal concern to Pika.",
+      "intended_meaning": "concern",
+      "interpretation": {
+        "soliko": "signal concern"
+      }
+    },
+    {
+      "turn": 7,
+      "creature": "Sora",
+      "action": "signal",
+      "target": "Nia",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Sent a warning signal to Nia",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 864,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Considering the situation where there may be danger nearby and knowing that Nia is close by, I choose to send a signal to warn her.",
+      "intended_meaning": "signal to warn about danger",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 8,
+      "creature": "Lumo",
+      "action": "share_food",
+      "target": "Nia",
+      "glyphs": [
+        "kove"
+      ],
+      "mood": "contented",
+      "memory_to_store": "Shared food with Nia.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1083,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Nia trusts Lumo, and Lumo has food. Sharing food shows loyalty and strengthens trust.",
+      "intended_meaning": "share food with Nia",
+      "interpretation": {
+        "kove": "food"
+      }
+    },
+    {
+      "turn": 8,
+      "creature": "Nia",
+      "action": "move_west",
+      "target": "Vey",
+      "glyphs": [
+        "soliko"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Moved west to find a safer location.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 979,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Mood is cautious due to fear. Moving west to a less dangerous area.",
+      "intended_meaning": "Share food with Vey",
+      "interpretation": {
+        "niliso": "unknown meaning",
+        "soliko": "useful signal maybe",
+        "kove": "unknown meaning"
+      }
+    },
+    {
+      "turn": 8,
+      "creature": "Oro",
+      "action": "move_east",
+      "target": "Lumo",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "kind",
+      "memory_to_store": "Moved east to gather food using niliso.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1066,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "To gather food for Lumo and improve our relationship with him.",
+      "intended_meaning": "To gather food using niliso.",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 8,
+      "creature": "Pika",
+      "action": "follow",
+      "target": "Lumo",
+      "glyphs": [
+        "soliko"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Followed Oro Gathered food from near visible food sources. Followed Oro Staying still is the safest option given the weather and the presence of danger. I noticed an unusual sound ",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1070,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Following Lumo will help protect Pika from danger and gather food safely.",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "soliko": "follow"
+      }
+    },
+    {
+      "turn": 8,
+      "creature": "Vey",
+      "action": "share_food",
+      "target": "Nia",
+      "glyphs": [
+        "soliko"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Shared food with Nia.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1193,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Nia is hungry and needs food. Since she trusts Vey and has already shared food with her, offering more would reinforce their relationship.",
+      "intended_meaning": "Offer food to Nia to alleviate her hunger.",
+      "interpretation": {
+        "soliko": "Signal to Nia about having food."
+      }
+    },
+    {
+      "turn": 8,
+      "creature": "Sora",
+      "action": "gather",
+      "target": "Nia",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Shared food with Nia.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 831,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Gathered food to share with Nia to build mutual trust.",
+      "intended_meaning": "Share food",
+      "interpretation": {
+        "niliso": "Share food"
+      }
+    },
+    {
+      "turn": 9,
+      "creature": "Lumo",
+      "action": "share_food",
+      "target": "Oro",
+      "glyphs": [
+        "nebrni"
+      ],
+      "mood": "eager",
+      "memory_to_store": "Shared food with Oro.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1052,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo shares food with Oro based on his loyalty and fear.",
+      "intended_meaning": "Share food with Oro",
+      "interpretation": {
+        "nebrni": "share food"
+      }
+    },
+    {
+      "turn": 9,
+      "creature": "Nia",
+      "action": "move_north",
+      "target": "Stray-6",
+      "glyphs": [
+        "juluko"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Moved north to Stray-6",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1131,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Moving north to Stray-6 helps maintain distance and avoid immediate threats.",
+      "intended_meaning": "Move towards Stray-6",
+      "interpretation": {
+        "juluko": "Move north"
+      }
+    },
+    {
+      "turn": 9,
+      "creature": "Oro",
+      "action": "gather",
+      "target": "Nia",
+      "glyphs": [
+        "soliko"
+      ],
+      "mood": "kind",
+      "memory_to_store": "Shared food to Nia after gathering it using niliso.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1207,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Nia is currently hungry and has low trust in Oro. Oro has just shared food, which could indicate a willingness to share in the future. Oro decides to use soliko as a signal to Nia, hoping for a positive response.",
+      "intended_meaning": "share food to Nia",
+      "interpretation": {
+        "soliko": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 9,
+      "creature": "Pika",
+      "action": "share_food",
+      "target": "Oro",
+      "glyphs": [
+        "niliso"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 910,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I have food to share and Oro seems hungry. Sharing food could strengthen our bond and increase our chances of survival.",
+      "intended_meaning": "Share my food with Oro",
+      "interpretation": {
+        "niliso": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 9,
+      "creature": "Vey",
+      "action": "signal",
+      "target": "Pika",
+      "glyphs": [
+        "soliko"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "Used soliko to signal concern to Pika.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1167,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Vey feels a need to signal Pika about her anxiety and hunger, as they're both visible. They've used soliko before but need to ensure it's effective.",
+      "intended_meaning": "signal concern",
+      "interpretation": {
+        "soliko": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 9,
+      "creature": "Sora",
+      "action": "follow",
+      "target": "Nia",
+      "glyphs": [
+        "tuluku"
+      ],
+      "mood": "cautious",
+      "memory_to_store": "shared_food_with_Nia: True; Followed_Nia_after_her_signal: True; sent_warning_glyph_to_Nia: True; sent_warning_signal_to_Nia: True; received_warning_glyph_response: True",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1073,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Following Nia will help ensure mutual safety and possibly gather food. I have shared food with Nia before and she showed trust. I should continue following her to maintain our bond.",
+      "intended_meaning": "follow Nia",
+      "interpretation": {
+        "tuluku": "follow"
+      }
+    },
+    {
+      "turn": 9,
+      "creature": "Stray-6",
+      "action": "share_food",
+      "target": "Nia",
+      "glyphs": [
+        "juluko"
+      ],
+      "mood": "calm",
+      "memory_to_store": "Stray-6 shared food with Nia.",
+      "provider": "huggingface",
+      "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "latency_ms": 1168,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Despite Stray-6's anxiety, sharing food with Nia might help ease her fears and strengthen their bond.",
+      "intended_meaning": "Offer food to Nia",
+      "interpretation": {
+        "juluko": "Offer"
+      }
+    }
+  ]
+}

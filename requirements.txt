@@ -1,0 +1,8 @@
+gradio>=5.0.0
+pydantic>=2.7.0
+networkx>=3.3
+matplotlib>=3.8.0
+requests>=2.32.0
+mem0ai>=1.0.0
+huggingface_hub>=0.26.0
+python-dotenv>=1.0.0

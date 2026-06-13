@@ -1,0 +1,14 @@
+# Modal: training + inference for Moku
+modal>=0.73.0
+
+# Training (runs on Modal GPU)
+torch>=2.2.0
+transformers>=4.44.0
+peft>=0.12.0
+trl>=0.9.0
+datasets>=2.20.0
+accelerate>=0.33.0
+huggingface_hub>=0.26.0
+
+# Inference server
+vllm>=0.6.0
