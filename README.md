@@ -107,3 +107,5 @@ If Mem0 is unavailable, the app mirrors and searches memories with local SQLite 
 ## Codex Checkpoint
 
 Stamped by Codex on 2026-06-13 as the immersive simulation checkpoint: two watch modes, model-load-bearing creature minds, Mem0-ready per-creature memory, JSON repair, trace evidence, and a forest-first UI.
+
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) for the human + Codex attribution note.
