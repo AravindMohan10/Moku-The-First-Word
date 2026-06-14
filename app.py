@@ -232,6 +232,10 @@ def build_app() -> gr.Blocks:
         fill_height=True,
         elem_classes=["moku-root"],
         css=css,
+        theme=gr.themes.Base(
+            font=gr.themes.GoogleFont("Source Serif 4"),
+            font_mono=gr.themes.GoogleFont("IBM Plex Mono"),
+        ),
     ) as demo:
         gr.HTML(f"<script>{js_inline}</script>", container=False)
         gr.HTML(render_guide_panel(), elem_id="moku-guide-host", container=False)
@@ -526,6 +530,8 @@ if __name__ == "__main__":
     launch_kwargs: dict[str, Any] = {
         "server_name": host_env,
         "show_error": True,
+        # HF Spaces enable Gradio SSR by default; it 404s on Consolas/system font woff2 paths.
+        "ssr_mode": False,
     }
     if port_env:
         launch_kwargs["server_port"] = int(port_env)

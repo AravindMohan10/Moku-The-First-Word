@@ -15,7 +15,7 @@
   --panel: rgba(12, 20, 16, 0.88);
   --panel-border: rgba(110, 180, 150, 0.22);
   --glass: rgba(255, 255, 255, 0.04);
-  --mono: "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", "Menlo", monospace;
 }
 
 .gradio-container {
@@ -313,7 +313,7 @@ footer {
   overflow-x: auto;
   white-space: pre-wrap;
   word-break: break-word;
-  font-family: "SF Mono", "Menlo", "Consolas", monospace;
+  font-family: var(--mono);
 }
 
 .moku-notes-section {
