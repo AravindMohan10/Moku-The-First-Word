@@ -14,13 +14,14 @@ def render_homepage(model_label: str, memory_label: str) -> str:
     <p class="home-eyebrow">Build Small Hackathon · Thousand Token Wood</p>
     <h1 class="home-title">Moku: The First Word</h1>
     <p class="home-deck">
-      A live forest toy where six tiny creatures invent their own words, lie to each other,
-      and sometimes become friends. You watch. The AI plays every mind. Every choice is logged.
+      Partial emergence in a live forest toy: six tiny creatures (agents) invent words, lie,
+      and sometimes bond. We script the map and timed events. Language, deception, and trust
+      grow from the model. Every choice is logged.
     </p>
     <p class="home-hook">
-      They cannot speak English. They only shout <strong>glyphs</strong>: short made-up sounds
-      like <strong>brlu</strong> or <strong>lin</strong>. Each creature decides privately what
-      those words mean.
+      They cannot speak English. <strong>Glyphs</strong> are the only way creatures (agents)
+      talk: short made-up sounds like <strong>brlu</strong> or <strong>lin</strong>. Each
+      agent decides privately what those words mean.
     </p>
     <p class="home-meta">{model_label} · memory: {memory_label}</p>
   </div>
@@ -28,7 +29,8 @@ def render_homepage(model_label: str, memory_label: str) -> str:
   <div class="home-glyph-explainer">
     <h2 class="home-section-title">What is a glyph?</h2>
     <p class="home-glyph-lead">
-      A glyph is an invented word. Not English. It is the only public language in the forest.
+      A glyph is an invented word. Not English. It is the only public way creatures (agents)
+      talk in the forest.
     </p>
     <p class="home-glyph-lead">
       There is no official dictionary. When Lumo shouts <strong>brlu</strong>, Pika might think
@@ -74,7 +76,7 @@ def render_homepage(model_label: str, memory_label: str) -> str:
   </div>
 
   <div class="home-honest-box">
-    <h2 class="home-section-title">What we set up vs what the AI decides</h2>
+    <h2 class="home-section-title">What we set up vs partial emergence</h2>
     <div class="home-split">
       <div class="home-split-col">
         <p class="home-split-label">We set up (same in Sandbox every time)</p>
@@ -85,7 +87,7 @@ def render_homepage(model_label: str, memory_label: str) -> str:
         </ul>
       </div>
       <div class="home-split-col home-split-em">
-        <p class="home-split-label">The AI decides (different every run)</p>
+        <p class="home-split-label">Partial emergence (different every run)</p>
         <ul>
           <li>Which glyphs get invented and copied</li>
           <li>Private meanings and drift over time</li>
@@ -95,7 +97,7 @@ def render_homepage(model_label: str, memory_label: str) -> str:
       </div>
     </div>
     <p class="home-honest-foot">
-      Same stage every Sandbox run. New story every time.
+      Same stage every Sandbox run. Partial emergence: new language and social story every time.
     </p>
   </div>
 
