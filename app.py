@@ -225,8 +225,14 @@ def build_app() -> gr.Blocks:
     world0, story0, panel0, traces0 = _views(initial_state, True, initial_layers)
     home0 = render_homepage(model_label, memory_label)
     js_inline = JS_PATH.read_text(encoding="utf-8") if JS_PATH.exists() else ""
+    css = CSS_PATH.read_text(encoding="utf-8") if CSS_PATH.exists() else ""
 
-    with gr.Blocks(title="Moku: The First Word", fill_height=True, elem_classes=["moku-root"]) as demo:
+    with gr.Blocks(
+        title="Moku: The First Word",
+        fill_height=True,
+        elem_classes=["moku-root"],
+        css=css,
+    ) as demo:
         gr.HTML(f"<script>{js_inline}</script>", container=False)
         gr.HTML(render_guide_panel(), elem_id="moku-guide-host", container=False)
 
@@ -512,12 +518,10 @@ def build_app() -> gr.Blocks:
 if __name__ == "__main__":
     warmup_local_backend()
     app = build_app()
-    css = CSS_PATH.read_text(encoding="utf-8") if CSS_PATH.exists() else ""
     port_env = os.environ.get("GRADIO_SERVER_PORT")
     host_env = os.environ.get("GRADIO_SERVER_NAME", "127.0.0.1")
     launch_kwargs: dict[str, Any] = {
         "server_name": host_env,
-        "css": css,
         "show_error": True,
     }
     if port_env:
