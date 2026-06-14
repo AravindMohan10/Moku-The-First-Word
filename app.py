@@ -149,13 +149,13 @@ def _reset(
     actions: bool,
     mood: bool,
     events: bool,
-) -> tuple[Any, bool, str, str, str, str, int, str | None, dict]:
+) -> tuple[Any, bool, str, str, str, str, int, dict]:
     state = create_for_watch_mode(watch_mode)
     state.playing = True
     layers = _build_layers(trust, signals, speech, actions, mood, events)
     world, story, panel, traces = _views(state, True, layers)
-    path = _write_trace_file(state)
-    return state, True, world, story, panel, traces, 0, path, _play_btn_update(True)
+    _write_trace_file(state)
+    return state, True, world, story, panel, traces, 0, _play_btn_update(True)
 
 
 def _switch_mode(
@@ -166,7 +166,7 @@ def _switch_mode(
     actions: bool,
     mood: bool,
     events: bool,
-) -> tuple[Any, bool, str, str, str, str, int, str | None, dict]:
+) -> tuple[Any, bool, str, str, str, str, int, dict]:
     return _reset(watch_mode, trust, signals, speech, actions, mood, events)
 
 
@@ -297,7 +297,7 @@ def build_app() -> gr.Blocks:
                 traces_view = gr.HTML(value=traces0, elem_classes=["moku-traces-wrap"], container=False)
 
         panel_view = gr.HTML(value=panel0, elem_id="moku-panel-host", container=False)
-        trace_file = gr.File(label="traces.json", visible=False, interactive=False)
+        trace_download = gr.DownloadButton("⬇ traces.json", visible=False, size="sm")
 
         state = gr.State(initial_state)
         playing = gr.State(True)
@@ -311,7 +311,6 @@ def build_app() -> gr.Blocks:
             state,
             *sim_live_outputs,
             tick_count,
-            trace_file,
             playing,
             play_btn,
         ]
@@ -371,19 +370,22 @@ def build_app() -> gr.Blocks:
             actions: bool,
             mood: bool,
             events: bool,
-        ) -> tuple[Any, str, str, str, int, str | None, bool, dict]:
+        ) -> tuple[Any, str, str, str, int, bool, dict]:
             p = _effective_playing(s, p)
             layers = _build_layers(trust, signals, speech, actions, mood, events)
             btn = _play_btn_update(p)
             world, story, traces = _live_views(s, p, layers)
             if pg != "sim" or not p:
-                return s, world, story, traces, tc, _write_trace_file(s), p, btn
+                _write_trace_file(s)
+                return s, world, story, traces, tc, p, btn
             tc += 1
             if mode == "emergence" and tc % 2 != 0:
-                return s, world, story, traces, tc, _write_trace_file(s), p, btn
+                _write_trace_file(s)
+                return s, world, story, traces, tc, p, btn
             s = step_world(s)
             world, story, traces = _live_views(s, p, layers)
-            return s, world, story, traces, tc, _write_trace_file(s), p, btn
+            _write_trace_file(s)
+            return s, world, story, traces, tc, p, btn
 
         def toggle_play_pause(
             p: bool,
@@ -430,9 +432,11 @@ def build_app() -> gr.Blocks:
             layers = _build_layers(trust, signals, speech, actions, mood, events)
             return _panel_html(s)
 
-        def export_traces(s: Any) -> tuple[str | None, dict]:
+        def export_traces(s: Any) -> dict:
             path = _write_trace_file(s)
-            return path, gr.update(value=path, visible=path is not None)
+            if not path:
+                return gr.update(visible=False)
+            return gr.update(value=path, visible=True)
 
         timer.tick(
             on_timer_tick,
@@ -467,7 +471,6 @@ def build_app() -> gr.Blocks:
                 playing,
                 *sim_outputs,
                 tick_count,
-                trace_file,
                 play_btn,
             ],
         ).then(
@@ -481,7 +484,7 @@ def build_app() -> gr.Blocks:
         trace_btn.click(
             export_traces,
             inputs=[state],
-            outputs=[trace_file, trace_file],
+            outputs=[trace_download],
         )
 
         play_btn.click(
