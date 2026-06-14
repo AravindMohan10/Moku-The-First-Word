@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import threading
 import warnings
 from pathlib import Path
 from typing import Any
@@ -53,10 +54,13 @@ APP_ROOT = Path(__file__).parent
 CSS_PATH = APP_ROOT / "moku" / "web" / "style.css"
 JS_PATH = APP_ROOT / "moku" / "web" / "sim.js"
 TRACE_DIR = APP_ROOT / "data" / "traces"
+_tick_lock = threading.Lock()
 
 
 def _llm_timer_interval() -> float:
-    return float(os.environ.get("MOKU_TICK_SECONDS", "2.5"))
+    # HF Space + Modal LLM often needs 8–15s per creature; avoid overlapping timer polls.
+    default = "8.0" if os.environ.get("SPACE_ID") else "2.5"
+    return float(os.environ.get("MOKU_TICK_SECONDS", default))
 
 
 def _play_btn_update(playing: bool) -> dict:
@@ -382,14 +386,20 @@ def build_app() -> gr.Blocks:
             if pg != "sim" or not p:
                 _write_trace_file(s)
                 return s, world, story, traces, tc, p, btn
-            tc += 1
-            if mode == "emergence" and tc % 2 != 0:
+            if not _tick_lock.acquire(blocking=False):
                 _write_trace_file(s)
                 return s, world, story, traces, tc, p, btn
-            s = step_world(s)
-            world, story, traces = _live_views(s, p, layers)
-            _write_trace_file(s)
-            return s, world, story, traces, tc, p, btn
+            try:
+                tc += 1
+                if mode == "emergence" and tc % 2 != 0:
+                    _write_trace_file(s)
+                    return s, world, story, traces, tc, p, btn
+                s = step_world(s)
+                world, story, traces = _live_views(s, p, layers)
+                _write_trace_file(s)
+                return s, world, story, traces, tc, p, btn
+            finally:
+                _tick_lock.release()
 
         def toggle_play_pause(
             p: bool,
@@ -525,6 +535,7 @@ def build_app() -> gr.Blocks:
 if __name__ == "__main__":
     warmup_local_backend()
     app = build_app()
+    app.queue(default_concurrency_limit=1)
     port_env = os.environ.get("GRADIO_SERVER_PORT")
     host_env = os.environ.get("GRADIO_SERVER_NAME", "127.0.0.1")
     launch_kwargs: dict[str, Any] = {
