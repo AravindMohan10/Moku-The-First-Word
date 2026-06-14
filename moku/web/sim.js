@@ -31,7 +31,7 @@ document.addEventListener("click", (e) => {
     setGuideOpen(!guide?.classList.contains("open"));
     return;
   }
-  if (e.target.closest(".moku-panel-btn") || e.target.closest("#moku-notes-btn")) {
+  if (e.target.closest(".moku-panel-btn")) {
     e.preventDefault();
     const panel = document.getElementById("moku-side-panel");
     setPanelOpen(!panel?.classList.contains("open"));
@@ -56,8 +56,10 @@ document.addEventListener("keydown", (e) => {
 });
 
 const panelObserver = new MutationObserver(() => {
-  restorePanelState();
-  restoreGuideState();
+  requestAnimationFrame(() => {
+    restorePanelState();
+    restoreGuideState();
+  });
 });
 document.addEventListener("DOMContentLoaded", () => {
   const host = document.getElementById("moku-panel-host");
@@ -65,7 +67,3 @@ document.addEventListener("DOMContentLoaded", () => {
   restorePanelState();
   restoreGuideState();
 });
-setInterval(() => {
-  restorePanelState();
-  restoreGuideState();
-}, 400);

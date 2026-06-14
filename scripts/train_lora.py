@@ -25,7 +25,7 @@ if str(ROOT) not in sys.path:
 def main() -> None:
     parser = argparse.ArgumentParser(description="LoRA fine-tune Moku policy model")
     parser.add_argument("--data", default="data/moku_sft_from_traces.jsonl")
-    parser.add_argument("--base-model", default="meta-llama/Llama-3.2-3B-Instruct")
+    parser.add_argument("--base-model", default="openbmb/MiniCPM3-4B")
     parser.add_argument("--output", default="models/moku-lora")
     parser.add_argument("--epochs", type=int, default=1)
     parser.add_argument("--batch-size", type=int, default=2)

@@ -1,3 +1,15 @@
+---
+title: Moku The First Word
+emoji: 🌲
+colorFrom: green
+colorTo: yellow
+sdk: gradio
+sdk_version: 5.0.0
+app_file: app.py
+pinned: false
+license: apache-2.0
+---
+
 # Moku: The First Word
 
 A tiny forest society where small LLM-driven creatures invent glyphs, remember what happened, build trust, and learn that words can mean food, danger, shelter, and eventually lies.
@@ -46,20 +58,32 @@ If no model provider is configured, creature minds fall back through the determi
 
 ## Model And Memory Configuration
 
-Hugging Face provider:
+**OpenBMB (hackathon primary):** `openbmb/MiniCPM3-4B` — no exact 3B checkpoint; this 4B model still qualifies for Tiny Titan (≤4B) and targets OpenBMB Awards. It is not available on HF Inference Providers for most accounts; serve it via Modal vLLM or a local OpenAI-compatible server.
+
+Hugging Face provider (dev fallback when Modal is offline):
 
 ```bash
 HF_TOKEN=...
 MOKU_LLM_PROVIDER=auto
-MOKU_HF_MODEL=openbmb/MiniCPM5-1B
+MOKU_HF_MODEL=openbmb/MiniCPM3-4B
+MOKU_HF_MODEL_FALLBACKS=Qwen/Qwen2.5-Coder-3B-Instruct,deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
 ```
 
-Local OpenAI-compatible provider:
+Modal vLLM (recommended judge demo — see `modal/moku_modal.py`):
+
+```bash
+MOKU_LLM_PROVIDER=auto
+MOKU_MODEL_BASE_URL=https://<workspace>--moku-the-first-word-serve.modal.run/v1
+MOKU_HF_MODEL=openbmb/MiniCPM3-4B
+MOKU_MODEL_API_KEY=local
+```
+
+Local llama.cpp / other OpenAI-compatible server:
 
 ```bash
 MOKU_LLM_PROVIDER=local
 MOKU_MODEL_BASE_URL=http://127.0.0.1:8080/v1
-MOKU_MODEL_NAME=meta-llama/Llama-3.2-3B-Instruct
+MOKU_HF_MODEL=openbmb/MiniCPM3-4B
 MOKU_MODEL_API_KEY=local
 ```
 
@@ -93,6 +117,30 @@ If Mem0 is unavailable, the app mirrors and searches memories with local SQLite 
 - `scripts/train_lora.py` - LoRA/TRL training entrypoint.
 - `modal/moku_modal.py` - Modal helpers for training and serving.
 - `docs/` - Modal setup and hackathon badge notes.
+
+## Hackathon Submission
+
+| Link | URL |
+|------|-----|
+| **Live demo (HF Space)** | https://huggingface.co/spaces/build-small-hackathon/moku-the-first-word |
+| **GitHub** | https://github.com/AravindMohan10/Moku-The-First-Word |
+| **Modal vLLM (MiniCPM3-4B)** | https://m-aravind619--moku-the-first-word-serve.modal.run/v1 |
+| **Open trace** | `data/traces/world-8953-t34-open-trace.json` (120 turns, all `provider: local`) |
+| **Field notes** | [docs/FIELD_NOTES.md](docs/FIELD_NOTES.md) |
+
+### HF Space secrets
+
+Set these under **Settings → Repository secrets** on the Space:
+
+```bash
+HF_TOKEN=...
+MEM0_API_KEY=...
+MOKU_LLM_PROVIDER=auto
+MOKU_HF_MODEL=openbmb/MiniCPM3-4B
+MOKU_MODEL_BASE_URL=https://m-aravind619--moku-the-first-word-serve.modal.run/v1
+MOKU_MODEL_API_KEY=local
+MOKU_MEM0_RETRIEVE=local
+```
 
 ## Hackathon Demo Arc
 

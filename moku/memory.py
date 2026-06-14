@@ -251,7 +251,10 @@ class HybridMemoryStore:
 
     @property
     def backend_label(self) -> str:
+        mode = os.environ.get("MOKU_MEM0_RETRIEVE", "auto").strip().lower()
         if self._mem0.available:
+            if mode == "local":
+                return "mem0 (platform writes) + local retrieve"
             return f"mem0 ({self._mem0._mode}) + local mirror"
         return "local sqlite"
 
@@ -272,6 +275,14 @@ class HybridMemoryStore:
         query: str,
         k: int = 5,
     ) -> list[str]:
+        mode = os.environ.get("MOKU_MEM0_RETRIEVE", "auto").strip().lower()
+        if mode == "local":
+            return self._local.search_memory(world_id, creature_id, query, k=k)
+        if mode == "platform" and self._mem0.available:
+            hits = self._mem0.search_memory(world_id, creature_id, query, k=k)
+            if hits:
+                return hits
+            return self._local.search_memory(world_id, creature_id, query, k=k)
         if self._mem0.available:
             hits = self._mem0.search_memory(world_id, creature_id, query, k=k)
             if hits:

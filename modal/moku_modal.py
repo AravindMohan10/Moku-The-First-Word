@@ -18,7 +18,8 @@ Serve vLLM (keep running for demo):
 Then in .env:
   MOKU_LLM_PROVIDER=local
   MOKU_MODEL_BASE_URL=https://<your-modal-url>/v1
-  MOKU_MODEL_NAME=meta-llama/Llama-3.2-3B-Instruct
+  MOKU_HF_MODEL=openbmb/MiniCPM3-4B
+  MOKU_BASE_MODEL=openbmb/MiniCPM3-4B
 """
 
 from __future__ import annotations
@@ -31,7 +32,7 @@ import modal
 
 APP_NAME = "moku-the-first-word"
 VOLUME_NAME = "moku-models"
-BASE_MODEL = os.environ.get("MOKU_BASE_MODEL", "meta-llama/Llama-3.2-3B-Instruct")
+BASE_MODEL = os.environ.get("MOKU_BASE_MODEL", "openbmb/MiniCPM3-4B")
 
 app = modal.App(APP_NAME)
 volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
@@ -39,7 +40,8 @@ volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
 repo_root = Path(__file__).resolve().parents[1]
 
 image = (
-    modal.Image.debian_slim(python_version="3.11")
+    modal.Image.from_registry("nvidia/cuda:12.4.1-devel-ubuntu22.04", add_python="3.11")
+    .entrypoint([])
     .pip_install(
         "torch>=2.2.0",
         "transformers>=4.44.0",
@@ -52,6 +54,7 @@ image = (
         "sentencepiece",
         "protobuf",
     )
+    .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
     .add_local_file(
         repo_root / "data" / "moku_sft_from_traces.jsonl",
         remote_path="/root/data/moku_sft_from_traces.jsonl",
@@ -114,7 +117,7 @@ def train(
     lora_dir.mkdir(parents=True, exist_ok=True)
     merged_dir.mkdir(parents=True, exist_ok=True)
 
-    tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL, token=hf_token)
+    tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL, token=hf_token, trust_remote_code=True)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
@@ -123,6 +126,7 @@ def train(
         torch_dtype=torch.bfloat16,
         device_map="auto",
         token=hf_token,
+        trust_remote_code=True,
     )
     lora = LoraConfig(
         r=16,
@@ -162,6 +166,7 @@ def train(
         torch_dtype=torch.bfloat16,
         device_map="auto",
         token=hf_token,
+        trust_remote_code=True,
     )
     merged = PeftModel.from_pretrained(base, str(lora_dir))
     merged = merged.merge_and_unload()
@@ -176,8 +181,9 @@ def train(
     gpu="A10G",
     timeout=24 * 60 * 60,
     volumes={"/models": volume},
-    allow_concurrent_inputs=8,
+    secrets=[modal.Secret.from_name("huggingface")],
 )
+@modal.concurrent(max_inputs=8)
 @modal.web_server(8000, startup_timeout=600)
 def serve() -> None:
     """OpenAI-compatible vLLM server — point MOKU_MODEL_BASE_URL here."""
@@ -193,6 +199,7 @@ def serve() -> None:
         "vllm.entrypoints.openai.api_server",
         "--model",
         model_path,
+        "--trust-remote-code",
         "--host",
         "0.0.0.0",
         "--port",
@@ -200,7 +207,8 @@ def serve() -> None:
         "--dtype",
         "bfloat16",
         "--max-model-len",
-        "4096",
+        "2048",
+        "--enforce-eager",
     ]
     print("Starting vLLM:", " ".join(cmd))
     subprocess.Popen(" ".join(cmd), shell=True)

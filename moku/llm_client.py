@@ -32,17 +32,21 @@ def _hf_token() -> str:
     return ""
 
 
+# OpenBMB has no exact 3B checkpoint — MiniCPM3-4B is the quality pick (≤4B, Tiny Titan eligible).
+OPENBMB_DEFAULT_MODEL = "openbmb/MiniCPM3-4B"
+
+
 def default_model() -> str:
     return os.environ.get(
         "MOKU_HF_MODEL",
-        os.environ.get("MOKU_MODEL_NAME", "meta-llama/Llama-3.2-3B-Instruct"),
+        os.environ.get("MOKU_MODEL_NAME", OPENBMB_DEFAULT_MODEL),
     ).strip()
 
 
 def _model_fallbacks() -> list[str]:
     raw = os.environ.get(
         "MOKU_HF_MODEL_FALLBACKS",
-        "meta-llama/Llama-3.2-3B-Instruct,Qwen/Qwen2.5-Coder-3B-Instruct,deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+        "Qwen/Qwen2.5-Coder-3B-Instruct,deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
     )
     seen: set[str] = set()
     out: list[str] = []
@@ -56,12 +60,41 @@ def _model_fallbacks() -> list[str]:
 
 
 def provider_label() -> str:
+    base = os.environ.get("MOKU_MODEL_BASE_URL", "").strip()
+    prefer = os.environ.get("MOKU_LLM_PROVIDER", "auto").lower()
+    if base and prefer in ("auto", "local"):
+        return f"local/{default_model()}"
     if _hf_token():
         return f"huggingface/{default_model()}"
-    base = os.environ.get("MOKU_MODEL_BASE_URL", "").strip()
     if base:
         return f"local/{default_model()}"
     return "unconfigured"
+
+
+def _local_chat_url(base_url: str) -> str:
+    """OpenAI-compatible chat URL; base may be .../v1 or host root."""
+    base = base_url.rstrip("/")
+    if base.endswith("/v1"):
+        return f"{base}/chat/completions"
+    return f"{base}/v1/chat/completions"
+
+
+def warmup_local_backend() -> None:
+    """Background ping so Modal vLLM compiles before the first creature turn."""
+    base_url = os.environ.get("MOKU_MODEL_BASE_URL", "").strip()
+    prefer = os.environ.get("MOKU_LLM_PROVIDER", "auto").lower()
+    if not base_url or prefer == "huggingface":
+        return
+
+    def _run() -> None:
+        try:
+            _chat_local('Reply JSON only: {"ok":true}', "warmup", default_model(), max_tokens=8)
+        except Exception:
+            pass
+
+    import threading
+
+    threading.Thread(target=_run, daemon=True, name="moku-llm-warmup").start()
 
 
 def _extract_json(text: str) -> str:
@@ -152,12 +185,17 @@ def _chat_local(
             {"role": "user", "content": user},
         ],
     }
-    if not raw and os.environ.get("MOKU_JSON_MODE", "1") == "1":
-        body["response_format"] = {"type": "json_object"}
+    if not raw:
+        local_json = os.environ.get(
+            "MOKU_LOCAL_JSON_MODE",
+            os.environ.get("MOKU_JSON_MODE", "0"),
+        )
+        if local_json == "1":
+            body["response_format"] = {"type": "json_object"}
     started = time.perf_counter()
     try:
         res = requests.post(
-            f"{base_url.rstrip('/')}/v1/chat/completions",
+            _local_chat_url(base_url),
             headers={"Authorization": f"Bearer {api_key}"},
             json=body,
             timeout=int(os.environ.get("MOKU_LLM_TIMEOUT", "25")),
@@ -315,14 +353,23 @@ def summarize_run_finale(
     system = (
         "You are the forest chronicler closing a field journal after a glyph-only creature run. "
         "Write exactly 4-5 short sentences in past tense. Plain text — no lists, no markdown. "
-        "Describe only social moves from turn_headlines and recent_traces: who signaled whom, "
-        "who share_food/gathered/moved, which glyphs spread. "
+        "REQUIRED — include one sentence naming highlights.glyph_drift.dominant_glyph and cite "
+        "at least TWO creatures with DIFFERENT readings from highlights.glyph_drift.conflicting_readings "
+        "(e.g. \"nilisi meant food to Nia and alert to Sora\"). Use the summary_line as a guide. "
+        "REQUIRED — include one sentence on social bonds from highlights.social_bonds: "
+        "who shared food with whom, who followed whom, and who trusted whom most. "
+        "Use share_food_bonds, follow_bonds, and strongest_trust only. "
+        "If highlights.stranger_arc.summary_line is non-empty, REQUIRED: one sentence on the stranger "
+        "(name, dialect glyphs, or an interaction). "
+        "REQUIRED final sentence: list highlights.final_turn_moves exactly — each creature and "
+        "move direction/action from that list; do not invent different directions. "
+        "Other sentences may cover deception or key actions from recent_traces. "
         "Warm tone is fine; cinematic fiction is not. "
-        "Do NOT invent sunsets, dusk, dawn, campfires, stargazing, journeys, travel, berries, "
-        "mushrooms, meals by fire, or emotional closure scenes absent from the traces. "
+        "Do NOT invent sunsets, dusk, dawn, campfires, fireflies, stargazing, journeys, travel, "
+        "berries, mushrooms, meals by fire, or scenic closure absent from the traces. "
         "Never mention villages, towns, cities, homes, or leaving the forest. "
         "Only name creatures in creature_names. "
-        "If one glyph dominates, say so — do not invent a day-long story arc."
+        "No generic filler — every sentence must cite concrete creatures, glyphs, or bonds from the JSON."
     )
     payload = {
         "turn_count": turn_count,
@@ -344,8 +391,14 @@ def summarize_run_finale_repair(
     system = (
         "Rewrite this forest epilogue in exactly 4-5 short past-tense sentences. "
         "Keep creature names, glyphs, and actions from the JSON highlights only. "
-        "Remove sunsets, dusk, campfires, stars, journeys, travel, invented meals, and place names. "
-        "No villages, towns, or leaving the forest. Plain text only."
+        "One sentence MUST name highlights.glyph_drift.dominant_glyph with two creatures "
+        "and their conflicting readings. "
+        "One sentence MUST describe social bonds: share_food, follow, or trust from "
+        "highlights.social_bonds. "
+        "If highlights.stranger_arc.summary_line exists, one sentence MUST use it. "
+        "Final sentence MUST match highlights.final_turn_moves for each creature's action. "
+        "Remove sunsets, dusk, campfires, fireflies, stars, journeys, travel, invented meals, "
+        "and place names. No villages, towns, or leaving the forest. Plain text only."
     )
     payload = {"turn_count": turn_count, "highlights": highlights, "draft_to_fix": draft[:800]}
     user = f"Repair this epilogue:\n{json.dumps(payload, ensure_ascii=True)}"

@@ -20,7 +20,7 @@ except ImportError:
 
 import gradio as gr
 
-from moku.llm_client import provider_label
+from moku.llm_client import provider_label, warmup_local_backend
 from moku.memory import get_memory_store
 from moku.render_home import render_homepage
 from moku.visual_layers import VisualLayers, layers_from_toggles
@@ -109,6 +109,21 @@ def _effective_playing(state: Any, playing: bool) -> bool:
 def _world_html(state: Any, playing: bool, layers: VisualLayers) -> str:
     active = _effective_playing(state, playing)
     return render_sim_shell(render_world_scene(state, layers), state.watch_mode, active)
+
+
+def _live_views(
+    state: Any,
+    playing: bool,
+    layers: VisualLayers,
+) -> tuple[str, str, str]:
+    """World + story + traces — updated every tick. Excludes side panel shell."""
+    last_trace = state.trace_log[-1] if state.trace_log else None
+    active = _effective_playing(state, playing)
+    return (
+        _world_html(state, playing, layers),
+        render_story_section(state, last_trace, playing=active),
+        render_traces_panel(state),
+    )
 
 
 def _views(
@@ -200,12 +215,12 @@ def build_app() -> gr.Blocks:
     memory_label = get_memory_store().backend_label
     model_label = provider_label()
     initial_layers = layers_from_toggles(
-        trust=False,
-        signals=False,
+        trust=True,
+        signals=True,
         speech=True,
         actions=True,
-        mood=False,
-        events=False,
+        mood=True,
+        events=True,
     )
     world0, story0, panel0, traces0 = _views(initial_state, True, initial_layers)
     home0 = render_homepage(model_label, memory_label)
@@ -249,11 +264,11 @@ def build_app() -> gr.Blocks:
 
                 with gr.Row(elem_classes=["moku-overlay-row"]):
                     ov_speech = gr.Checkbox(label="Speech", value=True, elem_id="ov-speech")
-                    ov_signals = gr.Checkbox(label="Signals", value=False, elem_id="ov-signals")
-                    ov_trust = gr.Checkbox(label="Trust", value=False, elem_id="ov-trust")
+                    ov_signals = gr.Checkbox(label="Signals", value=True, elem_id="ov-signals")
+                    ov_trust = gr.Checkbox(label="Trust", value=True, elem_id="ov-trust")
                     ov_actions = gr.Checkbox(label="Actions", value=True, elem_id="ov-actions")
-                    ov_mood = gr.Checkbox(label="Mood", value=False, elem_id="ov-mood")
-                    ov_events = gr.Checkbox(label="Events", value=False, elem_id="ov-events")
+                    ov_mood = gr.Checkbox(label="Mood", value=True, elem_id="ov-mood")
+                    ov_events = gr.Checkbox(label="Events", value=True, elem_id="ov-events")
 
                 overlay_inputs = [
                     ov_trust,
@@ -285,9 +300,10 @@ def build_app() -> gr.Blocks:
         timer = gr.Timer(value=_llm_timer_interval(), active=True)
 
         sim_outputs = [sim_view, story_view, panel_view, traces_view]
+        sim_live_outputs = [sim_view, story_view, traces_view]
         tick_outputs = [
             state,
-            *sim_outputs,
+            *sim_live_outputs,
             tick_count,
             trace_file,
             playing,
@@ -349,17 +365,19 @@ def build_app() -> gr.Blocks:
             actions: bool,
             mood: bool,
             events: bool,
-        ) -> tuple[Any, str, str, str, str, int, str | None, bool, dict]:
+        ) -> tuple[Any, str, str, str, int, str | None, bool, dict]:
             p = _effective_playing(s, p)
             layers = _build_layers(trust, signals, speech, actions, mood, events)
             btn = _play_btn_update(p)
+            world, story, traces = _live_views(s, p, layers)
             if pg != "sim" or not p:
-                return s, *_views(s, p, layers), tc, _write_trace_file(s), p, btn
+                return s, world, story, traces, tc, _write_trace_file(s), p, btn
             tc += 1
             if mode == "emergence" and tc % 2 != 0:
-                return s, *_views(s, p, layers), tc, _write_trace_file(s), p, btn
+                return s, world, story, traces, tc, _write_trace_file(s), p, btn
             s = step_world(s)
-            return s, *_views(s, p, layers), tc, _write_trace_file(s), p, btn
+            world, story, traces = _live_views(s, p, layers)
+            return s, world, story, traces, tc, _write_trace_file(s), p, btn
 
         def toggle_play_pause(
             p: bool,
@@ -393,6 +411,18 @@ def build_app() -> gr.Blocks:
             layers = _build_layers(trust, signals, speech, actions, mood, events)
             w, st, pn, tr = _views(s, s.playing, layers)
             return s, w, st, pn, tr
+
+        def refresh_panel_view(
+            s: Any,
+            trust: bool,
+            signals: bool,
+            speech: bool,
+            actions: bool,
+            mood: bool,
+            events: bool,
+        ) -> str:
+            layers = _build_layers(trust, signals, speech, actions, mood, events)
+            return _panel_html(s)
 
         def export_traces(s: Any) -> tuple[str | None, dict]:
             path = _write_trace_file(s)
@@ -458,8 +488,18 @@ def build_app() -> gr.Blocks:
             outputs=[state, *sim_outputs],
         )
         obs_btn.click(
+            refresh_panel_view,
+            inputs=[state, *overlay_inputs],
+            outputs=[panel_view],
+        ).then(
             fn=None,
-            js="() => { const p = document.getElementById('moku-side-panel'); if (p) { p.classList.toggle('open'); sessionStorage.setItem('moku-panel-open', p.classList.contains('open') ? '1' : '0'); } }",
+            js="""() => {
+              const panel = document.getElementById('moku-side-panel');
+              if (!panel) return;
+              const open = !panel.classList.contains('open');
+              panel.classList.toggle('open', open);
+              sessionStorage.setItem('moku-panel-open', open ? '1' : '0');
+            }""",
         )
         guide_btn.click(
             fn=None,
@@ -470,6 +510,7 @@ def build_app() -> gr.Blocks:
 
 
 if __name__ == "__main__":
+    warmup_local_backend()
     app = build_app()
     css = CSS_PATH.read_text(encoding="utf-8") if CSS_PATH.exists() else ""
     port_env = os.environ.get("GRADIO_SERVER_PORT")

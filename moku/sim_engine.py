@@ -5,6 +5,7 @@ import json
 import os
 import random
 import re
+import threading
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Any
@@ -124,6 +125,11 @@ class WorldState:
     run_summary: dict[str, Any] | None = None
     replay_traces: list[dict[str, Any]] | None = None
     playing: bool = True
+    prefetch_cid: str | None = None
+    prefetch_plan: tuple[CreatureTurn, dict[str, Any]] | None = None
+
+
+_prefetch_lock = threading.Lock()
 
 
 def _bounded(v: int, lo: int = 0, hi: int = 100) -> int:
@@ -388,7 +394,9 @@ def _memory_query(c: Creature, state: WorldState) -> str:
     return " ".join(bits)
 
 
-def _retrieve_memories(c: Creature, state: WorldState, k: int = 5) -> list[str]:
+def _retrieve_memories(c: Creature, state: WorldState, k: int | None = None) -> list[str]:
+    if k is None:
+        k = int(os.environ.get("MOKU_MEMORY_RETRIEVE_K", "5"))
     store = get_memory_store()
     query = _memory_query(c, state)
     hits = store.search_memory(state.world_id, c.cid, query, k=k)
@@ -458,15 +466,31 @@ def _overused_glyphs(state: WorldState, threshold: int = 10) -> list[str]:
     ][:5]
 
 
+def _is_stranger(creature: Any) -> bool:
+    return str(getattr(creature, "name", "")).startswith("Stray")
+
+
+def _stranger_names(state: WorldState) -> list[str]:
+    return [c.name for c in state.creatures if _is_stranger(c)]
+
+
 def _llm_policy(c: Creature, state: WorldState, r: random.Random) -> tuple[CreatureTurn, dict[str, Any]]:
     visible = _visible_cells(c, state)
     seen_food = [list(p) for p in state.food if p in visible]
     seen_danger = [list(p) for p in state.danger if p in visible]
     nearby = [
-        {"name": o.name, "x": o.x, "y": o.y, "trust": c.trust.get(o.name, 0), "last_glyphs": o.last_glyphs}
+        {
+            "name": o.name,
+            "x": o.x,
+            "y": o.y,
+            "trust": c.trust.get(o.name, 0),
+            "last_glyphs": o.last_glyphs,
+            "is_stranger": _is_stranger(o),
+        }
         for o in state.creatures
         if o.cid != c.cid and abs(o.x - c.x) + abs(o.y - c.y) <= 3
     ]
+    strangers_nearby = [n for n in nearby if n.get("is_stranger")]
     retrieved = _retrieve_memories(c, state)
     obs = {
         "creature": c.name,
@@ -482,6 +506,9 @@ def _llm_policy(c: Creature, state: WorldState, r: random.Random) -> tuple[Creat
         "visible_danger": seen_danger,
         "visible_shelter": [list(p) for p in state.shelter if p in visible],
         "nearby_creatures": nearby,
+        "is_stranger": _is_stranger(c),
+        "strangers_in_world": _stranger_names(state),
+        "strangers_nearby": strangers_nearby,
         "glyph_beliefs": c.glyph_beliefs,
         "trust": c.trust,
         "retrieved_memories": retrieved,
@@ -491,7 +518,6 @@ def _llm_policy(c: Creature, state: WorldState, r: random.Random) -> tuple[Creat
         "valid_creature_names": [o.name for o in state.creatures],
         "last_action": c.last_action,
         "last_glyphs": c.last_glyphs,
-        "legal_actions": LEGAL_ACTIONS,
         "turn": state.turn,
     }
     system = (
@@ -500,6 +526,8 @@ def _llm_policy(c: Creature, state: WorldState, r: random.Random) -> tuple[Creat
         "Reuse glyphs from public_glyphs or nearby last_glyphs when context repeats; "
         "coin a fresh glyph when overused_glyphs dominates or the situation is new. "
         "Use share_food (with target) when you hold food and a nearby ally is hungry — not signal. "
+        "Move often: use move_* toward visible_food when hungry, follow nearby allies, or roam one step "
+        "instead of stay/signal when nothing urgent. Creatures should cross the forest, not cluster. "
         "target must be a name from valid_creature_names, never yourself. "
         "Under scarcity, you may deceive with misleading glyphs. "
         "Choose one legal action. Return strict JSON only with keys: "
@@ -510,6 +538,16 @@ def _llm_policy(c: Creature, state: WorldState, r: random.Random) -> tuple[Creat
         "trust_updates must be a JSON object mapping creature name->integer. "
         "Do not invent map facts outside the observation. English only in hidden fields."
     )
+    if _is_stranger(c):
+        system += (
+            " You are a Stray newcomer: prefer glyphs from glyph_beliefs (your dialect) in public speech. "
+            "Natives may misread you — follow, signal, or share_food with a named native to build trust."
+        )
+    elif strangers_nearby:
+        system += (
+            " A Stray stranger is nearby (see strangers_nearby). Their glyphs may not match colony meanings. "
+            "You may follow, signal, or share_food with them to test trust — set target to their name."
+        )
     user = f"Turn observation:\n{json.dumps(obs, ensure_ascii=True)}"
     llm = chat_json(system, user)
     meta: dict[str, Any] = {
@@ -570,6 +608,50 @@ def _append_trace(state: WorldState, c: Creature, turn: CreatureTurn, meta: dict
     state.trace_log = state.trace_log[-120:]
 
 
+def _prefetch_enabled(state: WorldState) -> bool:
+    if state.replay_traces:
+        return False
+    if os.environ.get("MOKU_PREFETCH_MINDS", "1").strip().lower() in {"0", "false", "no"}:
+        return False
+    if not os.environ.get("MOKU_MODEL_BASE_URL", "").strip():
+        return False
+    if os.environ.get("MOKU_LLM_PROVIDER", "auto").lower() == "huggingface":
+        return False
+    return True
+
+
+def _clear_prefetch(state: WorldState) -> None:
+    with _prefetch_lock:
+        state.prefetch_cid = None
+        state.prefetch_plan = None
+
+
+def _start_prefetch(state: WorldState, c: Creature, r: random.Random) -> None:
+    """Plan the next creature's turn in the background using the current world state."""
+    if not _prefetch_enabled(state):
+        return
+    token = c.cid
+    with _prefetch_lock:
+        state.prefetch_cid = token
+        state.prefetch_plan = None
+
+    def _run() -> None:
+        seed = r.randint(0, 2**31 - 1) ^ hash(c.cid)
+        try:
+            plan = _llm_policy(c, state, random.Random(seed))
+        except Exception:
+            plan = None
+        with _prefetch_lock:
+            if state.prefetch_cid == token:
+                state.prefetch_plan = plan
+
+    threading.Thread(
+        target=_run,
+        daemon=True,
+        name=f"moku-prefetch-{c.name}",
+    ).start()
+
+
 def _choose_turn(c: Creature, state: WorldState, r: random.Random) -> CreatureTurn:
     if state.replay_traces:
         replay = _replay_turn(c, state)
@@ -577,6 +659,16 @@ def _choose_turn(c: Creature, state: WorldState, r: random.Random) -> CreatureTu
             turn, meta = replay
             _append_trace(state, c, turn, meta)
             return turn
+    with _prefetch_lock:
+        if state.prefetch_cid == c.cid and state.prefetch_plan is not None:
+            turn, meta = state.prefetch_plan
+            state.prefetch_cid = None
+            state.prefetch_plan = None
+            _append_trace(state, c, turn, meta)
+            return turn
+        if state.prefetch_cid == c.cid:
+            state.prefetch_cid = None
+            state.prefetch_plan = None
     turn, meta = _llm_policy(c, state, r)
     _append_trace(state, c, turn, meta)
     return turn
@@ -624,19 +716,32 @@ def _replay_turn(c: Creature, state: WorldState) -> tuple[CreatureTurn, dict[str
     return turn, meta
 
 
-def _apply_move(c: Creature, action: str, state: WorldState) -> None:
-    if action == "move_north":
-        nx, ny = c.x, c.y - 1
-    elif action == "move_south":
-        nx, ny = c.x, c.y + 1
-    elif action == "move_east":
-        nx, ny = c.x + 1, c.y
-    elif action == "move_west":
-        nx, ny = c.x - 1, c.y
-    else:
-        return
-    if _in_bounds(nx, ny, state) and _creature_at(nx, ny, state) is None:
-        c.x, c.y = nx, ny
+def _apply_move(c: Creature, action: str, state: WorldState) -> bool:
+    """Move one cell; try alternate free neighbors if blocked. Returns True if position changed."""
+    deltas = {
+        "move_north": (0, -1),
+        "move_south": (0, 1),
+        "move_east": (1, 0),
+        "move_west": (-1, 0),
+    }
+    primary = deltas.get(action)
+    if not primary:
+        return False
+    dx, dy = primary
+    candidates: list[tuple[int, int]] = [(c.x + dx, c.y + dy)]
+    for alt, (ax, ay) in deltas.items():
+        if alt == action:
+            continue
+        candidates.append((c.x + ax, c.y + ay))
+    seen: set[tuple[int, int]] = set()
+    for nx, ny in candidates:
+        if (nx, ny) in seen:
+            continue
+        seen.add((nx, ny))
+        if _in_bounds(nx, ny, state) and _creature_at(nx, ny, state) is None:
+            c.x, c.y = nx, ny
+            return True
+    return False
 
 
 def _step_creature(c: Creature, state: WorldState, turn: CreatureTurn, r: random.Random) -> None:
@@ -666,12 +771,17 @@ def _step_creature(c: Creature, state: WorldState, turn: CreatureTurn, r: random
     elif turn.action == "follow":
         if turn.target:
             target = next((o for o in state.creatures if o.name == turn.target), None)
-            if target:
+            if target and (c.x, c.y) != (target.x, target.y):
                 dx = 0 if c.x == target.x else (1 if target.x > c.x else -1)
                 dy = 0 if c.y == target.y else (1 if target.y > c.y else -1)
-                nx, ny = c.x + dx, c.y + dy
-                if _in_bounds(nx, ny, state) and _creature_at(nx, ny, state) is None:
-                    c.x, c.y = nx, ny
+                moved = False
+                for nx, ny in [(c.x + dx, c.y + dy), (c.x + dx, c.y), (c.x, c.y + dy)]:
+                    if _in_bounds(nx, ny, state) and _creature_at(nx, ny, state) is None:
+                        c.x, c.y = nx, ny
+                        moved = True
+                        break
+                if not moved:
+                    _apply_move(c, "move_north", state)
     elif turn.action == "gather":
         if (c.x, c.y) in state.food:
             c.food += 1
@@ -683,10 +793,15 @@ def _step_creature(c: Creature, state: WorldState, turn: CreatureTurn, r: random
         if c.food > 0:
             others = [o for o in state.creatures if o.cid != c.cid and abs(o.x - c.x) + abs(o.y - c.y) <= 1]
             if others:
-                t = sorted(others, key=lambda o: c.trust.get(o.name, 0), reverse=True)[0]
+                by_name = {o.name: o for o in others}
+                if turn.target and turn.target in by_name:
+                    t = by_name[turn.target]
+                else:
+                    t = sorted(others, key=lambda o: c.trust.get(o.name, 0), reverse=True)[0]
                 c.food -= 1
                 t.hunger = _bounded(t.hunger - 20)
                 c.trust[t.name] = c.trust.get(t.name, 0) + 1
+                t.trust[c.name] = t.trust.get(c.name, 0) + 1
                 state.transcript.append(f"Turn {state.turn} - {c.name} shares food with {t.name}.")
 
     if turn.glyphs:
@@ -924,13 +1039,24 @@ def _run_summary_fallback(state: WorldState) -> str:
         key=lambda item: item[1].get("uses", 0),
         reverse=True,
     )[:3]
-    if top:
+    drift = _epilogue_glyph_drift(state)
+    if drift.get("summary_line"):
+        lines.append(drift["summary_line"] + ".")
+    elif top:
         glyph_bits = ", ".join(f"'{g}'" for g, _ in top)
         lines.append(f"The air kept returning to {glyph_bits}.")
 
-    strangers = [c.name for c in state.creatures if c.name.startswith("Stray")]
+    bonds = _epilogue_social_bonds(state)
+    if bonds.get("summary_line"):
+        lines.append("Bonds formed: " + bonds["summary_line"] + ".")
+
+    strangers = _stranger_names(state)
     if strangers:
-        lines.append(f"A stranger ({', '.join(strangers)}) wandered in and rewired the social map.")
+        arc = _epilogue_stranger_arc(state)
+        if arc.get("summary_line"):
+            lines.append(arc["summary_line"] + ".")
+        else:
+            lines.append(f"A stranger ({', '.join(strangers)}) wandered in and rewired the social map.")
 
     if state.deception_events:
         lines.append(f"Deception flickered {len(state.deception_events)} time(s) across the run.")
@@ -965,6 +1091,8 @@ _EPILOGUE_BANNED_PHRASES = (
     "golden glow",
     "campfire",
     "camp fire",
+    "fireflies",
+    "firefly",
     "stars twinkle",
     "twinkle above",
     "continued their journey",
@@ -986,6 +1114,35 @@ _EPILOGUE_BANNED_PHRASES = (
     "following the sounds",
 )
 
+def _trace_social_edges(state: WorldState) -> list[tuple[str, str, str]]:
+    """Directed edges from trace — only actions the engine treats as social."""
+    valid = {c.name for c in state.creatures}
+    edges: list[tuple[str, str, str]] = []
+    for t in state.trace_log:
+        action = str(t.get("action") or "")
+        if action not in {"signal", "follow", "share_food"}:
+            continue
+        src = str(t.get("creature") or "").strip()
+        tgt = str(t.get("target") or "").strip()
+        if not src or not tgt or tgt not in valid or src == tgt:
+            continue
+        edges.append((src, tgt, action))
+    for line in state.transcript:
+        if "shares food with" not in line:
+            continue
+        m = re.search(r"Turn \d+ - (\S+) shares food with (\S+)\.", line)
+        if m:
+            edges.append((m.group(1), m.group(2), "share_food"))
+    return edges
+
+
+def _social_bond_pairs_from_state(state: WorldState) -> set[tuple[str, str]]:
+    pairs: set[tuple[str, str]] = set()
+    for src, tgt, _ in _trace_social_edges(state):
+        pairs.add(tuple(sorted([src, tgt])))
+    return pairs
+
+
 _EPILOGUE_MAX_SENTENCES = 5
 
 
@@ -995,6 +1152,9 @@ def _epilogue_allowed_tokens(highlights: dict[str, Any]) -> dict[str, set[str]]:
     for item in highlights.get("top_glyphs") or []:
         if isinstance(item, dict) and item.get("glyph"):
             glyphs.add(str(item["glyph"]).lower())
+    drift = highlights.get("glyph_drift") or {}
+    if isinstance(drift, dict) and drift.get("dominant_glyph"):
+        glyphs.add(str(drift["dominant_glyph"]).lower())
     for trace in highlights.get("recent_traces") or []:
         if not isinstance(trace, dict):
             continue
@@ -1006,8 +1166,14 @@ def _epilogue_allowed_tokens(highlights: dict[str, Any]) -> dict[str, set[str]]:
     return {"creatures": creatures, "glyphs": glyphs, "actions": actions}
 
 
-def _sentence_grounded(sentence: str, allowed: dict[str, set[str]]) -> bool:
+def _sentence_grounded(
+    sentence: str,
+    allowed: dict[str, set[str]],
+    highlights: dict[str, Any] | None = None,
+) -> bool:
     lower = sentence.lower()
+    if highlights and not _social_claim_allowed(sentence, highlights):
+        return False
     if any(name in lower for name in allowed["creatures"] if len(name) > 2):
         return True
     if any(glyph in lower for glyph in allowed["glyphs"] if len(glyph) > 2):
@@ -1016,6 +1182,17 @@ def _sentence_grounded(sentence: str, allowed: dict[str, set[str]]) -> bool:
         if len(action) > 4 and action in lower:
             return True
     return False
+
+
+def _social_claim_allowed(sentence: str, highlights: dict[str, Any]) -> bool:
+    """Block epilogue claims about sharing/following unless the trace proves them."""
+    social = highlights.get("social_bonds") or {}
+    lower = sentence.lower()
+    if re.search(r"shar(e|ed|ing)\s+food", lower) and not social.get("share_food_bonds"):
+        return False
+    if re.search(r"\bfollow(ed|ing|s)?\b", lower) and not social.get("follow_bonds"):
+        return False
+    return True
 
 
 def _epilogue_hallucinated(text: str) -> bool:
@@ -1033,7 +1210,7 @@ def _sanitize_epilogue(text: str, highlights: dict[str, Any]) -> str:
             continue
         if _epilogue_hallucinated(chunk):
             continue
-        if not _sentence_grounded(chunk, allowed):
+        if not _sentence_grounded(chunk, allowed, highlights):
             continue
         kept.append(chunk)
         if len(kept) >= _EPILOGUE_MAX_SENTENCES:
@@ -1060,7 +1237,7 @@ def _finalize_run_summary_text(
         sentences = [s for s in re.split(r"(?<=[.!?])\s+", candidate) if s]
         if len(sentences) > _EPILOGUE_MAX_SENTENCES:
             return False
-        return all(_sentence_grounded(s, allowed) for s in sentences)
+        return all(_sentence_grounded(s, allowed, highlights) for s in sentences)
 
     if _acceptable(text):
         return text, True, resp_latency, provider
@@ -1083,6 +1260,177 @@ def _finalize_run_summary_text(
         resp_latency + repair.latency_ms,
         "fallback",
     )
+
+
+def _epilogue_glyph_drift(state: WorldState) -> dict[str, Any]:
+    """Dominant glyph plus per-creature readings for the epilogue."""
+    if not state.dictionary_stats:
+        return {}
+    glyph, stats = max(
+        state.dictionary_stats.items(),
+        key=lambda item: item[1].get("uses", 0),
+    )
+    readings_by_creature: dict[str, str] = {}
+    for trace in state.trace_log:
+        interp = trace.get("interpretation") or {}
+        if not isinstance(interp, dict) or glyph not in interp:
+            continue
+        creature = str(trace.get("creature") or "").strip()
+        reading = str(interp[glyph]).strip()
+        if creature and reading:
+            readings_by_creature[creature] = reading[:80]
+
+    conflicting = [
+        {"creature": creature, "reading": reading}
+        for creature, reading in sorted(readings_by_creature.items())
+    ]
+    summary_line = ""
+    distinct: list[tuple[str, str]] = []
+    seen_norm: set[str] = set()
+    for creature, reading in conflicting:
+        norm = reading.lower()
+        if norm in seen_norm:
+            continue
+        seen_norm.add(norm)
+        distinct.append((creature, reading))
+    if len(distinct) >= 2:
+        (c1, r1), (c2, r2) = distinct[0], distinct[1]
+        summary_line = f"'{glyph}' meant {r2} to {c2} and {r1} to {c1}"
+    elif conflicting:
+        only = conflicting[0]
+        summary_line = f"'{glyph}' echoed as {only['reading']} to {only['creature']}"
+
+    return {
+        "dominant_glyph": glyph,
+        "uses": stats.get("uses", 0),
+        "conflicting_readings": conflicting[:8],
+        "summary_line": summary_line,
+    }
+
+
+def _epilogue_social_bonds(state: WorldState) -> dict[str, Any]:
+    """Food-sharing, follow chains, and trust peaks for the epilogue."""
+    from collections import Counter
+
+    share_food: Counter[tuple[str, str]] = Counter()
+    follows: Counter[tuple[str, str]] = Counter()
+    for src, tgt, kind in _trace_social_edges(state):
+        if kind == "share_food":
+            share_food[(src, tgt)] += 1
+        elif kind == "follow":
+            follows[(src, tgt)] += 1
+
+    trust_peaks: list[dict[str, Any]] = []
+    for creature in state.creatures:
+        if not creature.trust:
+            continue
+        toward, score = max(creature.trust.items(), key=lambda kv: kv[1])
+        if score >= 1:
+            trust_peaks.append(
+                {"from": creature.name, "toward": toward, "score": score}
+            )
+    trust_peaks.sort(key=lambda item: item["score"], reverse=True)
+
+    share_lines = [
+        f"{giver} shared food with {receiver} ({count}×)"
+        for (giver, receiver), count in share_food.most_common(4)
+    ]
+    follow_lines = [
+        f"{src} followed {tgt} ({count}×)"
+        for (src, tgt), count in follows.most_common(3)
+    ]
+    summary_parts: list[str] = []
+    if share_lines:
+        summary_parts.append("; ".join(share_lines))
+    if trust_peaks[:2]:
+        t1 = trust_peaks[0]
+        summary_parts.append(
+            f"{t1['from']} trusted {t1['toward']} most ({t1['score']})"
+        )
+    if follow_lines:
+        summary_parts.append(follow_lines[0])
+
+    return {
+        "share_food_bonds": [
+            {"giver": giver, "receiver": receiver, "count": count}
+            for (giver, receiver), count in share_food.most_common(6)
+        ],
+        "follow_bonds": [
+            {"follower": src, "target": tgt, "count": count}
+            for (src, tgt), count in follows.most_common(4)
+        ],
+        "strongest_trust": trust_peaks[:5],
+        "summary_line": ". ".join(summary_parts),
+    }
+
+
+def _epilogue_stranger_arc(state: WorldState) -> dict[str, Any]:
+    """Stray arrival, dialect glyphs, and social edges involving strangers."""
+    strays = [c for c in state.creatures if _is_stranger(c)]
+    if not strays:
+        return {}
+    stray = strays[0]
+    stray_traces = [t for t in state.trace_log if t.get("creature") == stray.name]
+    spoke: set[str] = set()
+    for t in stray_traces:
+        for g in t.get("glyphs") or []:
+            g = str(g).strip()
+            if g:
+                spoke.add(g)
+    interactions: list[str] = []
+    for line in state.transcript:
+        if stray.name not in line:
+            continue
+        if "shares food with" in line or "follow" in line.lower() or ":" in line:
+            interactions.append(line.replace(f"Turn {state.turn} - ", "")[:100])
+    for t in state.trace_log:
+        src = str(t.get("creature") or "")
+        tgt = str(t.get("target") or "")
+        action = str(t.get("action") or "")
+        if stray.name not in (src, tgt):
+            continue
+        if action in {"follow", "share_food", "signal"} and tgt:
+            interactions.append(f"{src} {action.replace('_', ' ')} {tgt}")
+    dialect = [g for g in stray.glyph_beliefs if g not in state.dictionary_stats or state.dictionary_stats[g]["uses"] <= 2]
+    summary_parts: list[str] = []
+    if spoke:
+        summary_parts.append(f"{stray.name} spoke {' '.join(sorted(spoke)[:3])}")
+    if dialect:
+        summary_parts.append(f"stranger dialect included {' '.join(dialect[:2])}")
+    if interactions:
+        summary_parts.append(interactions[0])
+    elif stray_traces:
+        summary_parts.append(f"{stray.name} wandered the colony for {len(stray_traces)} turns")
+    return {
+        "name": stray.name,
+        "turns_active": len(stray_traces),
+        "glyphs_spoken": sorted(spoke)[:6],
+        "dialect_glyphs": dialect[:4],
+        "interactions": interactions[:6],
+        "summary_line": "; ".join(summary_parts),
+    }
+
+
+def _final_turn_moves(state: WorldState) -> list[dict[str, Any]]:
+    """Exact last-turn actions for epilogue grounding."""
+    moves: list[dict[str, Any]] = []
+    for t in state.trace_log:
+        if int(t.get("turn") or 0) != state.turn:
+            continue
+        action = str(t.get("action") or "")
+        label = action.replace("_", " ")
+        if action.startswith("move_"):
+            label = action.replace("move_", "move ")
+        moves.append(
+            {
+                "creature": t.get("creature"),
+                "action": action,
+                "label": label,
+                "target": t.get("target"),
+                "glyphs": t.get("glyphs") or [],
+            }
+        )
+    return moves
 
 
 def generate_run_summary(state: WorldState) -> WorldState:
@@ -1116,6 +1464,11 @@ def generate_run_summary(state: WorldState) -> WorldState:
             "target": t.get("target"),
             "glyphs": t.get("glyphs"),
             "intended_meaning": (t.get("intended_meaning") or "")[:80],
+            "interpretation": {
+                str(k): str(v)[:60]
+                for k, v in (t.get("interpretation") or {}).items()
+                if isinstance(t.get("interpretation"), dict)
+            },
         }
         for t in state.trace_log[-20:]
     ]
@@ -1129,6 +1482,10 @@ def generate_run_summary(state: WorldState) -> WorldState:
         reverse=True,
     )[:6]
     creature_names = [c.name for c in state.creatures]
+    glyph_drift = _epilogue_glyph_drift(state)
+    social_bonds = _epilogue_social_bonds(state)
+    stranger_arc = _epilogue_stranger_arc(state)
+    final_turn_moves = _final_turn_moves(state)
     highlights = {
         "watch_mode": state.watch_mode,
         "turn_count": state.turn,
@@ -1142,7 +1499,11 @@ def generate_run_summary(state: WorldState) -> WorldState:
         "top_glyphs": [
             {"glyph": g, "uses": stats.get("uses", 0)} for g, stats in top_glyphs
         ],
-        "strangers": [c.name for c in state.creatures if c.name.startswith("Stray")],
+        "glyph_drift": glyph_drift,
+        "social_bonds": social_bonds,
+        "stranger_arc": stranger_arc,
+        "final_turn_moves": final_turn_moves,
+        "strangers": _stranger_names(state),
     }
     resp = summarize_run_finale(state.turn, turn_headlines, highlights)
     if resp.ok:
@@ -1174,6 +1535,7 @@ def step_world(state: WorldState, seed: int | None = None) -> WorldState:
     if state.action_cursor == 0:
         state.turn += 1
         _event_tick(state, r)
+        _clear_prefetch(state)
 
     c = state.creatures[state.action_cursor]
     turn = _choose_turn(c, state, r)
@@ -1182,10 +1544,13 @@ def step_world(state: WorldState, seed: int | None = None) -> WorldState:
     state.action_cursor += 1
     if state.action_cursor >= len(state.creatures):
         state.action_cursor = 0
+        _clear_prefetch(state)
         _spawn_resources(state, r)
         _auto_field_note(state)
         state = apply_sandbox_events(state)
         _update_chronicle(state)
+    elif state.action_cursor < len(state.creatures):
+        _start_prefetch(state, state.creatures[state.action_cursor], r)
     return state
 
 
@@ -1251,38 +1616,67 @@ def trigger_scarcity(state: WorldState) -> WorldState:
 
 def introduce_stranger(state: WorldState, seed: int | None = None) -> WorldState:
     r = _rng(seed if seed is not None else state.turn + 77)
+    if not state.creatures:
+        return state
     occupied = {(c.x, c.y) for c in state.creatures}
-    for _ in range(80):
-        x, y = r.randint(0, state.width - 1), r.randint(0, state.height - 1)
-        if (x, y) not in occupied:
-            idx = len(state.creatures)
-            newcomer = Creature(
-                cid=f"c{idx}",
-                name=f"Stray-{idx}",
-                x=x,
-                y=y,
-                personality=r.sample(PERSONALITIES, k=2),
-                hunger=45,
-                fear=35,
-                energy=80,
-                glyph_beliefs={
-                    g: round(r.uniform(0.15, 0.75), 2)
-                    for g in _invent_glyphs(r, 3)
-                },
-                memories=["I came from the fern-bridge."],
-            )
-            for c in state.creatures:
-                c.trust[newcomer.name] = 0
-            newcomer.trust = {c.name: 0 for c in state.creatures}
-            state.creatures.append(newcomer)
-            get_memory_store().add_memory(
-                state.world_id,
-                newcomer.cid,
-                "I came from the fern-bridge.",
-                metadata={"seed": True},
-            )
-            state.last_events = [f"A stranger appears: {newcomer.name}."]
-            return state
+    anchor = r.choice(state.creatures)
+    dialect = _invent_glyphs(r, 3)
+    spawn_candidates: list[tuple[int, int]] = []
+    for dx in (-1, 0, 1):
+        for dy in (-1, 0, 1):
+            if dx == 0 and dy == 0:
+                continue
+            nx, ny = anchor.x + dx, anchor.y + dy
+            if 0 <= nx < state.width and 0 <= ny < state.height and (nx, ny) not in occupied:
+                spawn_candidates.append((nx, ny))
+    if not spawn_candidates:
+        for _ in range(80):
+            x, y = r.randint(0, state.width - 1), r.randint(0, state.height - 1)
+            if (x, y) not in occupied:
+                spawn_candidates.append((x, y))
+                break
+    if not spawn_candidates:
+        return state
+    x, y = r.choice(spawn_candidates)
+    idx = len(state.creatures)
+    entry_glyphs = dialect[:2]
+    newcomer = Creature(
+        cid=f"c{idx}",
+        name=f"Stray-{idx}",
+        x=x,
+        y=y,
+        personality=r.sample(PERSONALITIES, k=2),
+        hunger=55,
+        fear=40,
+        energy=80,
+        food=1 if r.random() < 0.6 else 0,
+        glyph_beliefs={g: round(r.uniform(0.35, 0.9), 2) for g in dialect},
+        memories=[f"I came from the fern-bridge speaking {' '.join(entry_glyphs)}."],
+        last_glyphs=entry_glyphs,
+    )
+    for c in state.creatures:
+        c.trust[newcomer.name] = -1
+        newcomer.trust[c.name] = 0
+    state.creatures.append(newcomer)
+    get_memory_store().add_memory(
+        state.world_id,
+        newcomer.cid,
+        newcomer.memories[0],
+        metadata={"seed": True, "stranger": True},
+    )
+    state.transcript.append(
+        f"Turn {state.turn} - {newcomer.name}: {' '.join(entry_glyphs)}"
+    )
+    _update_dictionary(newcomer, entry_glyphs, state)
+    _record_glyph_history(newcomer, entry_glyphs, state)
+    note = (
+        f"Field Note #{len(state.field_notes) + 1}: {newcomer.name} appeared beside "
+        f"{anchor.name} speaking {' '.join(entry_glyphs)} — colony glyphs may not translate."
+    )
+    state.field_notes.append(note)
+    state.last_events = [
+        f"A stranger appears beside {anchor.name}: {newcomer.name} speaks {' '.join(entry_glyphs)}."
+    ]
     return state
 
 
@@ -1531,19 +1925,19 @@ def render_social_graph(state: WorldState) -> str:
         return "_No social edges yet._"
     from collections import Counter
 
-    edges: Counter[tuple[str, str]] = Counter()
-    for t in state.trace_log:
-        if t.get("action") != "signal":
-            continue
-        src, tgt = t.get("creature"), t.get("target")
-        if src and tgt:
-            edges[(str(src), str(tgt))] += 1
+    edges: Counter[tuple[str, str, str]] = Counter()
+    for src, tgt, kind in _trace_social_edges(state):
+        edges[(src, tgt, kind)] += 1
     if not edges:
-        return "_No directed signals yet._"
-    lines = [
-        f"- {src} → {tgt} ({n}×)"
-        for (src, tgt), n in edges.most_common(8)
-    ]
+        strays = _stranger_names(state)
+        if strays:
+            return f"_Stranger {strays[0]} is present — no bonds yet. Play past turn 10._"
+        return "_No directed bonds yet._"
+    lines = []
+    for (src, tgt, action), n in edges.most_common(10):
+        tag = action.replace("_", " ")
+        stray_mark = " ⚡" if src.startswith("Stray") or tgt.startswith("Stray") else ""
+        lines.append(f"- {src} → {tgt} ({tag}, {n}×){stray_mark}")
     return "\n".join(lines)
 
 

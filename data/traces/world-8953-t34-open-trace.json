@@ -1,0 +1,3486 @@
+{
+  "world_id": "world-8953",
+  "turn": 34,
+  "watch_mode": "sandbox",
+  "weather": "clear",
+  "scarcity_level": 4,
+  "creatures": [
+    "Lumo",
+    "Nia",
+    "Oro",
+    "Pika",
+    "Vey",
+    "Sora",
+    "Stray-6"
+  ],
+  "dictionary_stats": {
+    "mev": {
+      "uses": 1,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    },
+    "dav": {
+      "uses": 1,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    },
+    "gav": {
+      "uses": 70,
+      "food": 20,
+      "danger": 5,
+      "shelter": 17
+    },
+    "lupu": {
+      "uses": 1,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    },
+    "run": {
+      "uses": 168,
+      "food": 37,
+      "danger": 9,
+      "shelter": 15
+    },
+    "eat": {
+      "uses": 34,
+      "food": 9,
+      "danger": 3,
+      "shelter": 6
+    },
+    "follow": {
+      "uses": 5,
+      "food": 1,
+      "danger": 0,
+      "shelter": 0
+    },
+    "fud": {
+      "uses": 1,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    },
+    "soliko": {
+      "uses": 2,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    },
+    "rabr": {
+      "uses": 2,
+      "food": 0,
+      "danger": 1,
+      "shelter": 0
+    },
+    "lin": {
+      "uses": 138,
+      "food": 28,
+      "danger": 6,
+      "shelter": 13
+    },
+    "kove": {
+      "uses": 6,
+      "food": 2,
+      "danger": 0,
+      "shelter": 1
+    },
+    "brlu": {
+      "uses": 2,
+      "food": 1,
+      "danger": 0,
+      "shelter": 0
+    },
+    "niliso": {
+      "uses": 4,
+      "food": 1,
+      "danger": 0,
+      "shelter": 1
+    },
+    "move": {
+      "uses": 1,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    },
+    "north": {
+      "uses": 1,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    },
+    "south": {
+      "uses": 2,
+      "food": 0,
+      "danger": 0,
+      "shelter": 0
+    }
+  },
+  "glyph_history": {
+    "mev": {
+      "first_speaker": "Lumo",
+      "first_turn": 1,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 1
+      },
+      "speakers": {
+        "Lumo": 1
+      },
+      "drift_noted": false
+    },
+    "dav": {
+      "first_speaker": "Lumo",
+      "first_turn": 1,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 1
+      },
+      "speakers": {
+        "Lumo": 1
+      },
+      "drift_noted": false
+    },
+    "gav": {
+      "first_speaker": "Lumo",
+      "first_turn": 1,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 20,
+        "danger": 5,
+        "shelter": 17,
+        "neutral": 28
+      },
+      "speakers": {
+        "Lumo": 13,
+        "Oro": 32,
+        "Sora": 16,
+        "Nia": 5,
+        "Vey": 4
+      },
+      "drift_noted": false
+    },
+    "lupu": {
+      "first_speaker": "Nia",
+      "first_turn": 1,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 1
+      },
+      "speakers": {
+        "Nia": 1
+      },
+      "drift_noted": false
+    },
+    "run": {
+      "first_speaker": "Pika",
+      "first_turn": 1,
+      "first_context": "food",
+      "context_counts": {
+        "food": 37,
+        "danger": 9,
+        "shelter": 15,
+        "neutral": 107
+      },
+      "speakers": {
+        "Pika": 28,
+        "Vey": 30,
+        "Sora": 24,
+        "Nia": 7,
+        "Oro": 25,
+        "Lumo": 30,
+        "Stray-6": 24
+      },
+      "drift_noted": true,
+      "drift_dominant": "neutral"
+    },
+    "eat": {
+      "first_speaker": "Pika",
+      "first_turn": 1,
+      "first_context": "food",
+      "context_counts": {
+        "food": 9,
+        "danger": 3,
+        "shelter": 6,
+        "neutral": 16
+      },
+      "speakers": {
+        "Pika": 5,
+        "Sora": 6,
+        "Lumo": 12,
+        "Oro": 10,
+        "Vey": 1
+      },
+      "drift_noted": true,
+      "drift_dominant": "neutral"
+    },
+    "follow": {
+      "first_speaker": "Pika",
+      "first_turn": 1,
+      "first_context": "food",
+      "context_counts": {
+        "food": 1,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 4
+      },
+      "speakers": {
+        "Pika": 5
+      },
+      "drift_noted": true,
+      "drift_dominant": "neutral"
+    },
+    "fud": {
+      "first_speaker": "Lumo",
+      "first_turn": 2,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 1
+      },
+      "speakers": {
+        "Lumo": 1
+      },
+      "drift_noted": false
+    },
+    "soliko": {
+      "first_speaker": "Vey",
+      "first_turn": 7,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 2
+      },
+      "speakers": {
+        "Vey": 2
+      },
+      "drift_noted": false
+    },
+    "rabr": {
+      "first_speaker": "Vey",
+      "first_turn": 7,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 1,
+        "shelter": 0,
+        "neutral": 1
+      },
+      "speakers": {
+        "Vey": 1,
+        "Oro": 1
+      },
+      "drift_noted": false
+    },
+    "lin": {
+      "first_speaker": "Nia",
+      "first_turn": 8,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 28,
+        "danger": 6,
+        "shelter": 13,
+        "neutral": 91
+      },
+      "speakers": {
+        "Nia": 25,
+        "Pika": 19,
+        "Sora": 20,
+        "Oro": 25,
+        "Vey": 21,
+        "Lumo": 14,
+        "Stray-6": 14
+      },
+      "drift_noted": false
+    },
+    "kove": {
+      "first_speaker": "Stray-6",
+      "first_turn": 8,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 2,
+        "danger": 0,
+        "shelter": 1,
+        "neutral": 3
+      },
+      "speakers": {
+        "Stray-6": 2,
+        "Sora": 4
+      },
+      "drift_noted": true,
+      "drift_dominant": "food"
+    },
+    "brlu": {
+      "first_speaker": "Stray-6",
+      "first_turn": 8,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 1,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 1
+      },
+      "speakers": {
+        "Stray-6": 2
+      },
+      "drift_noted": false
+    },
+    "niliso": {
+      "first_speaker": "Sora",
+      "first_turn": 12,
+      "first_context": "food",
+      "context_counts": {
+        "food": 1,
+        "danger": 0,
+        "shelter": 1,
+        "neutral": 2
+      },
+      "speakers": {
+        "Sora": 4
+      },
+      "drift_noted": true,
+      "drift_dominant": "neutral"
+    },
+    "move": {
+      "first_speaker": "Sora",
+      "first_turn": 16,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 1
+      },
+      "speakers": {
+        "Sora": 1
+      },
+      "drift_noted": false
+    },
+    "north": {
+      "first_speaker": "Sora",
+      "first_turn": 16,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 1
+      },
+      "speakers": {
+        "Sora": 1
+      },
+      "drift_noted": false
+    },
+    "south": {
+      "first_speaker": "Sora",
+      "first_turn": 17,
+      "first_context": "neutral",
+      "context_counts": {
+        "food": 0,
+        "danger": 0,
+        "shelter": 0,
+        "neutral": 2
+      },
+      "speakers": {
+        "Sora": 2
+      },
+      "drift_noted": false
+    }
+  },
+  "deception_events": [
+    "Turn 6: possible misuse by Oro - 'run' often heard near food, spoken on danger.",
+    "Turn 6: possible misuse by Oro - 'gav' often heard near food, spoken on danger.",
+    "Turn 6: possible misuse by Oro - 'eat' often heard near food, spoken on danger.",
+    "Turn 7: possible misuse by Lumo - 'run' often heard near food, spoken on danger.",
+    "Turn 7: possible misuse by Lumo - 'gav' often heard near food, spoken on danger.",
+    "Turn 7: possible misuse by Lumo - 'eat' often heard near food, spoken on danger.",
+    "Turn 8: possible misuse by Oro - 'run' often heard near food, spoken on danger.",
+    "Turn 8: possible misuse by Oro - 'gav' often heard near food, spoken on danger.",
+    "Turn 8: possible misuse by Oro - 'eat' often heard near food, spoken on danger.",
+    "Turn 24: possible misuse by Stray-6 - 'lin' often heard near food, spoken on danger.",
+    "Turn 24: possible misuse by Stray-6 - 'run' often heard near food, spoken on danger.",
+    "Turn 25: possible misuse by Pika - 'lin' often heard near food, spoken on danger.",
+    "Turn 25: possible misuse by Pika - 'run' often heard near food, spoken on danger.",
+    "Turn 26: possible misuse by Stray-6 - 'lin' often heard near food, spoken on danger.",
+    "Turn 28: possible misuse by Stray-6 - 'run' often heard near food, spoken on danger.",
+    "Turn 29: possible misuse by Pika - 'run' often heard near food, spoken on danger.",
+    "Turn 30: possible misuse by Vey - 'lin' often heard near food, spoken on danger.",
+    "Turn 30: possible misuse by Vey - 'run' often heard near food, spoken on danger.",
+    "Turn 30: possible misuse by Sora - 'lin' often heard near food, spoken on danger.",
+    "Turn 32: possible misuse by Oro - 'lin' often heard near food, spoken on danger.",
+    "Turn 32: possible misuse by Oro - 'gav' often heard near food, spoken on danger."
+  ],
+  "chronicle_log": [
+    {
+      "turn": 2,
+      "text": "Lumo moves south, Nia moves east, Oro moves south, Pika moves east, Vey moves north, Sora moves south.",
+      "llm_ok": true,
+      "latency_ms": 2836,
+      "provider": "local"
+    },
+    {
+      "turn": 3,
+      "text": "Lumo, Nia, Oro, Pika, Vey, and Sora move towards the south or east, primarily to find food and shelter.",
+      "llm_ok": true,
+      "latency_ms": 3017,
+      "provider": "local"
+    },
+    {
+      "turn": 4,
+      "text": "Lumo, Nia, Oro, Pika, Vey, and Sora move to find food and shelter, using glyphs like \"run\", \"gav\", and \"eat\".",
+      "llm_ok": true,
+      "latency_ms": 3756,
+      "provider": "local"
+    },
+    {
+      "turn": 5,
+      "text": "Lumo moves east towards Oro with glyphs for running, gathering, and eating.",
+      "llm_ok": true,
+      "latency_ms": 1881,
+      "provider": "local"
+    },
+    {
+      "turn": 6,
+      "text": "Oro moved south, using glyphs \"run\", \"gav\", \"eat\", intending to find more food and shelter.",
+      "llm_ok": true,
+      "latency_ms": 2577,
+      "provider": "local"
+    },
+    {
+      "turn": 7,
+      "text": "Lumo and Nia move east, while Oro moves north, Pika moves east, Vey moves south, and Sora moves north towards Oro, all motivated by hunger and safety concerns.",
+      "llm_ok": true,
+      "latency_ms": 3735,
+      "provider": "local"
+    },
+    {
+      "turn": 8,
+      "text": "Oro moves south towards Vey, using glyphs \"run\" and \"gav\", intending to gather food with Vey.",
+      "llm_ok": true,
+      "latency_ms": 2561,
+      "provider": "local"
+    },
+    {
+      "turn": 9,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move towards food or follow each other.",
+      "llm_ok": true,
+      "latency_ms": 3056,
+      "provider": "local"
+    },
+    {
+      "turn": 10,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move towards the east or north in search of food and shelter.",
+      "llm_ok": true,
+      "latency_ms": 3240,
+      "provider": "local"
+    },
+    {
+      "turn": 11,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move towards the east or north, seeking food, shelter, or escape.",
+      "llm_ok": true,
+      "latency_ms": 3369,
+      "provider": "local"
+    },
+    {
+      "turn": 12,
+      "text": "Lumo moves east with glyphs \"run\", \"gav\", \"eat\", Nia moves east following Pika with glyph \"lin\", Oro moves south with glyphs \"lin\", \"gav\", \"eat\", Pika moves east with glyph",
+      "llm_ok": true,
+      "latency_ms": 4588,
+      "provider": "local"
+    },
+    {
+      "turn": 13,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move in various directions, primarily east, in search of food and shelter.",
+      "llm_ok": true,
+      "latency_ms": 3425,
+      "provider": "local"
+    },
+    {
+      "turn": 14,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move towards the east or south to find food and shelter.",
+      "llm_ok": true,
+      "latency_ms": 3162,
+      "provider": "local"
+    },
+    {
+      "turn": 15,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move in various directions using glyphs to find food and shelter.",
+      "llm_ok": true,
+      "latency_ms": 3249,
+      "provider": "local"
+    },
+    {
+      "turn": 16,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move towards the east or north, seeking food or shelter.",
+      "llm_ok": true,
+      "latency_ms": 3151,
+      "provider": "local"
+    },
+    {
+      "turn": 17,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move towards the food source in the east due to high scarcity levels.",
+      "llm_ok": true,
+      "latency_ms": 3652,
+      "provider": "local"
+    },
+    {
+      "turn": 18,
+      "text": "Lumo moves east towards the food source with glyphs [\"run\", \"lin\"], while Nia, Vey, and Stray-6 follow him, and Oro moves south towards the food source with glyphs [\"lin\", \"run\", \"gav\"]",
+      "llm_ok": true,
+      "latency_ms": 4512,
+      "provider": "local"
+    },
+    {
+      "turn": 19,
+      "text": "Lumo moves east, Nia moves east, Oro moves south, Pika moves east, Vey moves east, Sora moves south, Stray-6 moves east.",
+      "llm_ok": true,
+      "latency_ms": 3405,
+      "provider": "local"
+    },
+    {
+      "turn": 20,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move towards food or explore their surroundings.",
+      "llm_ok": true,
+      "latency_ms": 2847,
+      "provider": "local"
+    },
+    {
+      "turn": 21,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move towards the east or south, using glyphs like \"run\" and \"lin\" to communicate their intentions and actions.",
+      "llm_ok": true,
+      "latency_ms": 4260,
+      "provider": "local"
+    },
+    {
+      "turn": 22,
+      "text": "Lumo moves east with glyphs [\"run\", \"lin\"], intending to find food and shelter.",
+      "llm_ok": true,
+      "latency_ms": 2198,
+      "provider": "local"
+    },
+    {
+      "turn": 23,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move in different directions: east, south, and north, driven by hunger, curiosity, and the pursuit of food and shelter.",
+      "llm_ok": true,
+      "latency_ms": 4320,
+      "provider": "local"
+    },
+    {
+      "turn": 24,
+      "text": "Stray-6 moves south towards Lumo, following the glyphs 'lin' and 'run'.",
+      "llm_ok": true,
+      "latency_ms": 2256,
+      "provider": "local"
+    },
+    {
+      "turn": 25,
+      "text": "Lumo and Nia move east, Oro moves south, Pika moves south, Vey moves east, Sora moves south, Stray-6 moves south.",
+      "llm_ok": true,
+      "latency_ms": 3157,
+      "provider": "local"
+    },
+    {
+      "turn": 26,
+      "text": "Stray-6 moved north towards the food source, using the glyph 'lin'.",
+      "llm_ok": true,
+      "latency_ms": 1938,
+      "provider": "local"
+    },
+    {
+      "turn": 27,
+      "text": "Lumo and Nia move east, Oro moves south, Pika stays still, Vey moves north, Sora moves north, Stray-6 runs south.",
+      "llm_ok": true,
+      "latency_ms": 3145,
+      "provider": "local"
+    },
+    {
+      "turn": 28,
+      "text": "Stray-6 moves north.",
+      "llm_ok": true,
+      "latency_ms": 942,
+      "provider": "local"
+    },
+    {
+      "turn": 29,
+      "text": "Pika moved north with glyphs \"run\" and \"lin\" due to hunger and potential danger.",
+      "llm_ok": true,
+      "latency_ms": 2080,
+      "provider": "local"
+    },
+    {
+      "turn": 30,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 move towards the east or south, using glyphs like \"run\" and \"lin,\" indicating their search for food and potential dangers.",
+      "llm_ok": true,
+      "latency_ms": 4333,
+      "provider": "local"
+    },
+    {
+      "turn": 31,
+      "text": "Lumo and Nia move east, while Oro moves south, Pika moves east, Vey and Sora move north, and Stray-6 moves north towards food.",
+      "llm_ok": true,
+      "latency_ms": 3332,
+      "provider": "local"
+    },
+    {
+      "turn": 32,
+      "text": "Oro uses glyphs [\"lin\", \"gav\", \"rabr\"] to move north towards Sora, intending to share food and potentially increase trust.",
+      "llm_ok": true,
+      "latency_ms": 2998,
+      "provider": "local"
+    },
+    {
+      "turn": 33,
+      "text": "Lumo, Nia, Oro, Pika, Vey, Sora, and Stray-6 moved or ran in different directions, following strategies like searching for food or responding to perceived dangers.",
+      "llm_ok": true,
+      "latency_ms": 3789,
+      "provider": "local"
+    }
+  ],
+  "run_summary": {
+    "text": "The dominant glyph was 'run', which was interpreted as movement to Lumo. Stray-6, speaking in a different dialect, continued to interact with the group, using 'run' and 'lin'. Lumo used 'run' to look for more food. Lumo used 'run' again, and Stray-6 moved south to find more food",
+    "llm_ok": true,
+    "latency_ms": 1539,
+    "turns": 34,
+    "provider": "huggingface"
+  },
+  "trace_log": [
+    {
+      "turn": 17,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8536,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is hungry and sees food in the east, so it decides to move towards it.",
+      "intended_meaning": "move towards the food",
+      "interpretation": {
+        "run": "move fast",
+        "lin": "straight path"
+      }
+    },
+    {
+      "turn": 17,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8336,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I need to find food. The food is in the east, so I move east.",
+      "intended_meaning": "Move towards the food source",
+      "interpretation": {
+        "lin": "move"
+      }
+    },
+    {
+      "turn": 17,
+      "creature": "Oro",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9463,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the north, so I will move towards it.",
+      "intended_meaning": "I want to move towards the food source.",
+      "interpretation": {
+        "lin": "move",
+        "run": "move",
+        "gav": "food"
+      }
+    },
+    {
+      "turn": 17,
+      "creature": "Pika",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10666,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "The Pika is trying to move towards the food source to alleviate its hunger.",
+      "intended_meaning": "move towards the food source",
+      "interpretation": {
+        "run": "move",
+        "lin": "direction"
+      }
+    },
+    {
+      "turn": 17,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "scheming",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7837,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the east, so I will move towards it.",
+      "intended_meaning": "Move towards the food source",
+      "interpretation": {
+        "lin": "move"
+      }
+    },
+    {
+      "turn": 17,
+      "creature": "Sora",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "run",
+        "south"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12732,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I need to find food. The south direction might have more food.",
+      "intended_meaning": "Search for food",
+      "interpretation": {
+        "run": "move quickly",
+        "south": "direction towards food"
+      }
+    },
+    {
+      "turn": 17,
+      "creature": "Stray-6",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "calm",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8028,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow Lumo to find food",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "run": "move",
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 18,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9138,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I need to find food. The food is visible to the east, so I move east.",
+      "intended_meaning": "move towards the food source",
+      "interpretation": {
+        "run": "move",
+        "lin": "towards"
+      }
+    },
+    {
+      "turn": 18,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7548,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow Lumo to gather information and test trust.",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 18,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9338,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Seeing food nearby, I move south to reach it.",
+      "intended_meaning": "Follow the food source and move south",
+      "interpretation": {
+        "lin": "move south",
+        "run": "move quickly",
+        "gav": "follow"
+      }
+    },
+    {
+      "turn": 18,
+      "creature": "Pika",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12043,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am anxious and hungry, so I move towards the east to find food.",
+      "intended_meaning": "move towards the east",
+      "interpretation": {
+        "run": "move quickly",
+        "lin": "move in a straight line"
+      }
+    },
+    {
+      "turn": 18,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "scheming",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8205,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is nearby and I want to follow him to see if he has food or if there's danger.",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 18,
+      "creature": "Sora",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7973,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am curious and hungry, so I want to explore north for food or shelter.",
+      "intended_meaning": "Look for shelter or food to the north",
+      "interpretation": {
+        "lin": "Look"
+      }
+    },
+    {
+      "turn": 18,
+      "creature": "Stray-6",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "calm",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8984,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is a stranger but has been friendly, following him might find food.",
+      "intended_meaning": "Follow Lumo to find food",
+      "interpretation": {
+        "run": "move",
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 19,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8712,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is curious and has not eaten for a while. It moves east to look for food or shelter.",
+      "intended_meaning": "Look for food or shelter",
+      "interpretation": {
+        "run": "move",
+        "lin": "look"
+      }
+    },
+    {
+      "turn": 19,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8441,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I need to find food. I see some food in the east, so I will move towards it.",
+      "intended_meaning": "Move east",
+      "interpretation": {
+        "lin": "move"
+      }
+    },
+    {
+      "turn": 19,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8905,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow the food source and avoid danger",
+      "intended_meaning": "Follow the food source and avoid danger",
+      "interpretation": {
+        "lin": "useful signal maybe",
+        "run": "unknown meaning",
+        "gav": "eat"
+      }
+    },
+    {
+      "turn": 19,
+      "creature": "Pika",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9110,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am anxious and hungry, so I need to find food. I choose to move east to find food.",
+      "intended_meaning": "move towards the east",
+      "interpretation": {
+        "run": "move quickly",
+        "lin": "follow a path"
+      }
+    },
+    {
+      "turn": 19,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "scheming",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8671,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I need to find food. The nearest food is at (5, 1), so I will move east.",
+      "intended_meaning": "Follow visible food",
+      "interpretation": {
+        "run": "Follow visible food"
+      }
+    },
+    {
+      "turn": 19,
+      "creature": "Sora",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9070,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food to the south, so I will move south to find food.",
+      "intended_meaning": "I am moving south to find food or shelter.",
+      "interpretation": {
+        "lin": "move south",
+        "run": "hurry"
+      }
+    },
+    {
+      "turn": 19,
+      "creature": "Stray-6",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "calm",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8212,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow Lumo as they seem to know the area",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "run": "move",
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 20,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10847,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is hungry and sees food nearby, so it moves towards it.",
+      "intended_meaning": "Move towards the visible food source",
+      "interpretation": {
+        "run": "move"
+      }
+    },
+    {
+      "turn": 20,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8311,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow nearby allies",
+      "intended_meaning": "Follow nearby allies",
+      "interpretation": {
+        "lin": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 20,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12944,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Move to the south to avoid danger and gather food.",
+      "intended_meaning": "Follow the path and avoid danger",
+      "interpretation": {
+        "lin": "useful signal maybe",
+        "run": "unknown meaning",
+        "gav": "gather food"
+      }
+    },
+    {
+      "turn": 20,
+      "creature": "Pika",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8691,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am moving east to find food and avoid danger.",
+      "intended_meaning": "I am moving east to find food and avoid danger.",
+      "interpretation": {
+        "run": "move",
+        "lin": "path"
+      }
+    },
+    {
+      "turn": 20,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "scheming",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8329,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hungry and anxious, exploring east for food or shelter.",
+      "intended_meaning": "Explore east for food or shelter",
+      "interpretation": {
+        "run": "move",
+        "lin": "explore"
+      }
+    },
+    {
+      "turn": 20,
+      "creature": "Sora",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12038,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Move south to explore and find food",
+      "intended_meaning": "lin: move; run: move",
+      "interpretation": {
+        "lin": "move",
+        "run": "move"
+      }
+    },
+    {
+      "turn": 20,
+      "creature": "Stray-6",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "calm",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 11196,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the east, so I move towards it.",
+      "intended_meaning": "I am running to find food.",
+      "interpretation": {
+        "run": "movement"
+      }
+    },
+    {
+      "turn": 21,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10562,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is moving east to find more food and shelter.",
+      "intended_meaning": "Look for more food and shelter",
+      "interpretation": {
+        "run": "move"
+      }
+    },
+    {
+      "turn": 21,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 6472,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow nearby allies",
+      "intended_meaning": "Follow nearby allies",
+      "interpretation": {
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 21,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12587,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Oro is trying to move towards the food to satisfy its hunger.",
+      "intended_meaning": "move towards the food",
+      "interpretation": {
+        "lin": "move",
+        "run": "urgently",
+        "gav": "food"
+      }
+    },
+    {
+      "turn": 21,
+      "creature": "Pika",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 13432,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am anxious and hungry, so I need to find food and avoid danger. I moved east to find food and follow a path to avoid danger.",
+      "intended_meaning": "I am moving east to find food and avoid danger.",
+      "interpretation": {
+        "run": "move",
+        "lin": "path"
+      }
+    },
+    {
+      "turn": 21,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "scheming",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9154,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I need to find food. I'll move east to explore.",
+      "intended_meaning": "Explore the east for food or shelter",
+      "interpretation": {
+        "run": "move",
+        "lin": "explore"
+      }
+    },
+    {
+      "turn": 21,
+      "creature": "Sora",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8904,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Oro is nearby and friendly, so I will follow him to see where he goes.",
+      "intended_meaning": "Follow Oro",
+      "interpretation": {
+        "run": "Follow",
+        "lin": "Oro"
+      }
+    },
+    {
+      "turn": 21,
+      "creature": "Stray-6",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 11950,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I need to find food and shelter. I see some food and danger in the distance. I'll move towards the food and signal for help if needed.",
+      "intended_meaning": "I'm looking for food and shelter.",
+      "interpretation": {
+        "run": "move",
+        "lin": "signal"
+      }
+    },
+    {
+      "turn": 22,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 11239,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is moving east to search for food and shelter.",
+      "intended_meaning": "Look for food and shelter",
+      "interpretation": {
+        "run": "move",
+        "lin": "search"
+      }
+    },
+    {
+      "turn": 22,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7192,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow Lumo as he seems friendly and might lead to food.",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 22,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12941,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "The creature is moving towards the food source to fulfill its hunger.",
+      "intended_meaning": "Follow the food source towards the south.",
+      "interpretation": {
+        "lin": "move south",
+        "run": "move fast",
+        "gav": "towards food"
+      }
+    },
+    {
+      "turn": 22,
+      "creature": "Pika",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10657,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am anxious and hungry, so I need to find food and a safe place to stay. I see some food sources in the east, so I will move in that direction.",
+      "intended_meaning": "I am moving to find food or a safe place to stay.",
+      "interpretation": {
+        "run": "move",
+        "lin": "path"
+      }
+    },
+    {
+      "turn": 22,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "scheming",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9742,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is nearby and has a positive trust level, following him towards the food source is a strategic move.",
+      "intended_meaning": "Follow Lumo towards the food source",
+      "interpretation": {
+        "run": "move towards",
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 22,
+      "creature": "Sora",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin",
+        "south"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8816,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow nearby allies or roam",
+      "intended_meaning": "Follow nearby allies or roam",
+      "interpretation": {
+        "run": "move",
+        "lin": "follow",
+        "south": "direction"
+      }
+    },
+    {
+      "turn": 22,
+      "creature": "Stray-6",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 11213,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am moving east to find food.",
+      "intended_meaning": "I am moving east.",
+      "interpretation": {
+        "run": "move",
+        "lin": "direction east"
+      }
+    },
+    {
+      "turn": 23,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7745,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and want to find food or shelter.",
+      "intended_meaning": "Look for food or shelter",
+      "interpretation": {
+        "run": "move",
+        "lin": "look"
+      }
+    },
+    {
+      "turn": 23,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7900,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "The creature is moving east due to its curious nature and the presence of food in that direction.",
+      "intended_meaning": "Follow the path east",
+      "interpretation": {
+        "lin": "Follow the path"
+      }
+    },
+    {
+      "turn": 23,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12808,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Oro is trying to move south due to curiosity and to find food or shelter.",
+      "intended_meaning": "move towards the south",
+      "interpretation": {
+        "lin": "move",
+        "run": "move quickly",
+        "gav": "towards"
+      }
+    },
+    {
+      "turn": 23,
+      "creature": "Pika",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7773,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I noticed a food source in the south, so I decided to move towards it.",
+      "intended_meaning": "move towards the south",
+      "interpretation": {
+        "lin": "move"
+      }
+    },
+    {
+      "turn": 23,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "scheming",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8869,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I need to find food. I'll move east to explore.",
+      "intended_meaning": "Explore east for food or danger",
+      "interpretation": {
+        "run": "move",
+        "lin": "move"
+      }
+    },
+    {
+      "turn": 23,
+      "creature": "Sora",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9796,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the north, so I move north to find food.",
+      "intended_meaning": "I am moving north.",
+      "interpretation": {
+        "lin": "move",
+        "run": "move",
+        "gav": "move"
+      }
+    },
+    {
+      "turn": 23,
+      "creature": "Stray-6",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12394,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and need to find food and shelter. I will move south to explore.",
+      "intended_meaning": "I want to find food and shelter.",
+      "interpretation": {
+        "lin": "useful signal maybe",
+        "run": "unknown meaning"
+      }
+    },
+    {
+      "turn": 24,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8416,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is curious and hungry, so it moves east to find food and shelter.",
+      "intended_meaning": "Look for food and shelter",
+      "interpretation": {
+        "run": "move",
+        "lin": "search"
+      }
+    },
+    {
+      "turn": 24,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9903,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Moving east to explore and find food or shelter.",
+      "intended_meaning": "Check for food and shelter in the east.",
+      "interpretation": {
+        "lin": "move"
+      }
+    },
+    {
+      "turn": 24,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12506,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Oro is moving south to find food and shelter.",
+      "intended_meaning": "Follow the path to find food",
+      "interpretation": {
+        "lin": "follow",
+        "run": "path",
+        "gav": "food"
+      }
+    },
+    {
+      "turn": 24,
+      "creature": "Pika",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8109,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "The creature is anxious and wants to stay in the same place to avoid danger.",
+      "intended_meaning": "Stay in the same place to avoid danger",
+      "interpretation": {
+        "lin": "stay"
+      }
+    },
+    {
+      "turn": 24,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "scheming",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8380,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, need to find food or shelter",
+      "intended_meaning": "Explore east for food or shelter",
+      "interpretation": {
+        "lin": "move",
+        "run": "move"
+      }
+    },
+    {
+      "turn": 24,
+      "creature": "Sora",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 14082,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow nearby allies",
+      "intended_meaning": "lin: Follow nearby allies; run: Follow nearby allies; gav: Follow nearby allies",
+      "interpretation": {
+        "lin": "Follow nearby allies",
+        "run": "Follow nearby allies",
+        "gav": "Follow nearby allies"
+      }
+    },
+    {
+      "turn": 24,
+      "creature": "Stray-6",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8118,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow Lumo to find food",
+      "intended_meaning": "Follow Lumo to find food",
+      "interpretation": {
+        "lin": "follow",
+        "run": "move"
+      }
+    },
+    {
+      "turn": 25,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8474,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I move to explore for food or danger.",
+      "intended_meaning": "Explore east for food or danger",
+      "interpretation": {
+        "run": "move",
+        "lin": "direction: east"
+      }
+    },
+    {
+      "turn": 25,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8928,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is nearby and has a higher trust level, so I will follow him to gather food.",
+      "intended_meaning": "Follow Lumo to gather food.",
+      "interpretation": {
+        "lin": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 25,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12263,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Oro is moving towards the food to satisfy its hunger.",
+      "intended_meaning": "move towards the food",
+      "interpretation": {
+        "lin": "forward",
+        "run": "move",
+        "gav": "food"
+      }
+    },
+    {
+      "turn": 25,
+      "creature": "Pika",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 13321,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am anxious and hungry, so I need to find food. I chose to move south to find food or to avoid danger.",
+      "intended_meaning": "I am moving south to find food or to avoid danger.",
+      "interpretation": {
+        "lin": "move south",
+        "run": "move south"
+      }
+    },
+    {
+      "turn": 25,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "scheming",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9428,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "The creature is trying to find food and shelter, while also being cautious of nearby dangers and other creatures.",
+      "intended_meaning": "Explore the eastern area for food or shelter.",
+      "interpretation": {
+        "lin": "move",
+        "run": "move"
+      }
+    },
+    {
+      "turn": 25,
+      "creature": "Sora",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10305,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the south, so I move south to find food.",
+      "intended_meaning": "I am moving south.",
+      "interpretation": {
+        "lin": "move south",
+        "run": "move south",
+        "gav": "move south"
+      }
+    },
+    {
+      "turn": 25,
+      "creature": "Stray-6",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10754,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food nearby, so I will move to get it.",
+      "intended_meaning": "I am moving to find food.",
+      "interpretation": {
+        "lin": "useful signal maybe",
+        "run": "unknown meaning"
+      }
+    },
+    {
+      "turn": 26,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7483,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am curious and hungry, so I will move east to find food or shelter.",
+      "intended_meaning": "Look for food or shelter",
+      "interpretation": {
+        "lin": "look"
+      }
+    },
+    {
+      "turn": 26,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7569,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and want to find food or shelter.",
+      "intended_meaning": "Look for food or shelter",
+      "interpretation": {
+        "run": "move towards a new location"
+      }
+    },
+    {
+      "turn": 26,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 13362,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Oro is moving south towards the food source, following the path it previously used to gather food.",
+      "intended_meaning": "Follow the food source",
+      "interpretation": {
+        "lin": "useful signal maybe",
+        "run": "unknown meaning",
+        "gav": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 26,
+      "creature": "Pika",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10585,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am moving south to find food and avoid danger.",
+      "intended_meaning": "I am moving south to find food and avoid danger.",
+      "interpretation": {
+        "lin": "move south",
+        "run": "move"
+      }
+    },
+    {
+      "turn": 26,
+      "creature": "Vey",
+      "action": "move_west",
+      "target": null,
+      "glyphs": [
+        "soliko",
+        "run",
+        "lin"
+      ],
+      "mood": "uneasy",
+      "memory_to_store": "I used soliko run lin while feeling scheming.",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 17502,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": true,
+      "fallback_reason": "json parse: Could not parse creature JSON: line 1 column 1 (char 0)",
+      "reasoning_summary": "I acted from nearby signs, memory traces, and mood."
+    },
+    {
+      "turn": 26,
+      "creature": "Sora",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8580,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow nearby allies",
+      "intended_meaning": "Follow nearby allies",
+      "interpretation": {
+        "lin": "Follow",
+        "run": "nearby",
+        "gav": "allies"
+      }
+    },
+    {
+      "turn": 26,
+      "creature": "Stray-6",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9417,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I observed food in the north, so I moved towards it.",
+      "intended_meaning": "I am moving towards the north.",
+      "interpretation": {
+        "lin": "move"
+      }
+    },
+    {
+      "turn": 27,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 6766,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is trying to follow nearby allies.",
+      "intended_meaning": "Follow nearby allies",
+      "interpretation": {
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 27,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7652,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is nearby and I want to follow them",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 27,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12760,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food nearby, so I will move south to get it.",
+      "intended_meaning": "I am moving south",
+      "interpretation": {
+        "lin": "move",
+        "run": "move",
+        "gav": "move"
+      }
+    },
+    {
+      "turn": 27,
+      "creature": "Pika",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8141,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "The creature is trying to avoid danger by staying still.",
+      "intended_meaning": "Stay still to avoid danger",
+      "interpretation": {
+        "lin": "stay"
+      }
+    },
+    {
+      "turn": 27,
+      "creature": "Vey",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "uneasy",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8033,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and want to find food or shelter.",
+      "intended_meaning": "Look for food or shelter",
+      "interpretation": {
+        "run": "move",
+        "lin": "look"
+      }
+    },
+    {
+      "turn": 27,
+      "creature": "Sora",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10254,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food to the north, so I will move north to get food.",
+      "intended_meaning": "I am moving north.",
+      "interpretation": {
+        "lin": "move north",
+        "run": "move north",
+        "gav": "move north"
+      }
+    },
+    {
+      "turn": 27,
+      "creature": "Stray-6",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8779,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "There is danger nearby, so I move south to avoid it.",
+      "intended_meaning": "I am running away from danger",
+      "interpretation": {
+        "run": "running away"
+      }
+    },
+    {
+      "turn": 28,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8674,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the east, so I will move towards it.",
+      "intended_meaning": "I want to find food and move towards the east.",
+      "interpretation": {
+        "lin": "move",
+        "run": "search"
+      }
+    },
+    {
+      "turn": 28,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8445,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "The creature is curious and wants to explore its environment. It moves east to look for food or shelter.",
+      "intended_meaning": "Look for food or shelter",
+      "interpretation": {
+        "lin": "Look for food or shelter"
+      }
+    },
+    {
+      "turn": 28,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9462,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow Pika to find food and shelter",
+      "intended_meaning": "Follow Pika to find food and shelter",
+      "interpretation": {
+        "lin": "follow",
+        "run": "move",
+        "gav": "shelter"
+      }
+    },
+    {
+      "turn": 28,
+      "creature": "Pika",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8848,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "The creature senses danger from the Stray-6 and decides to run away to escape the danger.",
+      "intended_meaning": "Escape from danger",
+      "interpretation": {
+        "run": "Escape from danger"
+      }
+    },
+    {
+      "turn": 28,
+      "creature": "Vey",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "uneasy",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8679,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food to the south, so I will move south to find it.",
+      "intended_meaning": "I am moving south to find food.",
+      "interpretation": {
+        "lin": "move",
+        "run": "move"
+      }
+    },
+    {
+      "turn": 28,
+      "creature": "Sora",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 11255,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am curious and have enough energy to move. I choose to move south towards the food sources.",
+      "intended_meaning": "I intend to move south.",
+      "interpretation": {
+        "lin": "move south",
+        "gav": "move south"
+      }
+    },
+    {
+      "turn": 28,
+      "creature": "Stray-6",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9445,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food to the north, so I will move there.",
+      "intended_meaning": "I am moving north to find food.",
+      "interpretation": {
+        "run": "move"
+      }
+    },
+    {
+      "turn": 29,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "eat"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10137,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I will move east to find food.",
+      "intended_meaning": "lin: move; run: move; eat: hunger",
+      "interpretation": {
+        "lin": "move",
+        "run": "move",
+        "eat": "hunger"
+      }
+    },
+    {
+      "turn": 29,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8611,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am curious and want to explore more.",
+      "intended_meaning": "Follow the path",
+      "interpretation": {
+        "lin": "Follow"
+      }
+    },
+    {
+      "turn": 29,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8698,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow the food source to find more food.",
+      "intended_meaning": "Follow the food source",
+      "interpretation": {
+        "lin": "Follow",
+        "run": "Food",
+        "gav": "Direction"
+      }
+    },
+    {
+      "turn": 29,
+      "creature": "Pika",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10654,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am anxious and hungry, so I need to find food. I am also cautious due to the presence of danger. I chose to move north to explore and find food or shelter.",
+      "intended_meaning": "I am moving north to find food or avoid danger.",
+      "interpretation": {
+        "run": "move"
+      }
+    },
+    {
+      "turn": 29,
+      "creature": "Vey",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "uneasy",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9143,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "The creature is hungry and wants to find food, so it moves south towards the visible food source.",
+      "intended_meaning": "Follow the food source towards the south.",
+      "interpretation": {
+        "lin": "move south",
+        "run": "move towards food"
+      }
+    },
+    {
+      "turn": 29,
+      "creature": "Sora",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7777,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am curious and hungry, so I will move north to find food or shelter.",
+      "intended_meaning": "Look for food or shelter",
+      "interpretation": {
+        "lin": "Look"
+      }
+    },
+    {
+      "turn": 29,
+      "creature": "Stray-6",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10381,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and I see food in the east, so I will move east to find food.",
+      "intended_meaning": "I am looking for food.",
+      "interpretation": {
+        "run": "move",
+        "lin": "search"
+      }
+    },
+    {
+      "turn": 30,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8269,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the east, so I will move there to find more food.",
+      "intended_meaning": "I am moving east to find more food.",
+      "interpretation": {
+        "run": "move_east"
+      }
+    },
+    {
+      "turn": 30,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 6704,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow Lumo to gather food",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 30,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 13552,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the south, so I move south to find it.",
+      "intended_meaning": "I am moving south to find food.",
+      "interpretation": {
+        "lin": "useful signal maybe",
+        "run": "unknown meaning",
+        "gav": "eat"
+      }
+    },
+    {
+      "turn": 30,
+      "creature": "Pika",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10996,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the east. I will move to find it.",
+      "intended_meaning": "I am moving east to find food.",
+      "interpretation": {
+        "run": "move",
+        "lin": "direction: east"
+      }
+    },
+    {
+      "turn": 30,
+      "creature": "Vey",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "uneasy",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12512,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and have seen food nearby, so I move south to find food.",
+      "intended_meaning": "Follow nearby allies or roam to find food",
+      "interpretation": {
+        "lin": "useful signal maybe",
+        "run": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 30,
+      "creature": "Sora",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 11949,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the east, so I will move east to find food.",
+      "intended_meaning": "Look for food",
+      "interpretation": {
+        "lin": "Look for food"
+      }
+    },
+    {
+      "turn": 30,
+      "creature": "Stray-6",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12231,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and need to find food and shelter. I move east to explore and find resources.",
+      "intended_meaning": "I am moving east to find food and shelter.",
+      "interpretation": {
+        "run": "move",
+        "lin": "direction east"
+      }
+    },
+    {
+      "turn": 31,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 12154,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I need to find food or shelter. Moving east might lead to resources.",
+      "intended_meaning": "Explore the east for food or shelter",
+      "interpretation": {
+        "run": "move",
+        "lin": "direction east"
+      }
+    },
+    {
+      "turn": 31,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7740,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow Lumo to gather food",
+      "intended_meaning": "Follow Lumo to gather food",
+      "interpretation": {
+        "lin": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 31,
+      "creature": "Oro",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run",
+        "gav"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 14536,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and need to find food and shelter. I move south to the location [6, 7] to find visible food and shelter.",
+      "intended_meaning": "Continue moving south to find food and shelter.",
+      "interpretation": {
+        "lin": "useful signal maybe",
+        "run": "unknown meaning",
+        "gav": "eat"
+      }
+    },
+    {
+      "turn": 31,
+      "creature": "Pika",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 11432,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am anxious and hungry, so I need to find food and shelter. I moved east to search for food or shelter.",
+      "intended_meaning": "I am moving east to find food or shelter.",
+      "interpretation": {
+        "lin": "move",
+        "run": "move"
+      }
+    },
+    {
+      "turn": 31,
+      "creature": "Vey",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "lin",
+        "run"
+      ],
+      "mood": "uneasy",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10116,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and want to find food or shelter.",
+      "intended_meaning": "Look for food or shelter",
+      "interpretation": {
+        "lin": "move north",
+        "run": "look for food"
+      }
+    },
+    {
+      "turn": 31,
+      "creature": "Sora",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8018,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Since the creature is curious and hungry, it moves north to explore for food or shelter.",
+      "intended_meaning": "Explore north for food or shelter",
+      "interpretation": {
+        "lin": "Explore"
+      }
+    },
+    {
+      "turn": 31,
+      "creature": "Stray-6",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "run",
+        "lin",
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8329,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "See food north, move towards it.",
+      "intended_meaning": "run: move; lin: direction",
+      "interpretation": {
+        "run": "move",
+        "lin": "direction"
+      }
+    },
+    {
+      "turn": 32,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7160,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is hungry and wants to find more food.",
+      "intended_meaning": "Look for more food",
+      "interpretation": {
+        "run": "move towards"
+      }
+    },
+    {
+      "turn": 32,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 9863,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the east, so I move towards it.",
+      "intended_meaning": "Look for food",
+      "interpretation": {
+        "lin": "move towards"
+      }
+    },
+    {
+      "turn": 32,
+      "creature": "Oro",
+      "action": "move_north",
+      "target": "Sora",
+      "glyphs": [
+        "lin",
+        "gav",
+        "rabr"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 11752,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I see food in the north and want to share it with Sora, which might increase my trust in him.",
+      "intended_meaning": "I see food in the north, and I want to share it with Sora.",
+      "interpretation": {
+        "lin": "useful signal maybe",
+        "gav": "gather food",
+        "rabr": "trust"
+      }
+    },
+    {
+      "turn": 32,
+      "creature": "Pika",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8046,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow Lumo to gather food from near visible food sources and stay safe.",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 32,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "uneasy",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8212,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food in the east, so I will move there to find food.",
+      "intended_meaning": "I am moving east to find food.",
+      "interpretation": {
+        "lin": "move"
+      }
+    },
+    {
+      "turn": 32,
+      "creature": "Sora",
+      "action": "move_north",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7020,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow nearby allies",
+      "intended_meaning": "Follow nearby allies",
+      "interpretation": {
+        "lin": "Follow nearby allies"
+      }
+    },
+    {
+      "turn": 32,
+      "creature": "Stray-6",
+      "action": "move_south",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10640,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and there is food to the south, so I will move south to find more food.",
+      "intended_meaning": "I am moving south to find more food.",
+      "interpretation": {
+        "lin": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 33,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10479,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I am hungry and want to find more food.",
+      "intended_meaning": "Look for more food",
+      "interpretation": {
+        "run": "Look for more food"
+      }
+    },
+    {
+      "turn": 33,
+      "creature": "Nia",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 6590,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Follow Lumo to find food",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "lin": "follow"
+      }
+    },
+    {
+      "turn": 33,
+      "creature": "Oro",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7036,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Oro is hungry and wants to find food.",
+      "intended_meaning": "Look for food",
+      "interpretation": {
+        "lin": "look"
+      }
+    },
+    {
+      "turn": 33,
+      "creature": "Pika",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "anxious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 11114,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I sensed danger and decided to run away to ensure my safety.",
+      "intended_meaning": "I am running away from danger.",
+      "interpretation": {
+        "run": "run away"
+      }
+    },
+    {
+      "turn": 33,
+      "creature": "Vey",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "brave",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7853,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Lumo is nearby and I want to follow him",
+      "intended_meaning": "Follow Lumo",
+      "interpretation": {
+        "lin": "useful signal maybe"
+      }
+    },
+    {
+      "turn": 33,
+      "creature": "Sora",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "lin"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 10821,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "See food in the east, move towards it.",
+      "intended_meaning": "Move east",
+      "interpretation": {
+        "lin": "move"
+      }
+    },
+    {
+      "turn": 33,
+      "creature": "Stray-6",
+      "action": "move_north",
+      "target": "Lumo",
+      "glyphs": [
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 8282,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "I see Lumo and want to interact with them.",
+      "intended_meaning": "I am moving north and see Lumo.",
+      "interpretation": {
+        "run": "move"
+      }
+    },
+    {
+      "turn": 34,
+      "creature": "Lumo",
+      "action": "move_east",
+      "target": null,
+      "glyphs": [
+        "run"
+      ],
+      "mood": "curious",
+      "memory_to_store": "",
+      "provider": "local",
+      "model": "openbmb/MiniCPM3-4B",
+      "latency_ms": 7360,
+      "memories_retrieved": 5,
+      "llm_ok": true,
+      "fallback": false,
+      "reasoning_summary": "Hunger is high, so I need to find food or shelter.",
+      "intended_meaning": "Look for food or shelter",
+      "interpretation": {
+        "run": "move"
+      }
+    }
+  ]
+}

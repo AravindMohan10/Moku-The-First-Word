@@ -7,25 +7,25 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class VisualLayers:
-    show_trust: bool = False
-    signal_mode: str = "none"  # none | turn
-    badge_mode: str = "none"  # none | last
-    speech_mode: str = "none"  # none | last
-    show_speech_meaning: bool = False
-    show_status_rings: bool = False
+    show_trust: bool = True
+    signal_mode: str = "turn"  # none | turn
+    badge_mode: str = "last"  # none | last
+    speech_mode: str = "last"  # none | last
+    show_speech_meaning: bool = True
+    show_status_rings: bool = True
     show_spotlight: bool = True
-    show_toast: bool = False
+    show_toast: bool = True
     show_turn_beat: bool = True
 
 
 def layers_from_toggles(
     *,
-    trust: bool = False,
-    signals: bool = False,
+    trust: bool = True,
+    signals: bool = True,
     speech: bool = True,
     actions: bool = True,
-    mood: bool = False,
-    events: bool = False,
+    mood: bool = True,
+    events: bool = True,
 ) -> VisualLayers:
     """Build overlay state from UI checkboxes."""
     return VisualLayers(
