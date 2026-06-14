@@ -133,6 +133,8 @@ def fix_targets(c: Any, state: Any, turn: CreatureTurn) -> CreatureTurn:
         elif neighbors and turn.action == "share_food" and c.food > 0:
             hungry = sorted(neighbors, key=lambda o: o.hunger, reverse=True)
             target = hungry[0].name if hungry else None
+        elif neighbors and turn.action == "signal":
+            target = sorted(neighbors, key=lambda o: c.trust.get(o.name, 0), reverse=True)[0].name
     return turn.model_copy(update={"target": target})
 
 

@@ -178,7 +178,7 @@ def _control_hint(mode: str) -> str:
     if mode == "sandbox":
         return (
             '<p class="moku-control-hint moku-hint-sandbox">'
-            "<strong>Sandbox</strong> — curated beats for demos. "
+            "<strong>Sandbox</strong>: curated beats for demos. "
             "Forest Chronicle updates each turn; Mind Traces hold exact reasoning."
             "</p>"
         )

@@ -11,19 +11,16 @@ def render_homepage(model_label: str, memory_label: str) -> str:
     return f"""
 <section class="moku-home" id="moku-home">
   <div class="home-hero">
-    <p class="home-eyebrow">Thousand Token Wood · Build Small Hackathon</p>
+    <p class="home-eyebrow">Build Small Hackathon · Thousand Token Wood</p>
     <h1 class="home-title">Moku: The First Word</h1>
     <p class="home-deck">
-      Partial emergence in a live forest sim — glyphs, trust, bonds, and betrayal.
-      Scripted map. Unscripted language and social life. Every LLM choice logged.
+      A live forest toy where six tiny creatures invent their own words, lie to each other,
+      and sometimes become friends. You watch. The AI plays every mind. Every choice is logged.
     </p>
     <p class="home-hook">
-      Six creatures cannot speak English — only <strong>glyphs</strong>, invented sounds
-      they shout into the air. A real 3B LLM plus memory picks each word and each move.
-    </p>
-    <p class="home-hook">
-      Who shares food, who follows a signal, who distrusts whom — none of that is written
-      in advance. Mind Traces and JSON export are the proof; chronicle prose is garnish.
+      They cannot speak English. They only shout <strong>glyphs</strong>: short made-up sounds
+      like <strong>brlu</strong> or <strong>lin</strong>. Each creature decides privately what
+      those words mean.
     </p>
     <p class="home-meta">{model_label} · memory: {memory_label}</p>
   </div>
@@ -31,12 +28,11 @@ def render_homepage(model_label: str, memory_label: str) -> str:
   <div class="home-glyph-explainer">
     <h2 class="home-section-title">What is a glyph?</h2>
     <p class="home-glyph-lead">
-      A glyph is a made-up word — like <strong>brlu</strong>. Not English.
-      It is the only way creatures can talk.
+      A glyph is an invented word. Not English. It is the only public language in the forest.
     </p>
     <p class="home-glyph-lead">
-      There is no fixed dictionary. Each creature privately decides what a glyph means.
-      It learns from what happened when it last heard that sound.
+      There is no official dictionary. When Lumo shouts <strong>brlu</strong>, Pika might think
+      "food" while Oro thinks "run." That mismatch is the fun.
     </p>
     <div class="home-glyph-demo">
       <div class="home-glyph-example">
@@ -51,90 +47,56 @@ def render_homepage(model_label: str, memory_label: str) -> str:
           <li>Lumo reads <strong>brlu</strong> as <em>food nearby</em></li>
           <li>Pika reads <strong>brlu</strong> as <em>come closer</em></li>
         </ul>
-        <p class="home-glyph-caption">Shown in <strong>Mind Traces</strong> — the raw LLM reasoning log</p>
+        <p class="home-glyph-caption">Open <strong>Details → Mind Traces</strong> to see private readings</p>
       </div>
     </div>
   </div>
 
   <div class="home-watch-box">
-    <h2 class="home-section-title">Before you press Play — three things to watch for</h2>
+    <h2 class="home-section-title">Three things to watch for</h2>
     <ol class="home-watch-list">
       <li>
-        <strong>Same glyph, different minds.</strong>
-        Open Mind Traces. Pick any glyph — try <strong>niliso</strong>.
-        Oro reads it as safety. Vey reads it as fear.
-        That gap is the experiment.
-      </li>
-      <li>
         <strong>Which glyph wins.</strong>
-        One sound will start appearing everywhere. Not scripted.
-        The model reuses what it hears — like a meme in the forest.
+        One sound gets copied until the whole forest is saying it. That is language spreading.
       </li>
       <li>
-        <strong>JSON export.</strong>
-        Every LLM call is logged with latency, memory, and reasoning.
-        The chronicle prose is garnish. The JSON is proof.
+        <strong>Deception.</strong>
+        When food is scarce, creatures may use a friendly glyph in a scary moment.
+        Check the Deception board in Details.
+      </li>
+      <li>
+        <strong>Trust lines (sometimes).</strong>
+        Turn on the <strong>Trust</strong> overlay. Faint lines appear when creatures
+        signal, follow, or share food with someone by name. Bonds are not scripted;
+        the model chooses them.
       </li>
     </ol>
   </div>
 
   <div class="home-honest-box">
-    <h2 class="home-section-title">What&apos;s scripted vs what&apos;s not</h2>
+    <h2 class="home-section-title">What we set up vs what the AI decides</h2>
     <div class="home-split">
       <div class="home-split-col">
-        <p class="home-split-label">Scripted — same every sandbox run</p>
+        <p class="home-split-label">We set up (same in Sandbox every time)</p>
         <ul>
-          <li>Forest layout, six creatures, seed 42</li>
-          <li>World events: food T2 · scarcity T5 · stranger T8 · danger T11 · rain T14</li>
-          <li>Mechanics: hunger, proximity, trust scores</li>
+          <li>Forest map, six creatures, seed 42</li>
+          <li>Timed events: food, scarcity, a stranger, danger, rain</li>
+          <li>Rules: hunger, fear, movement, memory</li>
         </ul>
       </div>
       <div class="home-split-col home-split-em">
-        <p class="home-split-label">Not scripted — emergence</p>
+        <p class="home-split-label">The AI decides (different every run)</p>
         <ul>
-          <li>Which glyphs get invented, echoed, or overloaded</li>
-          <li>Actions: signal, share food, gather, move — and toward whom</li>
-          <li>Private translations: same glyph, diverging beliefs across minds</li>
-          <li>Social bonds: who shares, who follows, who ignores a signal</li>
-          <li>Trust shifts — the model raises or lowers trust each turn</li>
-          <li>Deception flags when a glyph is used against its usual context</li>
+          <li>Which glyphs get invented and copied</li>
+          <li>Private meanings and drift over time</li>
+          <li>Lies and mistrust under pressure</li>
+          <li>Social bonds: who signals, follows, or shares food with whom</li>
         </ul>
       </div>
     </div>
     <p class="home-honest-foot">
-      Same map every run. Different language every time.
+      Same stage every Sandbox run. New story every time.
     </p>
-  </div>
-
-  <div class="home-why-box">
-    <h2 class="home-section-title">Why it&apos;s interesting — the emergence angle</h2>
-    <p class="home-why-lead">
-      We script the forest pressure. Language and social life grow on their own.
-    </p>
-    <ul class="home-why-list">
-      <li>
-        <strong>Language without a dictionary.</strong>
-        No one assigns meanings. Sounds spread because the model reuses what it hears.
-      </li>
-      <li>
-        <strong>Social bonds, unscripted.</strong>
-        Who shares food, who signals whom, who follows — chosen each turn by the LLM.
-        Turn on the <strong>Trust</strong> overlay to see scores shift.
-      </li>
-      <li>
-        <strong>Miscommunication and mistrust.</strong>
-        Same glyph, different private readings. Trust can fall as easily as it rises.
-        The Deception board flags glyphs used in the wrong place.
-      </li>
-      <li>
-        <strong>Same stage, new story every run.</strong>
-        Seed 42 gives the same map and beats. Alliances and dialects do not repeat.
-      </li>
-      <li>
-        <strong>Auditable, not magic.</strong>
-        Every move has a Mind Trace. Export JSON to verify any claim.
-      </li>
-    </ul>
   </div>
 
   <div class="home-start-box">
@@ -143,21 +105,20 @@ def render_homepage(model_label: str, memory_label: str) -> str:
       <li>
         <span class="home-step-num">1</span>
         <div>
-          <strong>Watch Forest</strong> → <strong>Sandbox</strong> → <strong>▶ Play</strong>.
-          Turn on <strong>Speech</strong> so glyphs appear above creatures.
+          Tap <strong>Enter the forest</strong>, pick <strong>Sandbox</strong>, press
+          <strong>▶ Play</strong>. Turn on <strong>Speech</strong> and <strong>Trust</strong>.
         </div>
       </li>
       <li>
         <span class="home-step-num">2</span>
         <div>
-          Let 10–14 turns unfold. Watch which glyph starts winning.
+          Watch 10–15 turns. Look for a dominant glyph, a deception flag, and maybe a trust line.
         </div>
       </li>
       <li>
         <span class="home-step-num">3</span>
         <div>
-          Press <strong>⏹ Stop</strong> for the epilogue.
-          Press <strong>⬇ JSON</strong> for the full trace.
+          Press <strong>⏹ Stop</strong> for the epilogue. Press <strong>⬇ JSON</strong> to export proof.
         </div>
       </li>
     </ol>
@@ -166,12 +127,11 @@ def render_homepage(model_label: str, memory_label: str) -> str:
   <details class="home-screen-guide">
     <summary>Screen guide</summary>
     <ul class="home-look-list">
-      <li><strong>Forest</strong> — the map. The glowing creature just thought.</li>
-      <li><strong>Glyphs</strong> — invented words in speech bubbles.</li>
-      <li><strong>Turn beat</strong> — one-line summary of the last action.</li>
-      <li><strong>Chronicle</strong> — AI headline while the run is playing.</li>
-      <li><strong>Epilogue</strong> — short run summary when you press Stop.</li>
-      <li><strong>Mind Traces</strong> — raw LLM reasoning. Primary evidence.</li>
+      <li><strong>Forest</strong>: the map. The glowing creature just acted.</li>
+      <li><strong>Glyphs</strong>: invented words in speech bubbles.</li>
+      <li><strong>Trust overlay</strong>: lines between creatures who signaled, followed, or shared food.</li>
+      <li><strong>Details panel</strong>: mind traces, dictionary guesses, deception, trust scores.</li>
+      <li><strong>JSON export</strong>: every model choice with latency and reasoning.</li>
     </ul>
   </details>
 </section>
