@@ -184,7 +184,7 @@ def _control_hint(mode: str) -> str:
         )
     return (
         '<p class="moku-control-hint moku-hint-emergence">'
-        "<strong>Wild run</strong> — random world, no scheduled beats. "
+        "<strong>Wild run</strong>: random world, no scheduled beats. "
         "Watch glyphs, chronicle, and traces diverge."
         "</p>"
     )
