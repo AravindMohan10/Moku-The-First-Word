@@ -541,7 +541,9 @@ def _llm_policy(c: Creature, state: WorldState, r: random.Random) -> tuple[Creat
         "glyphs must be a JSON array of 1-3 invented words (not English). "
         "interpretation must be a JSON object mapping glyph->meaning. "
         "trust_updates must be a JSON object mapping creature name->integer. "
-        "Do not invent map facts outside the observation. English only in hidden fields."
+        "Do not invent map facts outside the observation. "
+        "All hidden text fields (intended_meaning, interpretation values, memory_to_store, "
+        "mood, reasoning_summary) must be English only — never Chinese or other languages."
     )
     if _is_stranger(c):
         system += (

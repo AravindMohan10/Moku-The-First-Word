@@ -6,6 +6,10 @@ import re
 from typing import TYPE_CHECKING, Any
 
 from moku.models import CreatureTurn
+from moku.text_sanitize import (
+    enforce_english_interpretation,
+    enforce_english_prose,
+)
 
 if TYPE_CHECKING:
     from moku.sim_engine import Creature, WorldState
@@ -144,4 +148,28 @@ def post_process_creature_turn(c: Any, state: Any, turn: CreatureTurn) -> Creatu
     turn = coerce_movement(c, state, turn)
     mem = sanitize_memory(turn.memory_to_store, state)
     trust = {k: v for k, v in turn.trust_updates.items() if k in _creature_names(state)}
-    return turn.model_copy(update={"memory_to_store": mem, "trust_updates": trust})
+    fallback_reason = f"I chose {turn.action.replace('_', ' ')} from hunger, trust, and what I heard."
+    reasoning = enforce_english_prose(
+        turn.reasoning_summary,
+        fallback=fallback_reason,
+    )
+    intended = enforce_english_prose(
+        turn.intended_meaning,
+        fallback=f"I meant to {turn.action.replace('_', ' ')}.",
+    )
+    memory = enforce_english_prose(
+        mem,
+        fallback=f"I watched the forest on turn {state.turn}.",
+    )
+    interpretation = enforce_english_interpretation(turn.interpretation)
+    mood = enforce_english_prose(turn.mood, fallback="calm")
+    return turn.model_copy(
+        update={
+            "memory_to_store": memory[:180],
+            "trust_updates": trust,
+            "reasoning_summary": reasoning,
+            "intended_meaning": intended,
+            "interpretation": interpretation,
+            "mood": mood.split()[0][:24] if mood else "calm",
+        }
+    )

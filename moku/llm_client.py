@@ -324,16 +324,18 @@ def summarize_turn_chronicle(
                 "target": t.get("target"),
                 "glyphs": t.get("glyphs"),
                 "intended_meaning": (t.get("intended_meaning") or "")[:120],
-                "reasoning_summary": (t.get("reasoning_summary") or "")[:180],
                 "fallback": bool(t.get("fallback")),
             }
         )
     system = (
         "You are the forest chronicler for a glyph-only creature simulation. "
         "Write exactly ONE short sentence (max 22 words). "
+        "Use ONLY the action and target fields for verbs — e.g. move_north means moved, "
+        "signal means signaled, share_food means shared food, follow means followed. "
+        "Never claim signal/follow/share unless action is exactly that. "
         "Name who acted and toward whom; mention glyphs only if central. "
         "No mood filler, no 'eerily quiet', no duplicate recap of prior turns. "
-        "Use ONLY facts in the JSON. Plain text only."
+        "Use ONLY facts in the JSON. Plain English text only."
     )
     payload = {
         "turn": turn,
