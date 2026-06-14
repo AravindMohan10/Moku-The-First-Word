@@ -378,22 +378,21 @@ def build_app() -> gr.Blocks:
             actions: bool,
             mood: bool,
             events: bool,
-        ) -> tuple[Any, str, str, str, int, bool, dict]:
+        ) -> tuple[Any, str | dict, str | dict, str | dict, int, bool, dict]:
             p = _effective_playing(s, p)
             layers = _build_layers(trust, signals, speech, actions, mood, events)
             btn = _play_btn_update(p)
-            world, story, traces = _live_views(s, p, layers)
+            skip_views = gr.update()
             if pg != "sim" or not p:
                 _write_trace_file(s)
-                return s, world, story, traces, tc, p, btn
+                return s, skip_views, skip_views, skip_views, tc, p, btn
             if not _tick_lock.acquire(blocking=False):
-                _write_trace_file(s)
-                return s, world, story, traces, tc, p, btn
+                return s, skip_views, skip_views, skip_views, tc, p, btn
             try:
                 tc += 1
                 if mode == "emergence" and tc % 2 != 0:
                     _write_trace_file(s)
-                    return s, world, story, traces, tc, p, btn
+                    return s, skip_views, skip_views, skip_views, tc, p, btn
                 s = step_world(s)
                 world, story, traces = _live_views(s, p, layers)
                 _write_trace_file(s)
@@ -456,18 +455,21 @@ def build_app() -> gr.Blocks:
             on_timer_tick,
             inputs=[state, playing, watch_mode, tick_count, page, *overlay_inputs],
             outputs=tick_outputs,
+            show_progress="hidden",
         )
 
         page.change(
             on_page_change,
             inputs=[page, state, playing, *overlay_inputs],
             outputs=[home_col, sim_col, page, *sim_outputs],
+            show_progress="hidden",
         )
 
         enter_btn.click(
             go_to_sim,
             inputs=[state, playing, *overlay_inputs],
             outputs=[home_col, sim_col, page, *sim_outputs],
+            show_progress="hidden",
         )
 
         for ov in overlay_inputs:
@@ -475,6 +477,7 @@ def build_app() -> gr.Blocks:
                 refresh_sim_views,
                 inputs=[state, playing, *overlay_inputs],
                 outputs=sim_outputs,
+                show_progress="hidden",
             )
 
         watch_mode.change(
@@ -487,6 +490,7 @@ def build_app() -> gr.Blocks:
                 tick_count,
                 play_btn,
             ],
+            show_progress="hidden",
         ).then(
             _sandbox_controls_visible,
             inputs=[watch_mode],
@@ -505,10 +509,12 @@ def build_app() -> gr.Blocks:
             toggle_play_pause,
             inputs=[playing, state, *overlay_inputs],
             outputs=[playing, play_btn, state, *sim_outputs],
+            show_progress="hidden",
         ).then(
             toggle_play_epilogue,
             inputs=[state, *overlay_inputs],
             outputs=[state, *sim_outputs],
+            show_progress="hidden",
         )
         obs_btn.click(
             refresh_panel_view,
