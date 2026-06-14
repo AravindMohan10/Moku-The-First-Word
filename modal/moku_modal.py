@@ -44,7 +44,7 @@ image = (
     .entrypoint([])
     .pip_install(
         "torch>=2.2.0",
-        "transformers>=4.44.0",
+        "transformers>=4.44.0,<4.57.0",
         "peft>=0.12.0",
         "trl>=0.9.0",
         "datasets>=2.20.0",
@@ -54,7 +54,6 @@ image = (
         "sentencepiece",
         "protobuf",
     )
-    .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
     .add_local_file(
         repo_root / "data" / "moku_sft_from_traces.jsonl",
         remote_path="/root/data/moku_sft_from_traces.jsonl",

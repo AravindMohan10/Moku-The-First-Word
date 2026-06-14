@@ -82,6 +82,7 @@ GOLDEN_TRACE_FILES = (
     "world-8953-t19.json",
     "world-8953-t22.json",
     "world-8953-t33.json",
+    "world-8953-t34-open-trace.json",
     "world-7118-t18.json",
 )
 
