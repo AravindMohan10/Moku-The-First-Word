@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 import os
 import threading
 import warnings
@@ -252,6 +253,11 @@ def build_app() -> gr.Blocks:
             font_mono=gr.themes.GoogleFont("IBM Plex Mono"),
         ),
     ) as demo:
+        if not _launch_supports_js():
+            script_html = _moku_script_html()
+            if script_html:
+                gr.HTML(script_html, visible=False, container=False)
+
         gr.HTML(render_guide_panel(), elem_id="moku-guide-host", container=False)
 
         with gr.Column(elem_classes=["moku-layout"]):
@@ -550,7 +556,7 @@ def build_app() -> gr.Blocks:
 
 
 def _moku_client_js() -> str:
-    """Load sim.js via launch(js=) — more reliable than head injection in Gradio 6."""
+    """Forest UI + client-side audio (sim.js)."""
     if not JS_PATH.exists():
         return ""
     boot = """
@@ -560,6 +566,18 @@ def _moku_client_js() -> str:
 })();
 """
     return JS_PATH.read_text(encoding="utf-8") + "\n" + boot
+
+
+def _moku_script_html() -> str:
+    client_js = _moku_client_js()
+    if not client_js:
+        return ""
+    safe = client_js.replace("</script>", "<\\/script>")
+    return f'<script type="text/javascript">\n{safe}\n</script>'
+
+
+def _launch_supports_js() -> bool:
+    return "js" in inspect.signature(gr.Blocks.launch).parameters
 
 
 if __name__ == "__main__":
@@ -572,11 +590,13 @@ if __name__ == "__main__":
     launch_kwargs: dict[str, Any] = {
         "server_name": host_env,
         "show_error": True,
-        # HF Spaces enable Gradio SSR by default; it 404s on Consolas/system font woff2 paths.
-        "ssr_mode": False,
     }
+    launch_sig = inspect.signature(app.launch)
+    if "ssr_mode" in launch_sig.parameters:
+        # HF Spaces enable Gradio SSR by default; it 404s on Consolas/system font woff2 paths.
+        launch_kwargs["ssr_mode"] = False
     client_js = _moku_client_js()
-    if client_js:
+    if client_js and "js" in launch_sig.parameters:
         launch_kwargs["js"] = client_js
     if port_env:
         launch_kwargs["server_port"] = int(port_env)
