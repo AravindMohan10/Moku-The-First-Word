@@ -177,12 +177,25 @@ def train(
 
 @app.function(
     image=image,
-    gpu="A10G",
+    # L4 (~$0.80/hr) comfortably serves a 4B model in bf16 — cheaper than A10G
+    # while staying fast enough for the live demo.
+    gpu="L4",
     timeout=24 * 60 * 60,
     volumes={"/models": volume},
     secrets=[modal.Secret.from_name("huggingface")],
+    # Warmth vs cost knob (set MOKU_MODAL_MIN_CONTAINERS at deploy time):
+    #   1 → always warm, fallback rare (~$19/day on L4). Use only for the demo-recording day.
+    #   0 → zero idle cost; first ~2-3 min of a fresh visit shows the Qwen fallback banner
+    #       while vLLM loads, then upgrades to OpenBMB and stays warm for the session.
+    #       This is the credit-safe mode for a week-long, unknown judging window.
+    min_containers=int(os.environ.get("MOKU_MODAL_MIN_CONTAINERS", "0")),
+    # Hard cap autoscaling so it can never run away to the plan's 10-GPU limit.
+    max_containers=1,
+    # Stay warm 15 min after the last request so a judge's whole session (and any
+    # cluster of judges) stays green without re-paying for cold starts.
+    scaledown_window=900,
 )
-@modal.concurrent(max_inputs=8)
+@modal.concurrent(max_inputs=16)
 @modal.web_server(8000, startup_timeout=600)
 def serve() -> None:
     """OpenAI-compatible vLLM server — point MOKU_MODEL_BASE_URL here."""
@@ -198,6 +211,8 @@ def serve() -> None:
         "vllm.entrypoints.openai.api_server",
         "--model",
         model_path,
+        "--served-model-name",
+        BASE_MODEL,
         "--trust-remote-code",
         "--host",
         "0.0.0.0",
@@ -210,4 +225,6 @@ def serve() -> None:
         "--enforce-eager",
     ]
     print("Starting vLLM:", " ".join(cmd))
-    subprocess.Popen(" ".join(cmd), shell=True)
+    # Fire-and-forget: Modal @web_server only routes traffic after serve() returns.
+    # proc.wait() blocks forever and leaves the public URL hanging with 0 bytes.
+    subprocess.Popen(cmd)

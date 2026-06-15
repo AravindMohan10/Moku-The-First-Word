@@ -82,7 +82,7 @@ def render_homepage(model_label: str, memory_label: str) -> str:
         <p class="home-split-label">We set up (same in Sandbox every time)</p>
         <ul>
           <li>Forest map, six creatures, seed 42</li>
-          <li>Timed events: food, scarcity, a stranger, danger, rain</li>
+          <li>Timed events: food (2), rain (3), scarcity (5), stranger (8), danger (11), rain (14)</li>
           <li>Rules: hunger, fear, movement, memory</li>
         </ul>
       </div>

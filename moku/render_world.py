@@ -30,6 +30,83 @@ CREATURE_LOOKS: dict[str, dict[str, str]] = {
 }
 
 
+# Whimsical one-line characters — pure flavour for the roster, no effect on the sim.
+CREATURE_EPITHETS: dict[str, str] = {
+    "Lumo": "the bright one who shouts first",
+    "Nia": "the quiet one who remembers everything",
+    "Oro": "the hungry optimist",
+    "Pika": "the echo who copies the loudest word",
+    "Vey": "the gentle hoarder of berries",
+    "Sora": "the nervous lookout",
+    "Miri": "the sunny meddler",
+    "Tiko": "the stubborn wanderer",
+    "Brum": "the slow, certain thinker",
+    "Eli": "the dreamer who drifts off-path",
+}
+
+
+def _epithet(name: str) -> str:
+    if name in CREATURE_EPITHETS:
+        return CREATURE_EPITHETS[name]
+    h = int(hashlib.md5(name.encode()).hexdigest()[6:8], 16)
+    pool = [
+        "a small voice in the wood",
+        "a keeper of one good glyph",
+        "a watcher at the tree line",
+        "a follower of warm sounds",
+        "a quiet inventor of words",
+    ]
+    return pool[h % len(pool)]
+
+
+def _creature_mouth(mood: str, accent: str) -> str:
+    m = (mood or "calm").lower()
+    if "afraid" in m or "fear" in m:
+        return (
+            f'<ellipse class="creature-mouth" cx="22" cy="30.5" rx="2.2" ry="2.8" '
+            f'fill="#1a1a2e" opacity="0.45"/>'
+        )
+    if "hungry" in m:
+        return (
+            f'<circle class="creature-mouth" cx="22" cy="30" r="2" fill="#1a1a2e" opacity="0.5"/>'
+        )
+    if "wary" in m:
+        return (
+            f'<path class="creature-mouth" d="M18.5 30.5 L25.5 30.5" stroke="{accent}" '
+            f'stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>'
+        )
+    return (
+        f'<path class="creature-mouth" d="M18 29.5 Q22 32.5 26 29.5" stroke="{accent}" '
+        f'stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.6"/>'
+    )
+
+
+def _creature_blink_delay(name: str) -> float:
+    h = int(hashlib.md5(name.encode()).hexdigest()[:4], 16)
+    return (h % 45) / 10.0
+
+
+def _creature_eyes_block(name: str, eyes: str) -> str:
+    delay = _creature_blink_delay(name)
+    return f'<g class="creature-eyes" style="animation-delay:{delay:.1f}s">{eyes}</g>'
+
+
+def _rain_layer() -> str:
+    parts = ['<div class="rain-layer" aria-hidden="true">']
+    for i in range(32):
+        h = int(hashlib.md5(f"rain-{i}".encode()).hexdigest()[:8], 16)
+        left = (h % 980) / 10.0 + 1.0
+        delay = (h % 28) / 10.0
+        dur = 0.5 + (h % 18) / 20.0
+        w = 1 + (h % 2)
+        parts.append(
+            f'<span class="rain-drop" style="left:{left:.1f}%;animation-delay:{delay:.1f}s;'
+            f'animation-duration:{dur:.2f}s;--drop-w:{w}px"></span>'
+        )
+    parts.append("</div>")
+    return "".join(parts)
+
+
 def _creature_svg_defs(uid: str, body: str, accent: str, glow: str) -> str:
     return (
         f"<defs>"
@@ -187,6 +264,9 @@ def _creature_svg(creature: "Creature", size: int = 44, svg_id: str | None = Non
     if fear_pulse > 0.5:
         fear_ring = f'<circle cx="22" cy="26" r="18" fill="none" stroke="#e87878" stroke-width="1.5" opacity="{fear_pulse * 0.5}" class="fear-pulse"/>'
 
+    eyes_block = _creature_eyes_block(creature.name, eyes)
+    mouth = _creature_mouth(creature.mood, accent)
+
     return (
         f'<svg class="creature-svg" width="{size}" height="{size}" viewBox="0 0 44 44" '
         f'data-creature="{html.escape(creature.name)}" aria-label="{html.escape(creature.name)}" '
@@ -194,7 +274,7 @@ def _creature_svg(creature: "Creature", size: int = 44, svg_id: str | None = Non
         f"{_creature_svg_defs(uid, body, accent, glow)}"
         f'<circle cx="22" cy="28" r="17" fill="url(#{uid}-aura)"/>'
         f"{fear_ring}"
-        f"<g class=\"creature-body\">{body_path}{shine}{eyes}{feet}</g>"
+        f'<g class="creature-body">{body_path}{shine}{eyes_block}{mouth}{feet}</g>'
         f"</svg>"
     )
 
@@ -235,6 +315,89 @@ def _status_class(creature: "Creature") -> str:
     if creature.mood in {"scheming", "uneasy"}:
         return " status-wary"
     return " status-calm"
+
+
+def _adjacent_to(x: int, y: int, cells: set[tuple[int, int]], radius: int = 1) -> bool:
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            if dx == 0 and dy == 0:
+                continue
+            if (x + dx, y + dy) in cells:
+                return True
+    return False
+
+
+def _creature_react_classes(creature: "Creature", state: "WorldState") -> str:
+    """World-driven emotive classes — rain, scarcity, proximity, and fresh events."""
+    parts: list[str] = []
+    pos = (creature.x, creature.y)
+
+    if state.weather == "rain":
+        parts.append("react-rain")
+    if state.scarcity_level >= 3:
+        parts.append("react-scarcity-high")
+    elif state.scarcity_level >= 1:
+        parts.append("react-scarcity")
+
+    if pos in state.danger:
+        parts.append("react-on-danger")
+    elif _adjacent_to(creature.x, creature.y, state.danger):
+        parts.append("react-near-danger")
+
+    if pos in state.food:
+        parts.append("react-on-food")
+    elif _adjacent_to(creature.x, creature.y, state.food):
+        parts.append("react-near-food")
+
+    if pos in state.shelter:
+        parts.append("react-shelter")
+
+    for other in state.creatures:
+        if other.name.startswith("Stray") and other.cid != creature.cid:
+            if max(abs(other.x - creature.x), abs(other.y - creature.y)) <= 2:
+                parts.append("react-stranger-near")
+                break
+
+    if creature.fear >= 55:
+        parts.append("react-stat-afraid")
+    if creature.hunger >= 55:
+        parts.append("react-stat-hungry")
+
+    event_blob = " ".join(state.last_events).lower()
+    if any(w in event_blob for w in ("fruit", "food", "glimmer", "abundance", "caretaker")):
+        parts.append("react-event-food")
+    if any(w in event_blob for w in ("stranger", "stray", "newcomer")):
+        parts.append("react-event-stranger")
+    if any(w in event_blob for w in ("thorn", "hazard", "danger")):
+        parts.append("react-event-danger")
+    if "scarcity" in event_blob:
+        parts.append("react-event-scarcity")
+    if state.weather == "rain" and any(w in event_blob for w in ("rain", "shower")):
+        parts.append("react-event-rain")
+    if state.weather == "clear" and any(
+        w in event_blob for w in ("clear", "passes", "sun filter", "abundance returns")
+    ):
+        parts.append("react-event-clear")
+
+    if not parts:
+        return ""
+    return " " + " ".join(parts)
+
+
+def _react_stagger_sec(name: str) -> float:
+    h = int(hashlib.md5(name.encode()).hexdigest()[:4], 16)
+    return (h % 12) * 0.22
+
+
+def _react_vibrate_sec(name: str) -> float:
+    """Per-creature tremble period — faster/slower so the grove never syncs up."""
+    h = int(hashlib.md5(name.encode()).hexdigest()[4:8], 16)
+    return 0.18 + (h % 16) * 0.02
+
+
+def _react_vibrate_delay_sec(name: str) -> float:
+    h = int(hashlib.md5(name.encode()).hexdigest()[8:12], 16)
+    return (h % 10) * 0.05
 
 
 def _hud_verb_line(last_trace: dict[str, Any] | None) -> str:
@@ -303,6 +466,38 @@ def _social_bond_pairs(state: "WorldState") -> set[tuple[str, str]]:
     return pairs
 
 
+def _audio_beat_key(last_trace: dict[str, Any] | None, turn: int) -> str:
+    if not last_trace or last_trace.get("fallback"):
+        return ""
+    if int(last_trace.get("turn") or 0) != turn:
+        return ""
+    return "|".join(
+        [
+            str(last_trace.get("creature") or ""),
+            str(last_trace.get("action") or ""),
+            str(last_trace.get("target") or ""),
+        ]
+    )
+
+
+def _audio_bonds_key(state: "WorldState") -> str:
+    pairs = sorted(_social_bond_pairs(state))
+    return "|".join(f"{a}:{b}" for a, b in pairs)
+
+
+def _audio_signals_key(state: "WorldState", turn: int) -> str:
+    keys: list[str] = []
+    for t in state.trace_log:
+        if int(t.get("turn") or 0) != turn:
+            continue
+        if str(t.get("action") or "") != "signal":
+            continue
+        src, tgt = t.get("creature"), t.get("target")
+        if src and tgt:
+            keys.append(f"{src}->{tgt}")
+    return "|".join(sorted(set(keys)))
+
+
 def _trust_threads(state: "WorldState", positions: dict[str, tuple[float, float]]) -> str:
     bonds = _social_bond_pairs(state)
     if not bonds:
@@ -359,6 +554,60 @@ def render_transcript_strip(state: "WorldState") -> str:
     )
 
 
+def render_glyph_of_the_run(drift: dict[str, Any] | None) -> str:
+    """The keepsake moment: one glyph the forest could not stop saying — read six ways."""
+    if not isinstance(drift, dict):
+        return ""
+    glyph = str(drift.get("dominant_glyph") or "").strip()
+    if not glyph:
+        return ""
+    uses = int(drift.get("uses") or 0)
+    readings = [
+        r for r in (drift.get("conflicting_readings") or [])
+        if isinstance(r, dict) and r.get("creature") and r.get("reading")
+    ]
+
+    # Keep only distinct readings so the divergence reads cleanly.
+    seen: set[str] = set()
+    distinct: list[dict[str, Any]] = []
+    for r in readings:
+        norm = str(r["reading"]).strip().lower()
+        if norm in seen:
+            continue
+        seen.add(norm)
+        distinct.append(r)
+
+    chips = ""
+    if len(distinct) >= 2:
+        chip_parts = []
+        for r in distinct[:4]:
+            chip_parts.append(
+                '<span class="gotr-chip">'
+                f'<span class="gotr-who">{html.escape(str(r["creature"]))}</span>'
+                f'<span class="gotr-read">{html.escape(str(r["reading"]))}</span>'
+                "</span>"
+            )
+        chips = (
+            '<div class="gotr-readings-label">one sound · '
+            f'{len(distinct)} private meanings</div>'
+            '<div class="gotr-readings">' + "".join(chip_parts) + "</div>"
+        )
+        caption = "No narrator assigned these meanings. The minds did."
+    else:
+        caption = "The forest kept saying it. The meaning is still being decided."
+
+    uses_line = f"heard {uses} times" if uses else "the forest's favourite sound"
+    return (
+        '<div class="glyph-of-the-run">'
+        '<div class="gotr-eyebrow">The first word of this run</div>'
+        f'<div class="gotr-glyph">{html.escape(glyph)}</div>'
+        f'<div class="gotr-uses">{html.escape(uses_line)}</div>'
+        f"{chips}"
+        f'<div class="gotr-caption">{html.escape(caption)}</div>'
+        "</div>"
+    )
+
+
 def render_story_section(
     state: "WorldState",
     last_trace: dict[str, Any] | None = None,
@@ -381,10 +630,11 @@ def render_story_section(
             f'<span class="instrument-tag">turns 1–{turns}</span>'
             "</div>"
         )
+        parts.append(render_glyph_of_the_run(rs.get("glyph_drift")))
         parts.append('<div class="instrument-body story-body">')
         parts.append(
             '<div class="story-subhead">'
-            "Woven when you stopped · cross-check Mind Traces for proof"
+            "Woven from glyph drift, bonds, trust, and deception in Details · Mind Traces are proof"
             "</div>"
         )
         meta = f"{turns} turns"
@@ -516,14 +766,12 @@ def _signal_overlays(
         x1, y1 = positions[str(src)]
         x2, y2 = positions[str(tgt)]
         mx, my = (x1 + x2) / 2, min(y1, y2) - 10
-        label = html.escape(glyph_key or "·")
         arcs.append(
             f'<g class="signal-group signal-strong" data-turn="{turn}">'
             f'<path class="signal-arc signal-arc-glow" d="M{x1},{y1} Q{mx},{my} {x2},{y2}" />'
             f'<path class="signal-arc" d="M{x1},{y1} Q{mx},{my} {x2},{y2}" />'
             f'<circle class="signal-pulse" cx="{x1}" cy="{y1}" r="1.4" />'
             f'<circle class="signal-pulse signal-pulse-delay signal-target-flash" cx="{x2}" cy="{y2}" r="1.1" />'
-            f'<text class="signal-glyph" x="{mx}" y="{my - 2}">{label}</text>'
             f"</g>"
         )
         if len(arcs) >= max_arcs:
@@ -722,13 +970,18 @@ def render_world_scene(state: "WorldState", layers: VisualLayers | None = None) 
             extra_cls += _status_class(c)
         if c.name.startswith("Stray"):
             extra_cls += " creature-stranger"
+        extra_cls += _creature_react_classes(c, state)
+        react_stagger = _react_stagger_sec(c.name)
+        react_vibrate = _react_vibrate_sec(c.name)
+        react_vibe_delay = _react_vibrate_delay_sec(c.name)
 
         status_ring = '<div class="creature-status-ring"></div>' if layers.show_status_rings else ""
 
         creature_parts.append(
             f'<div class="world-creature mood-{html.escape(mood_slug)} action-{html.escape(action_slug)}{extra_cls}" '
             f'style="left:{cx:.1f}%;top:{cy:.1f}%;--depth:{depth};'
-            f'--glow:{look["glow"]}" '
+            f'--glow:{look["glow"]};--react-stagger:{react_stagger:.2f}s;'
+            f'--react-vibrate:{react_vibrate:.2f}s;--react-vibe-delay:{react_vibe_delay:.2f}s" '
             f'data-name="{html.escape(c.name)}" title="{html.escape(c.name)}">'
             f'<div class="creature-halo" style="background: radial-gradient(circle, {look["glow"]}ee 0%, {look["body"]}66 38%, transparent 72%)"></div>'
             f"{status_ring}"
@@ -742,6 +995,7 @@ def render_world_scene(state: "WorldState", layers: VisualLayers | None = None) 
     weather_cls = f"weather-{state.weather}"
     scarcity_cls = f" scarcity-{min(state.scarcity_level, 5)}"
     event_text = " · ".join(state.last_events) if state.last_events else "The forest is quiet."
+    event_attr = html.escape(event_text[:120])
     thinker = None
     if state.creatures:
         idx = state.action_cursor - 1
@@ -752,10 +1006,18 @@ def render_world_scene(state: "WorldState", layers: VisualLayers | None = None) 
     verb_line = _hud_verb_line(last_trace) if layers.show_turn_beat else ""
     toast = _event_toast(state.last_events) if layers.show_toast else ""
     trust = _trust_threads(state, positions) if layers.show_trust else ""
+    beat_key = _audio_beat_key(last_trace, state.turn)
+    bonds_key = _audio_bonds_key(state)
+    signals_key = _audio_signals_key(state, state.turn)
+    rain_html = _rain_layer() if state.weather == "rain" else ""
 
     return (
-        f'<div class="world-scene {ov_cls}{weather_cls}{scarcity_cls}" data-turn="{state.turn}">'
-        f'<div class="world-sky"></div>'
+        f'<div class="world-scene {ov_cls}{weather_cls}{scarcity_cls}" '
+        f'data-turn="{state.turn}" data-weather="{html.escape(state.weather)}" '
+        f'data-scarcity="{min(state.scarcity_level, 5)}" data-event="{event_attr}" '
+        f'data-beat="{html.escape(beat_key)}" data-bonds="{html.escape(bonds_key)}" '
+        f'data-signals="{html.escape(signals_key)}">'
+        f'<div class="world-sky"></div>{rain_html}'
         f'<div class="world-dim"></div>'
         f"{_ambient_layer(state.turn)}"
         f"{_map_legend()}"
@@ -796,11 +1058,14 @@ def render_guide_panel() -> str:
         "<li><strong>Private meaning</strong> lives in mind traces; the same word can mean different things to different creatures.</li>"
         "</ul></div>"
         '<div class="guide-section">'
-        '<div class="guide-section-title">Map symbols</div>'
+        '<div class="guide-section-title">Map legend</div>'
+        '<p class="guide-note">The pill in the <strong>top-right of the forest</strong> labels terrain tiles. Overlay arcs are separate — turn Signals / Trust on to see them.</p>'
         '<ul class="guide-list">'
         '<li><span class="guide-swatch guide-swatch-food"></span><strong>Glimmer-fruit</strong> — food tile. Creatures can gather here.</li>'
         '<li><span class="guide-swatch guide-swatch-danger"></span><strong>Thorn</strong> — danger. Standing here raises fear and drains energy.</li>'
         '<li><span class="guide-swatch guide-swatch-shelter"></span><strong>Shelter log</strong> — safe cover. Hide actions work best nearby.</li>'
+        '<li><span class="guide-swatch guide-swatch-line guide-swatch-signal"></span><strong>Signal arc</strong> — gold dashed line: who signalled whom <em>this turn</em> (Signals overlay).</li>'
+        '<li><span class="guide-swatch guide-swatch-line guide-swatch-trust"></span><strong>Trust bond</strong> — teal solid line: social history from signal, follow, or share_food (Trust overlay).</li>'
         "</ul></div>"
         '<div class="guide-section">'
         '<div class="guide-section-title">Creatures</div>'
@@ -814,8 +1079,8 @@ def render_guide_panel() -> str:
         '<div class="guide-section-title">Overlay layers</div>'
         '<ul class="guide-list">'
         "<li><strong>Speech</strong> — last speaker's public glyphs (+ private reading subtitle).</li>"
-        "<li><strong>Signals</strong> — curved arcs for who signaled whom this turn.</li>"
-        "<li><strong>Trust</strong> — faint bonds between allied minds.</li>"
+        "<li><strong>Signals</strong> — gold dashed arcs for this turn's signal (may overlap a trust bond on the same pair).</li>"
+        "<li><strong>Trust</strong> — teal solid arcs for bonds built across the run.</li>"
         "<li><strong>Actions</strong> — icon on whoever acted last (gather, hide, signal…).</li>"
         "<li><strong>Mood</strong> — hunger / fear / calm rings on every creature.</li>"
         "<li><strong>Events</strong> — toast when sandbox beats fire (food, rain, stranger).</li>"
@@ -832,6 +1097,12 @@ def render_guide_panel() -> str:
         "<li><strong>Turn</strong> — round number; <em>mind:</em> who thought last.</li>"
         "<li><strong>Weather / scarcity</strong> — world pressure (rain slows energy; scarcity raises hunger).</li>"
         "<li><strong>Italic line</strong> — latest world event.</li>"
+        "</ul></div>"
+        '<div class="guide-section">'
+        '<div class="guide-section-title">Sound</div>'
+        '<ul class="guide-list">'
+        "<li>Toggle <strong>Sound</strong> in the overlay row. A soft fantasy pipe bed plays while live; gentle accents when creatures move, signal, or bond.</li>"
+        "<li>If you hear nothing, click anywhere on the page once — browsers block audio until you interact.</li>"
         "</ul></div>"
         '<div class="guide-section">'
         '<div class="guide-section-title">Panels</div>'
@@ -903,11 +1174,75 @@ def render_side_panel(
     )
 
 
-def render_sim_shell(world_html: str, watch_mode: str, playing: bool) -> str:
+def _short_model(model: str) -> str:
+    """Trim a HF model id for display: 'Qwen/Qwen2.5-Coder-3B-Instruct' -> 'Qwen2.5-Coder-3B'."""
+    name = (model or "").split("/")[-1]
+    return name.replace("-Instruct", "").replace("-instruct", "") or "the model"
+
+
+def _provider_chip(state_class: str, label: str, detail: str) -> str:
+    """Compact, self-updating status chip. Short label always visible; full story on hover."""
+    return (
+        f'<div class="provider-chip {state_class}" tabindex="0">'
+        '<span class="pb-dot"></span>'
+        f'<span class="pb-label">{html.escape(label)}</span>'
+        f'<span class="pb-detail">{detail}</span>'
+        "</div>"
+    )
+
+
+def render_provider_banner(state: "WorldState") -> str:
+    """Honest live status: which engine is actually answering the minds right now."""
+    log = getattr(state, "trace_log", None)
+    if not log:
+        return ""
+    recent = log[-6:]
+    live = next((t for t in reversed(recent) if t.get("llm_ok")), None)
+
+    if live is None:
+        return _provider_chip(
+            "pb-rule",
+            "Rule policy",
+            "<strong>Rule policy active.</strong> The model is unreachable, so the built-in "
+            "policy is driving the minds. Glyphs still emerge — open <strong>⬇ JSON</strong> to verify.",
+        )
+
+    prov = str(live.get("provider") or "")
+    model = _short_model(str(live.get("model") or ""))
+
+    if prov == "local":
+        return _provider_chip(
+            "pb-live",
+            "OpenBMB · live",
+            f"<strong>Live minds — OpenBMB {html.escape(model)}</strong> served on Modal (vLLM). "
+            "Real model, real latency — this is the OpenBMB run.",
+        )
+    if prov == "replay":
+        return _provider_chip(
+            "pb-replay",
+            "Replay",
+            "<strong>Replay of a recorded OpenBMB run.</strong> Every trace shows "
+            "<code>provider: local</code> — captured live, replayed for a smooth demo.",
+        )
+    if prov == "huggingface":
+        return _provider_chip(
+            "pb-fallback",
+            "Warming up · " + html.escape(model.split("-")[0] or "fallback"),
+            "<strong>OpenBMB is warming up.</strong> The forest is thinking on "
+            f"<strong>{html.escape(model)}</strong> (Hugging Face) so nothing freezes while "
+            "MiniCPM3-4B spins up on Modal. It switches to the OpenBMB run automatically in a "
+            "minute or two — no refresh needed.",
+        )
+    return ""
+
+
+def render_sim_shell(world_html: str, watch_mode: str, playing: bool, banner_html: str = "") -> str:
     mode_label = "Sandbox" if watch_mode == "sandbox" else "Wild run"
     play_label = "▶ LIVE" if playing else "⏸ PAUSED"
+    play_flag = "1" if playing else "0"
     return (
-        '<div class="moku-sim-root">'
+        f'<div class="moku-sim-root" data-playing="{play_flag}">'
+        f"{banner_html}"
         '<span class="sim-corner sim-corner-tl" aria-hidden="true"></span>'
         '<span class="sim-corner sim-corner-tr" aria-hidden="true"></span>'
         '<span class="sim-corner sim-corner-bl" aria-hidden="true"></span>'
@@ -919,6 +1254,9 @@ def render_sim_shell(world_html: str, watch_mode: str, playing: bool) -> str:
         "</div>"
         f'<div class="sim-mode-badge">{html.escape(mode_label)}</div>'
         f'<div class="sim-status sim-status-{"live" if playing else "paused"}">{html.escape(play_label)}</div>'
+        '<div class="forest-motes" aria-hidden="true">'
+        "<i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>"
+        "</div>"
         f'<div class="sim-world-wrap">{world_html}</div>'
         "</div>"
     )

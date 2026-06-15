@@ -140,7 +140,16 @@ MOKU_LLM_PROVIDER=auto
 MOKU_HF_MODEL=openbmb/MiniCPM3-4B
 MOKU_MODEL_BASE_URL=https://m-aravind619--moku-the-first-word-serve.modal.run/v1
 MOKU_MODEL_API_KEY=local
+# MUST match vLLM's --served-model-name (BASE_MODEL). Do NOT set this to the
+# volume path (/models/moku-merged) or every request 404s and falls back to Qwen.
+MOKU_MODEL_NAME=openbmb/MiniCPM3-4B
 MOKU_MEM0_RETRIEVE=local
+MOKU_TICK_SECONDS=6
+MOKU_LLM_TIMEOUT=90
+# WEEK MODE (credit-safe, scale-to-zero): keepalive MUST be 0, or the Space pings
+# Modal every few minutes and keeps a GPU warm 24/7 (~$134/week). With it off,
+# Modal only spins up when a judge actually visits, then idles back down.
+MOKU_MODAL_KEEPALIVE=0
 ```
 
 ## Hackathon Demo Arc

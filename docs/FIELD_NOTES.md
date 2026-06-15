@@ -33,7 +33,7 @@ Same glyph. Different minds. No narrator assigned that. The model did.
 
 That's not a bug. **That's the demo.**
 
-We script the *pressure* — food on turn 2, scarcity on turn 5, a stranger on turn 8, danger on turn 11. We do **not** script who means what, who shares with whom, or which glyph becomes the forest's accidental meme.
+We script the *pressure* — food on turn 2, a soft rain on turn 3 (clears turn 6), scarcity on turn 5, a stranger on turn 8, danger on turn 11, rain again on turn 14. We do **not** script who means what, who shares with whom, or which glyph becomes the forest's accidental meme.
 
 ---
 

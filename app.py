@@ -21,12 +21,13 @@ except ImportError:
 
 import gradio as gr
 
-from moku.llm_client import provider_label, warmup_local_backend
+from moku.llm_client import provider_label, start_modal_keepalive, warmup_local_backend
 from moku.memory import get_memory_store
 from moku.render_home import render_homepage
 from moku.visual_layers import VisualLayers, layers_from_toggles
 from moku.render_world import (
     render_guide_panel,
+    render_provider_banner,
     render_side_panel,
     render_sim_shell,
     render_story_section,
@@ -58,8 +59,13 @@ _tick_lock = threading.Lock()
 
 
 def _llm_timer_interval() -> float:
-    # HF Space + Modal LLM often needs 8–15s per creature; avoid overlapping timer polls.
-    default = "8.0" if os.environ.get("SPACE_ID") else "2.5"
+    # Modal / HF LLM often needs 8–15s per creature; poll after a step can finish.
+    if os.environ.get("SPACE_ID"):
+        default = "10.0"
+    elif os.environ.get("MOKU_MODEL_BASE_URL", "").strip():
+        default = "10.0"
+    else:
+        default = "2.5"
     return float(os.environ.get("MOKU_TICK_SECONDS", default))
 
 
@@ -112,7 +118,12 @@ def _effective_playing(state: Any, playing: bool) -> bool:
 
 def _world_html(state: Any, playing: bool, layers: VisualLayers) -> str:
     active = _effective_playing(state, playing)
-    return render_sim_shell(render_world_scene(state, layers), state.watch_mode, active)
+    return render_sim_shell(
+        render_world_scene(state, layers),
+        state.watch_mode,
+        active,
+        banner_html=render_provider_banner(state),
+    )
 
 
 def _live_views(
@@ -178,7 +189,8 @@ def _control_hint(mode: str) -> str:
     if mode == "sandbox":
         return (
             '<p class="moku-control-hint moku-hint-sandbox">'
-            "<strong>Sandbox</strong>: curated beats for demos. "
+            "<strong>Sandbox</strong>: curated beats for demos — food turn 2, rain turn 3, "
+            "scarcity 5, stranger 8, danger 11, rain 14. "
             "Forest Chronicle updates each turn; Mind Traces hold exact reasoning."
             "</p>"
         )
@@ -228,7 +240,6 @@ def build_app() -> gr.Blocks:
     )
     world0, story0, panel0, traces0 = _views(initial_state, True, initial_layers)
     home0 = render_homepage(model_label, memory_label)
-    js_inline = JS_PATH.read_text(encoding="utf-8") if JS_PATH.exists() else ""
     css = CSS_PATH.read_text(encoding="utf-8") if CSS_PATH.exists() else ""
 
     with gr.Blocks(
@@ -241,7 +252,6 @@ def build_app() -> gr.Blocks:
             font_mono=gr.themes.GoogleFont("IBM Plex Mono"),
         ),
     ) as demo:
-        gr.HTML(f"<script>{js_inline}</script>", container=False)
         gr.HTML(render_guide_panel(), elem_id="moku-guide-host", container=False)
 
         with gr.Column(elem_classes=["moku-layout"]):
@@ -283,6 +293,7 @@ def build_app() -> gr.Blocks:
                     ov_actions = gr.Checkbox(label="Actions", value=True, elem_id="ov-actions")
                     ov_mood = gr.Checkbox(label="Mood", value=True, elem_id="ov-mood")
                     ov_events = gr.Checkbox(label="Events", value=True, elem_id="ov-events")
+                    ov_sound = gr.Checkbox(label="Sound", value=True, elem_id="ov-sound")
 
                 overlay_inputs = [
                     ov_trust,
@@ -538,8 +549,22 @@ def build_app() -> gr.Blocks:
     return demo
 
 
+def _moku_client_js() -> str:
+    """Load sim.js via launch(js=) — more reliable than head injection in Gradio 6."""
+    if not JS_PATH.exists():
+        return ""
+    boot = """
+(function mokuLaunchPoll() {
+  if (typeof window.mokuTryBoot === "function" && window.mokuTryBoot()) return;
+  requestAnimationFrame(mokuLaunchPoll);
+})();
+"""
+    return JS_PATH.read_text(encoding="utf-8") + "\n" + boot
+
+
 if __name__ == "__main__":
     warmup_local_backend()
+    start_modal_keepalive()
     app = build_app()
     app.queue(default_concurrency_limit=1)
     port_env = os.environ.get("GRADIO_SERVER_PORT")
@@ -550,6 +575,9 @@ if __name__ == "__main__":
         # HF Spaces enable Gradio SSR by default; it 404s on Consolas/system font woff2 paths.
         "ssr_mode": False,
     }
+    client_js = _moku_client_js()
+    if client_js:
+        launch_kwargs["js"] = client_js
     if port_env:
         launch_kwargs["server_port"] = int(port_env)
     app.launch(**launch_kwargs)

@@ -480,7 +480,7 @@ footer {
 }
 
 .weather-rain .world-sky {
-  background: linear-gradient(180deg, #6898b8 0%, #78a8a8 38%, #489868 100%);
+  background: linear-gradient(180deg, #5a7898 0%, #6a9098 34%, #3a7858 100%);
 }
 
 .weather-rain .world-sky::after {
@@ -488,13 +488,53 @@ footer {
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    105deg,
+    108deg,
     transparent,
-    transparent 8px,
-    rgba(180, 200, 220, 0.03) 8px,
-    rgba(180, 200, 220, 0.03) 10px
+    transparent 6px,
+    rgba(200, 220, 240, 0.05) 6px,
+    rgba(200, 220, 240, 0.05) 8px
   );
-  animation: rain-drift 0.8s linear infinite;
+  animation: rain-drift 0.65s linear infinite;
+  pointer-events: none;
+}
+
+.rain-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.rain-drop {
+  position: absolute;
+  top: -12%;
+  width: var(--drop-w, 1px);
+  height: 14px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(200, 230, 255, 0.15) 20%,
+    rgba(180, 220, 255, 0.55) 100%
+  );
+  border-radius: 0 0 2px 2px;
+  transform: rotate(12deg);
+  animation: rain-fall linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-10vh) rotate(12deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(115vh) rotate(12deg);
+    opacity: 0.2;
+  }
 }
 
 @keyframes rain-drift {
@@ -674,6 +714,313 @@ footer {
 @keyframes creature-idle {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-2px); }
+}
+
+/* Blink — staggered per creature via inline animation-delay */
+.creature-eyes {
+  transform-box: fill-box;
+  transform-origin: center center;
+  animation: creature-blink 5.2s ease-in-out infinite;
+}
+
+@keyframes creature-blink {
+  0%, 42%, 44%, 100% { transform: scaleY(1); }
+  43% { transform: scaleY(0.1); }
+}
+
+.creature-mouth {
+  transform-origin: 22px 30px;
+  animation: creature-mouth-idle 4s ease-in-out infinite;
+}
+
+@keyframes creature-mouth-idle {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.92); }
+}
+
+/* Mood — emotive motion */
+.mood-hungry .creature-svg {
+  animation: creature-idle 2.1s ease-in-out infinite, creature-gloss 5s ease-in-out infinite, creature-nudge 3.5s ease-in-out infinite;
+}
+
+.mood-afraid .creature-svg {
+  animation:
+    creature-idle 1.6s ease-in-out infinite,
+    creature-gloss 5s ease-in-out infinite,
+    creature-tremble var(--react-vibrate, 0.28s) ease-in-out infinite;
+  animation-delay: 0s, 0s, var(--react-vibe-delay, 0s);
+}
+
+.mood-calm .creature-svg,
+.mood-peaceful .creature-svg {
+  animation: creature-idle 3.6s ease-in-out infinite, creature-gloss 5s ease-in-out infinite, creature-sway 5.5s ease-in-out infinite;
+}
+
+.mood-wary .creature-svg {
+  animation: creature-idle 2.8s ease-in-out infinite, creature-gloss 5s ease-in-out infinite, creature-sway 3s ease-in-out infinite;
+}
+
+.creature-just-acted .creature-svg {
+  animation: creature-bounce 0.55s ease-out, creature-idle 3s ease-in-out 0.55s infinite, creature-gloss 5s ease-in-out infinite;
+}
+
+@keyframes creature-nudge {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-1px) rotate(-1.5deg); }
+  75% { transform: translateY(-2px) rotate(1.5deg); }
+}
+
+@keyframes creature-tremble {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-0.6px, 0.4px); }
+  50% { transform: translate(0.5px, -0.5px); }
+  75% { transform: translate(-0.4px, -0.3px); }
+}
+
+@keyframes creature-sway {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-2px) rotate(1.2deg); }
+}
+
+@keyframes creature-bounce {
+  0% { transform: translateY(0) scale(1); }
+  35% { transform: translateY(-5px) scale(1.06); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.weather-rain .world-creature {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--glow, #c8fff8) 28%, transparent)) brightness(0.92);
+}
+
+.weather-rain .creature-halo {
+  opacity: 0.65;
+}
+
+/* World-reactive emotive motion (rain, scarcity, proximity, events) */
+.react-rain .creature-svg {
+  animation:
+    creature-rain-huddle 4.8s ease-in-out infinite,
+    creature-tremble var(--react-vibrate, 0.32s) ease-in-out infinite,
+    creature-gloss 5s ease-in-out infinite;
+  animation-delay: var(--react-stagger, 0s), var(--react-vibe-delay, 0s), 0s;
+}
+
+.react-rain .creature-eyes {
+  animation:
+    creature-blink 5.2s ease-in-out infinite,
+    creature-squint 5s ease-in-out infinite;
+  animation-delay: var(--react-stagger, 0s), calc(var(--react-stagger, 0s) + 0.4s);
+}
+
+.react-rain .creature-mouth {
+  animation: creature-mouth-pout 4.5s ease-in-out infinite;
+  animation-delay: var(--react-stagger, 0s);
+}
+
+.react-rain .creature-halo {
+  opacity: 0.55;
+  transform: scale(0.92);
+}
+
+.react-shelter .creature-svg {
+  animation:
+    creature-shelter-curl 5.5s ease-in-out infinite,
+    creature-gloss 5s ease-in-out infinite;
+}
+
+.react-shelter .creature-halo {
+  opacity: 0.85;
+}
+
+.react-on-food .creature-svg,
+.react-near-food .creature-svg {
+  animation:
+    creature-food-perk 3.2s ease-in-out infinite,
+    creature-gloss 5s ease-in-out infinite;
+}
+
+.react-on-food .creature-mouth,
+.react-near-food .creature-mouth {
+  animation: creature-mouth-smile 3s ease-in-out infinite;
+}
+
+.react-on-danger .creature-svg,
+.react-near-danger .creature-svg,
+.react-stat-afraid .creature-svg {
+  animation:
+    creature-tremble var(--react-vibrate, 0.32s) ease-in-out infinite,
+    creature-idle 2.2s ease-in-out infinite,
+    creature-gloss 5s ease-in-out infinite;
+  animation-delay: var(--react-vibe-delay, 0s), 0s, 0s;
+}
+
+.react-on-danger .creature-eyes,
+.react-near-danger .creature-eyes,
+.react-stat-afraid .creature-eyes {
+  animation:
+    creature-blink 4.8s ease-in-out infinite,
+    creature-wide-eyes 2.4s ease-in-out infinite;
+}
+
+.react-stranger-near .creature-svg {
+  animation:
+    creature-lean-away 3.6s ease-in-out infinite,
+    creature-gloss 5s ease-in-out infinite;
+}
+
+.react-scarcity .creature-svg {
+  animation:
+    creature-slump 4.2s ease-in-out infinite,
+    creature-gloss 5s ease-in-out infinite;
+}
+
+.react-scarcity-high .creature-svg {
+  animation:
+    creature-slump 3.4s ease-in-out infinite,
+    creature-nudge 3s ease-in-out infinite,
+    creature-gloss 5s ease-in-out infinite;
+}
+
+.react-stat-hungry .creature-mouth {
+  animation: creature-mouth-hungry 2.8s ease-in-out infinite;
+}
+
+.react-event-rain .creature-svg {
+  animation:
+    creature-event-shiver calc(var(--react-vibrate, 0.32s) * 3.4) ease-out,
+    creature-rain-huddle 4.8s ease-in-out calc(var(--react-vibrate, 0.32s) * 3.4) infinite,
+    creature-tremble var(--react-vibrate, 0.32s) ease-in-out calc(var(--react-vibrate, 0.32s) * 3.4) infinite,
+    creature-gloss 5s ease-in-out infinite;
+}
+
+.react-event-clear .creature-svg {
+  animation:
+    creature-event-stretch 1.2s ease-out,
+    creature-sway 5.5s ease-in-out 1.2s infinite,
+    creature-gloss 5s ease-in-out infinite;
+}
+
+.react-event-food .creature-svg {
+  animation:
+    creature-event-perk 0.95s ease-out,
+    creature-food-perk 3.2s ease-in-out 0.95s infinite,
+    creature-gloss 5s ease-in-out infinite;
+}
+
+.react-event-danger .creature-svg {
+  animation:
+    creature-event-flinch 0.85s ease-out,
+    creature-tremble var(--react-vibrate, 0.32s) ease-in-out 0.85s infinite,
+    creature-gloss 5s ease-in-out infinite;
+  animation-delay: 0s, var(--react-vibe-delay, 0s), 0s;
+}
+
+.react-event-stranger .creature-svg {
+  animation:
+    creature-event-recoil 1s ease-out,
+    creature-lean-away 3.6s ease-in-out 1s infinite,
+    creature-gloss 5s ease-in-out infinite;
+}
+
+.react-event-scarcity .creature-svg {
+  animation:
+    creature-event-slump 1s ease-out,
+    creature-slump 4.2s ease-in-out 1s infinite,
+    creature-gloss 5s ease-in-out infinite;
+}
+
+.world-scene.scarcity-3 .world-creature.react-scarcity .creature-svg,
+.world-scene.scarcity-4 .world-creature.react-scarcity .creature-svg,
+.world-scene.scarcity-5 .world-creature.react-scarcity .creature-svg {
+  filter: brightness(0.94) saturate(0.92);
+}
+
+@keyframes creature-rain-huddle {
+  0%, 100% { transform: translateY(2px) scale(0.97); }
+  50% { transform: translateY(3px) scale(0.95) rotate(-0.8deg); }
+}
+
+@keyframes creature-squint {
+  0%, 100% { transform: scaleY(0.82); }
+  50% { transform: scaleY(0.58); }
+}
+
+@keyframes creature-mouth-pout {
+  0%, 100% { transform: scaleY(0.88) translateY(0.5px); }
+  50% { transform: scaleY(0.72) translateY(1px); }
+}
+
+@keyframes creature-shelter-curl {
+  0%, 100% { transform: translateY(1px) scale(0.96); }
+  50% { transform: translateY(2px) scale(0.94); }
+}
+
+@keyframes creature-food-perk {
+  0%, 100% { transform: translateY(-1px) scale(1.02); }
+  50% { transform: translateY(-3px) scale(1.04); }
+}
+
+@keyframes creature-mouth-smile {
+  0%, 100% { transform: scaleY(1.05) scaleX(1.08); }
+  50% { transform: scaleY(1.12) scaleX(1.12); }
+}
+
+@keyframes creature-wide-eyes {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.12); }
+}
+
+@keyframes creature-lean-away {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(-2px) rotate(-2.5deg); }
+}
+
+@keyframes creature-slump {
+  0%, 100% { transform: translateY(1px) scale(0.98); }
+  50% { transform: translateY(2px) scale(0.96); }
+}
+
+@keyframes creature-mouth-hungry {
+  0%, 100% { transform: scaleY(1.1); }
+  50% { transform: scaleY(1.22); }
+}
+
+@keyframes creature-event-shiver {
+  0% { transform: translateY(0) scale(1); }
+  20% { transform: translateY(2px) scale(0.96) rotate(-1deg); }
+  40% { transform: translate(1px, 1px) scale(0.97); }
+  60% { transform: translate(-1px, 2px) scale(0.96); }
+  100% { transform: translateY(2px) scale(0.97); }
+}
+
+@keyframes creature-event-stretch {
+  0% { transform: translateY(2px) scale(0.97); }
+  45% { transform: translateY(-4px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes creature-event-perk {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-6px) scale(1.07); }
+  100% { transform: translateY(-1px) scale(1.02); }
+}
+
+@keyframes creature-event-flinch {
+  0% { transform: scale(1); }
+  30% { transform: scale(0.92) translateY(2px); }
+  100% { transform: scale(0.98); }
+}
+
+@keyframes creature-event-recoil {
+  0% { transform: translateX(0); }
+  35% { transform: translateX(-4px) rotate(-3deg); }
+  100% { transform: translateX(-1px) rotate(-1deg); }
+}
+
+@keyframes creature-event-slump {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(4px) scale(0.94); }
+  100% { transform: translateY(1px) scale(0.98); }
 }
 
 .fear-pulse {
@@ -1003,6 +1350,31 @@ footer {
   border-radius: 0 0 8px 8px;
   height: 10px;
   top: 6px;
+}
+
+.guide-note {
+  font-size: 0.72rem;
+  color: rgba(255, 252, 235, 0.72);
+  margin: 0 0 8px;
+  line-height: 1.45;
+}
+
+.guide-swatch-line {
+  width: 20px;
+  height: 0;
+  border-radius: 0;
+  top: 10px;
+  background: none;
+}
+
+.guide-swatch-signal {
+  border-top: 2px dashed rgba(255, 220, 130, 0.95);
+  box-shadow: 0 0 6px rgba(255, 216, 120, 0.4);
+}
+
+.guide-swatch-trust {
+  border-top: 2px solid rgba(110, 236, 196, 0.75);
+  box-shadow: 0 0 6px rgba(110, 236, 196, 0.35);
 }
 
 .guide-actions {
@@ -2583,7 +2955,7 @@ footer {
 }
 
 .weather-rain .world-sky {
-  background: linear-gradient(180deg, #101820 0%, #182830 35%, #142820 100%);
+  background: linear-gradient(180deg, #5a7898 0%, #6a9098 34%, #3a7858 100%);
 }
 
 .world-ground {
@@ -2756,3 +3128,255 @@ footer {
 .moku-overlay-row label:has(input:checked) {
   color: var(--phosphor) !important;
 }
+
+/* ─────────────────────────────────────────────────────────
+   Delight pass — Glyph of the Run, creature epithets, fireflies
+   ───────────────────────────────────────────────────────── */
+
+/* "Glyph of the Run" keepsake card in the epilogue */
+.glyph-of-the-run {
+  margin: 10px 0 14px;
+  padding: 18px 16px 16px;
+  border-radius: 14px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 90% at 50% 0%, rgba(110, 236, 196, 0.16), transparent 70%),
+    linear-gradient(160deg, rgba(30, 46, 36, 0.7), rgba(12, 18, 14, 0.55));
+  border: 1px solid rgba(212, 184, 104, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: gotr-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes gotr-rise {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.gotr-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--phosphor);
+  opacity: 0.85;
+}
+
+.gotr-glyph {
+  font-family: var(--mono);
+  font-size: clamp(2.1rem, 7vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  margin: 6px 0 2px;
+  color: var(--gold-bright);
+  text-shadow:
+    0 0 18px rgba(240, 216, 144, 0.45),
+    0 0 42px rgba(110, 236, 196, 0.22);
+  animation: gotr-glow 3.2s ease-in-out infinite;
+}
+
+@keyframes gotr-glow {
+  0%, 100% { text-shadow: 0 0 18px rgba(240, 216, 144, 0.4), 0 0 42px rgba(110, 236, 196, 0.18); }
+  50% { text-shadow: 0 0 26px rgba(240, 216, 144, 0.62), 0 0 60px rgba(110, 236, 196, 0.34); }
+}
+
+.gotr-uses {
+  font-size: 0.74rem;
+  color: var(--ink-dim);
+  font-style: italic;
+}
+
+.gotr-readings-label {
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #9fb39f;
+}
+
+.gotr-readings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.gotr-chip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 6px 10px;
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--panel-border);
+  text-align: left;
+}
+
+.gotr-who {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--phosphor);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.gotr-read {
+  font-size: 0.78rem;
+  color: #e8ece4;
+}
+
+.gotr-caption {
+  margin-top: 12px;
+  font-size: 0.72rem;
+  color: #b8c4b0;
+  font-style: italic;
+}
+
+/* Creature roster epithet line */
+.roster-epithet {
+  font-size: 0.72rem;
+  color: var(--gold);
+  font-style: italic;
+  opacity: 0.85;
+  margin-top: 1px;
+}
+
+/* Forest fireflies / drifting motes — pure ambiance, behind creatures */
+.forest-motes {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.forest-motes i {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240, 232, 180, 0.95), rgba(110, 236, 196, 0.2) 60%, transparent 70%);
+  box-shadow: 0 0 8px 2px rgba(240, 232, 180, 0.35);
+  opacity: 0;
+  animation: mote-drift 11s ease-in-out infinite;
+}
+
+.forest-motes i:nth-child(1) { left: 12%; top: 78%; animation-delay: 0s; animation-duration: 12s; }
+.forest-motes i:nth-child(2) { left: 28%; top: 88%; animation-delay: 2.4s; animation-duration: 14s; }
+.forest-motes i:nth-child(3) { left: 44%; top: 72%; animation-delay: 4.1s; animation-duration: 10s; }
+.forest-motes i:nth-child(4) { left: 61%; top: 90%; animation-delay: 1.3s; animation-duration: 13s; }
+.forest-motes i:nth-child(5) { left: 75%; top: 80%; animation-delay: 5.6s; animation-duration: 15s; }
+.forest-motes i:nth-child(6) { left: 88%; top: 84%; animation-delay: 3.2s; animation-duration: 11s; }
+.forest-motes i:nth-child(7) { left: 20%; top: 94%; animation-delay: 6.8s; animation-duration: 16s; }
+.forest-motes i:nth-child(8) { left: 53%; top: 96%; animation-delay: 0.9s; animation-duration: 12.5s; }
+.forest-motes i:nth-child(9) { left: 83%; top: 92%; animation-delay: 4.7s; animation-duration: 13.5s; }
+
+@keyframes mote-drift {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.7); }
+  10% { opacity: 0.8; }
+  50% { opacity: 0.55; transform: translate(14px, -120px) scale(1); }
+  85% { opacity: 0.4; }
+  100% { opacity: 0; transform: translate(-8px, -240px) scale(0.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forest-motes,
+  .gotr-glyph,
+  .provider-banner .pb-dot { animation: none; }
+}
+
+/* Honest provider status — compact chip in the HUD; full story on hover/focus */
+.provider-chip {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 24;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 11px;
+  font-size: 0.66rem;
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #eaf2e6;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(12, 20, 16, 0.82);
+  backdrop-filter: blur(6px);
+  cursor: default;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.provider-chip .pb-label { white-space: nowrap; }
+
+.provider-chip .pb-dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pb-pulse 2s ease-in-out infinite;
+}
+
+/* Detail popover — hidden until hover/focus, so judges see a calm chip by default */
+.provider-chip .pb-detail {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  width: min(320px, 78vw);
+  padding: 10px 12px;
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  text-align: left;
+  color: #eaf2e6;
+  background: rgba(10, 16, 13, 0.97);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.provider-chip:hover .pb-detail,
+.provider-chip:focus .pb-detail,
+.provider-chip:focus-within .pb-detail {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.provider-chip .pb-detail strong { color: #fff; font-weight: 700; }
+.provider-chip .pb-detail code {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+@keyframes pb-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.55; }
+}
+
+.pb-live { border-color: rgba(110, 236, 196, 0.4); }
+.pb-live .pb-dot { background: var(--phosphor); box-shadow: 0 0 9px 2px rgba(110, 236, 196, 0.65); }
+
+.pb-fallback { border-color: rgba(240, 216, 144, 0.45); }
+.pb-fallback .pb-dot { background: var(--gold-bright); box-shadow: 0 0 9px 2px rgba(240, 216, 144, 0.65); }
+
+.pb-replay { border-color: rgba(155, 140, 255, 0.45); }
+.pb-replay .pb-dot { background: var(--violet); box-shadow: 0 0 9px 2px rgba(155, 140, 255, 0.6); }
+
+.pb-rule { border-color: rgba(224, 112, 112, 0.45); }
+.pb-rule .pb-dot { background: var(--danger); box-shadow: 0 0 9px 2px rgba(224, 112, 112, 0.6); }

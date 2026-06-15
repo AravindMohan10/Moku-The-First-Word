@@ -245,16 +245,23 @@ def apply_sandbox_events(state: WorldState) -> WorldState:
     if state.turn == 2:
         state = add_food(state)
         state.last_events = ["A glimmer-fruit falls — first food signal opportunity."]
+    elif state.turn == 3:
+        state.weather = "rain"
+        state.last_events = ["A soft rain begins — the canopy glistens."]
     elif state.turn == 5:
         state = trigger_scarcity(state)
         state.last_events.append("Scarcity whispers. Someone may lie soon.")
+    elif state.turn == 6:
+        state.weather = "clear"
+        state.last_events = ["The shower passes. Sun filters through the leaves."]
     elif state.turn == 8:
         state = introduce_stranger(state)
     elif state.turn == 11:
         state = add_danger(state)
         state.last_events.append("Thorns bloom beside old trails.")
     elif state.turn == 14:
-        state = start_rain(state)
+        state.weather = "rain"
+        state.last_events = ["Rain returns — silver through the canopy."]
     return state
 
 
@@ -492,6 +499,26 @@ def _llm_policy(c: Creature, state: WorldState, r: random.Random) -> tuple[Creat
     ]
     strangers_nearby = [n for n in nearby if n.get("is_stranger")]
     retrieved = _retrieve_memories(c, state)
+    bond_hint = ""
+    if nearby:
+        ally = max(nearby, key=lambda n: n.get("trust", 0))
+        if ally.get("trust", 0) >= 2:
+            bond_hint = (
+                f"You trust {ally['name']} ({ally['trust']}). "
+                f"Consider signal, follow, or share_food with target {ally['name']} "
+                "to make the bond visible on the map."
+            )
+        elif state.scarcity_level >= 2 and state.turn >= 4:
+            bond_hint = (
+                "Scarcity is rising. Signal a nearby creature by name, or share_food if you hold food — "
+                "social actions draw trust lines on the map."
+            )
+        elif strangers_nearby and state.turn >= 8:
+            sname = strangers_nearby[0]["name"]
+            bond_hint = (
+                f"Stranger {sname} is nearby. Signal, follow, or share_food with target {sname} "
+                "to test whether their glyphs mean what you think."
+            )
     obs = {
         "creature": c.name,
         "personality": c.personality,
@@ -520,6 +547,8 @@ def _llm_policy(c: Creature, state: WorldState, r: random.Random) -> tuple[Creat
         "last_glyphs": c.last_glyphs,
         "turn": state.turn,
     }
+    if bond_hint:
+        obs["bond_opportunity"] = bond_hint
     system = (
         "You are the policy mind of a tiny forest creature in a glyph-only society. "
         "Invent 1-3 short glyph words per turn (2-8 lowercase letters, not English, not creature names). "
@@ -949,12 +978,13 @@ def _spawn_resources(state: WorldState, r: random.Random) -> None:
 
 def _event_tick(state: WorldState, r: random.Random) -> None:
     state.last_events.clear()
-    if r.random() < 0.08:
-        state.weather = "rain"
-        state.last_events.append("Rain drifts through the canopy.")
-    elif state.weather == "rain" and r.random() < 0.45:
-        state.weather = "clear"
-        state.last_events.append("Rain clears. Fog lingers.")
+    if state.watch_mode != "sandbox":
+        if r.random() < 0.08:
+            state.weather = "rain"
+            state.last_events.append("Rain drifts through the canopy.")
+        elif state.weather == "rain" and r.random() < 0.45:
+            state.weather = "clear"
+            state.last_events.append("Rain clears. Fog lingers.")
     if r.random() < 0.08:
         state.scarcity_level = min(4, state.scarcity_level + 1)
         state.last_events.append("Scarcity deepens.")
@@ -1066,7 +1096,22 @@ def _run_summary_fallback(state: WorldState) -> str:
             lines.append(f"A stranger ({', '.join(strangers)}) wandered in and rewired the social map.")
 
     if state.deception_events:
-        lines.append(f"Deception flickered {len(state.deception_events)} time(s) across the run.")
+        lines.append(
+            "Deception surfaced when "
+            + "; ".join(state.deception_events[-2:])
+            + "."
+        )
+
+    trust = _epilogue_trust_web(state)
+    if trust.get("strongest_distrust"):
+        d = trust["strongest_distrust"][0]
+        lines.append(
+            f"Trust split: {d['from']} kept score {d['score']} toward {d['toward']}."
+        )
+
+    evo = _epilogue_language_evolution(state)
+    if evo:
+        lines.append(evo[0] + ("." if not evo[0].endswith(".") else ""))
 
     if state.chronicle_log:
         last_line = str(state.chronicle_log[-1].get("text") or "").strip()
@@ -1150,7 +1195,7 @@ def _social_bond_pairs_from_state(state: WorldState) -> set[tuple[str, str]]:
     return pairs
 
 
-_EPILOGUE_MAX_SENTENCES = 5
+_EPILOGUE_MAX_SENTENCES = 8
 
 
 def _epilogue_allowed_tokens(highlights: dict[str, Any]) -> dict[str, set[str]]:
@@ -1250,14 +1295,14 @@ def _finalize_run_summary_text(
         return text, True, resp_latency, provider
 
     cleaned = _sanitize_epilogue(text, highlights)
-    if len(cleaned) >= 60 and _acceptable(cleaned):
+    if len(cleaned) >= 80 and _acceptable(cleaned):
         return cleaned, True, resp_latency, provider
 
     repair = summarize_run_finale_repair(text or cleaned, state.turn, highlights)
     if repair.ok:
         repaired = repair.content.strip()
         cleaned_repair = _sanitize_epilogue(repaired, highlights)
-        candidate = cleaned_repair if len(cleaned_repair) >= 60 else repaired
+        candidate = cleaned_repair if len(cleaned_repair) >= 80 else repaired
         if _acceptable(candidate):
             return candidate, True, resp_latency + repair.latency_ms, repair.provider
 
@@ -1418,6 +1463,93 @@ def _epilogue_stranger_arc(state: WorldState) -> dict[str, Any]:
     }
 
 
+def _epilogue_language_evolution(state: WorldState) -> list[str]:
+    notes: list[str] = list(state.evolution_notes[-6:])
+    for glyph, hist in sorted(state.glyph_history.items(), key=lambda kv: kv[1]["first_turn"])[:5]:
+        if hist.get("drift_noted"):
+            notes.append(
+                f"'{glyph}' may be drifting — born near {hist.get('first_context', 'neutral')}, "
+                f"now spread across contexts"
+            )
+        else:
+            notes.append(
+                f"'{glyph}' born turn {hist['first_turn']} by {hist['first_speaker']} "
+                f"near {hist.get('first_context', 'neutral')}"
+            )
+    return notes[:8]
+
+
+def _epilogue_glyph_readings(state: WorldState) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for glyph, hist in sorted(state.glyph_history.items(), key=lambda kv: kv[1]["first_turn"])[:6]:
+        readings: set[str] = set()
+        for t in state.trace_log:
+            interp = t.get("interpretation") or {}
+            if isinstance(interp, dict) and glyph in interp:
+                readings.add(str(interp[glyph])[:50])
+        rows.append(
+            {
+                "glyph": glyph,
+                "first_turn": hist.get("first_turn"),
+                "uses": state.dictionary_stats.get(glyph, {}).get("uses", 0),
+                "readings": sorted(readings)[:5],
+            }
+        )
+    return rows
+
+
+def _epilogue_trust_web(state: WorldState) -> dict[str, Any]:
+    peaks: list[dict[str, Any]] = []
+    valleys: list[dict[str, Any]] = []
+    for creature in state.creatures:
+        if not creature.trust:
+            continue
+        toward, score = max(creature.trust.items(), key=lambda kv: kv[1])
+        if score >= 1:
+            peaks.append({"from": creature.name, "toward": toward, "score": score})
+        low_toward, low_score = min(creature.trust.items(), key=lambda kv: kv[1])
+        if low_score <= -1:
+            valleys.append({"from": creature.name, "toward": low_toward, "score": low_score})
+    peaks.sort(key=lambda item: item["score"], reverse=True)
+    valleys.sort(key=lambda item: item["score"])
+    return {
+        "strongest_trust": peaks[:5],
+        "strongest_distrust": valleys[:5],
+    }
+
+
+def _epilogue_dictionary(state: WorldState) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for glyph, stats in sorted(
+        state.dictionary_stats.items(),
+        key=lambda item: item[1].get("uses", 0),
+        reverse=True,
+    )[:6]:
+        uses = max(1, stats.get("uses", 0))
+        neutral_count = max(
+            0,
+            stats.get("uses", 0)
+            - stats.get("food", 0)
+            - stats.get("danger", 0)
+            - stats.get("shelter", 0),
+        )
+        dominant = max(
+            ("food", stats.get("food", 0)),
+            ("danger", stats.get("danger", 0)),
+            ("shelter", stats.get("shelter", 0)),
+            ("neutral", neutral_count),
+            key=lambda item: item[1],
+        )[0]
+        rows.append(
+            {
+                "glyph": glyph,
+                "uses": stats.get("uses", 0),
+                "dominant_meaning": dominant,
+            }
+        )
+    return rows
+
+
 def _final_turn_moves(state: WorldState) -> list[dict[str, Any]]:
     """Exact last-turn actions for epilogue grounding."""
     moves: list[dict[str, Any]] = []
@@ -1448,6 +1580,7 @@ def generate_run_summary(state: WorldState) -> WorldState:
             "llm_ok": False,
             "latency_ms": 0,
             "turns": state.turn,
+            "glyph_drift": _epilogue_glyph_drift(state),
         }
         return state
     if state.turn < 1:
@@ -1493,6 +1626,7 @@ def generate_run_summary(state: WorldState) -> WorldState:
     social_bonds = _epilogue_social_bonds(state)
     stranger_arc = _epilogue_stranger_arc(state)
     final_turn_moves = _final_turn_moves(state)
+    trust_web = _epilogue_trust_web(state)
     highlights = {
         "watch_mode": state.watch_mode,
         "turn_count": state.turn,
@@ -1500,7 +1634,10 @@ def generate_run_summary(state: WorldState) -> WorldState:
         "scarcity_level": state.scarcity_level,
         "creature_names": creature_names,
         "deception_events": state.deception_events[-6:],
-        "field_notes": state.field_notes[-4:],
+        "field_notes": state.field_notes[-6:],
+        "language_evolution": _epilogue_language_evolution(state),
+        "glyph_readings": _epilogue_glyph_readings(state),
+        "emergent_dictionary": _epilogue_dictionary(state),
         "recent_traces": recent_traces,
         "action_counts": action_counts,
         "top_glyphs": [
@@ -1508,6 +1645,7 @@ def generate_run_summary(state: WorldState) -> WorldState:
         ],
         "glyph_drift": glyph_drift,
         "social_bonds": social_bonds,
+        "trust_web": trust_web,
         "stranger_arc": stranger_arc,
         "final_turn_moves": final_turn_moves,
         "strangers": _stranger_names(state),
@@ -1533,6 +1671,7 @@ def generate_run_summary(state: WorldState) -> WorldState:
         "latency_ms": latency_ms,
         "turns": state.turn,
         "provider": provider if resp_ok else "fallback",
+        "glyph_drift": glyph_drift,
     }
     return state
 
@@ -1722,7 +1861,7 @@ def render_map(state: WorldState) -> str:
 
 
 def render_creature_cards(state: WorldState) -> str:
-    from moku.render_world import _look, _creature_svg
+    from moku.render_world import _look, _creature_svg, _epithet
 
     cards = []
     for c in state.creatures:
@@ -1733,6 +1872,7 @@ def render_creature_cards(state: WorldState) -> str:
             f"<div class='roster-sprite' style='--glow:{look['glow']}'>{_creature_svg(c, 36)}</div>"
             f"<div class='roster-info'>"
             f"<div class='roster-name'>{c.name} <span class='mood'>{c.mood}</span></div>"
+            f"<div class='roster-epithet'>{_epithet(c.name)}</div>"
             f"<div class='roster-traits'>{', '.join(c.personality)}</div>"
             f"<div class='roster-stats'>hunger {c.hunger} · fear {c.fear} · energy {c.energy}</div>"
             f"<div class='roster-glyphs'>"

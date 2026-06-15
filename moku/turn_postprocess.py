@@ -81,8 +81,11 @@ def _free_moves(c: Any, state: Any) -> list[str]:
 
 
 def coerce_movement(c: Any, state: Any, turn: CreatureTurn) -> CreatureTurn:
-    """Nudge idle minds to roam — share_food clusters creatures; movement keeps the forest alive."""
-    if turn.action in {"move_north", "move_south", "move_east", "move_west", "follow", "gather", "hide", "share_food"}:
+    """Nudge idle minds to roam — never override social actions the model chose."""
+    if turn.action in {
+        "move_north", "move_south", "move_east", "move_west",
+        "follow", "gather", "hide", "share_food", "signal",
+    }:
         return turn
     food = _visible_food(c, state)
     if food and c.hunger >= 40 and (c.x, c.y) not in state.food:
@@ -95,7 +98,7 @@ def coerce_movement(c: Any, state: Any, turn: CreatureTurn) -> CreatureTurn:
             return turn.model_copy(update={"action": action})
         if free:
             return turn.model_copy(update={"action": free[0]})
-    if turn.action in ("stay", "signal"):
+    if turn.action == "stay":
         free = _free_moves(c, state)
         if free and (c.hunger >= 35 or len(_adjacent(state, c)) <= 1):
             return turn.model_copy(update={"action": free[0]})

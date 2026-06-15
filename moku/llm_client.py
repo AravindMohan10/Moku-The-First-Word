@@ -97,6 +97,38 @@ def warmup_local_backend() -> None:
     threading.Thread(target=_run, daemon=True, name="moku-llm-warmup").start()
 
 
+def start_modal_keepalive() -> None:
+    """Ping Modal on an interval so judges never hit a cold GPU (HF Space + demo days)."""
+    base_url = os.environ.get("MOKU_MODEL_BASE_URL", "").strip()
+    prefer = os.environ.get("MOKU_LLM_PROVIDER", "auto").lower()
+    if not base_url or prefer == "huggingface":
+        return
+    if os.environ.get("MOKU_MODAL_KEEPALIVE", "1").strip().lower() in {"0", "false", "no"}:
+        return
+
+    interval = max(120, int(os.environ.get("MOKU_KEEPALIVE_SECONDS", "240")))
+
+    def _loop() -> None:
+        import time
+
+        models_url = _local_chat_url(base_url).replace("/chat/completions", "/models")
+        api_key = os.environ.get("MOKU_MODEL_API_KEY", "local")
+        while True:
+            time.sleep(interval)
+            try:
+                requests.get(
+                    models_url,
+                    headers={"Authorization": f"Bearer {api_key}"},
+                    timeout=30,
+                )
+            except Exception:
+                pass
+
+    import threading
+
+    threading.Thread(target=_loop, daemon=True, name="moku-modal-keepalive").start()
+
+
 def _extract_json(text: str) -> str:
     text = text.strip()
     if "```" in text:
@@ -162,6 +194,11 @@ def _chat_hf(
         )
 
 
+def _local_model_name(requested: str) -> str:
+    """Modal vLLM may serve merged weights under a volume path — allow override."""
+    return os.environ.get("MOKU_MODEL_NAME", requested).strip() or requested
+
+
 def _chat_local(
     system: str,
     user: str,
@@ -175,9 +212,10 @@ def _chat_local(
     api_key = os.environ.get("MOKU_MODEL_API_KEY", "local")
     if not base_url:
         return LLMResponse("", "local", model, 0, False, "no local base url")
+    serve_model = _local_model_name(model)
     temp = temperature if temperature is not None else float(os.environ.get("MOKU_TEMPERATURE", "0.65"))
     body: dict[str, Any] = {
-        "model": model,
+        "model": serve_model,
         "temperature": temp,
         "max_tokens": max_tokens or int(os.environ.get("MOKU_MAX_TOKENS", "420")),
         "messages": [
@@ -193,12 +231,14 @@ def _chat_local(
         if local_json == "1":
             body["response_format"] = {"type": "json_object"}
     started = time.perf_counter()
+    connect_s = int(os.environ.get("MOKU_LOCAL_CONNECT_TIMEOUT", "12"))
+    read_s = int(os.environ.get("MOKU_LLM_TIMEOUT", "25"))
     try:
         res = requests.post(
             _local_chat_url(base_url),
             headers={"Authorization": f"Bearer {api_key}"},
             json=body,
-            timeout=int(os.environ.get("MOKU_LLM_TIMEOUT", "25")),
+            timeout=(connect_s, read_s),
         )
         res.raise_for_status()
         payload = res.json()
@@ -211,7 +251,7 @@ def _chat_local(
         return LLMResponse(
             content=content,
             provider="local",
-            model=model,
+            model=serve_model,
             latency_ms=latency,
             ok=bool(content),
         )
@@ -220,7 +260,7 @@ def _chat_local(
         return LLMResponse(
             content="",
             provider="local",
-            model=model,
+            model=serve_model,
             latency_ms=latency,
             ok=False,
             error=str(exc),
@@ -354,24 +394,26 @@ def summarize_run_finale(
     """Closing summary for a stopped run — the interesting arc in a few sentences."""
     system = (
         "You are the forest chronicler closing a field journal after a glyph-only creature run. "
-        "Write exactly 4-5 short sentences in past tense. Plain text — no lists, no markdown. "
-        "REQUIRED — include one sentence naming highlights.glyph_drift.dominant_glyph and cite "
-        "at least TWO creatures with DIFFERENT readings from highlights.glyph_drift.conflicting_readings "
-        "(e.g. \"nilisi meant food to Nia and alert to Sora\"). Use the summary_line as a guide. "
-        "REQUIRED — include one sentence on social bonds from highlights.social_bonds: "
-        "who shared food with whom, who followed whom, and who trusted whom most. "
-        "Use share_food_bonds, follow_bonds, and strongest_trust only. "
-        "If highlights.stranger_arc.summary_line is non-empty, REQUIRED: one sentence on the stranger "
-        "(name, dialect glyphs, or an interaction). "
-        "REQUIRED final sentence: list highlights.final_turn_moves exactly — each creature and "
-        "move direction/action from that list; do not invent different directions. "
-        "Other sentences may cover deception or key actions from recent_traces. "
-        "Warm tone is fine; cinematic fiction is not. "
-        "Do NOT invent sunsets, dusk, dawn, campfires, fireflies, stargazing, journeys, travel, "
-        "berries, mushrooms, meals by fire, or scenic closure absent from the traces. "
-        "Never mention villages, towns, cities, homes, or leaving the forest. "
-        "Only name creatures in creature_names. "
-        "No generic filler — every sentence must cite concrete creatures, glyphs, or bonds from the JSON."
+        "Write exactly 6-8 short sentences in past tense. Plain text — no lists, no markdown. "
+        "Voice: curious field scientist who watched the Details panel — warm, specific, slightly wonder-struck. "
+        "Weave the run like a story that explains what happened, using ONLY facts in the JSON highlights. "
+        "Cover these layers across the sentences (one idea per sentence, skip empty sections): "
+        "(1) Setting arc: turn_count, weather, scarcity_level — how pressure changed the forest. "
+        "(2) Language birth: one line from language_evolution on how the first words appeared or drifted. "
+        "(3) Dominant glyph: name glyph_drift.dominant_glyph and TWO creatures with DIFFERENT readings "
+        "from glyph_drift.conflicting_readings or glyph_readings (e.g. soliko meant food to Lumo and warning to Nia). "
+        "(4) Social graph: who shared food, followed whom, or signaled whom — from social_bonds only; "
+        "cite share_food_bonds and follow_bonds counts when present. "
+        "(5) Trust web: strongest trust AND one distrust from trust_web if present. "
+        "(6) Stranger arc: if stranger_arc.summary_line is non-empty, name the Stray, dialect glyphs, "
+        "and one colony interaction. "
+        "(7) Deception: if deception_events is non-empty, name creature and glyph from one event. "
+        "(8) Final beat: last sentence lists highlights.final_turn_moves — each creature and exact action; "
+        "do not invent different directions or social verbs unless action is signal/follow/share_food. "
+        "Use field_notes for color only when they add a concrete fact already in the JSON. "
+        "Never claim signal/follow/share unless traces or social_bonds prove it. "
+        "Do NOT invent sunsets, dusk, campfires, journeys, villages, or leaving the forest. "
+        "Only name creatures in creature_names. Every sentence must cite concrete glyphs, creatures, or bonds."
     )
     payload = {
         "turn_count": turn_count,
@@ -391,16 +433,13 @@ def summarize_run_finale_repair(
 ) -> LLMResponse:
     """Rewrite a rejected epilogue — keep warmth, drop travel/place inventions."""
     system = (
-        "Rewrite this forest epilogue in exactly 4-5 short past-tense sentences. "
+        "Rewrite this forest epilogue in exactly 6-8 short past-tense sentences. "
         "Keep creature names, glyphs, and actions from the JSON highlights only. "
-        "One sentence MUST name highlights.glyph_drift.dominant_glyph with two creatures "
-        "and their conflicting readings. "
-        "One sentence MUST describe social bonds: share_food, follow, or trust from "
-        "highlights.social_bonds. "
-        "If highlights.stranger_arc.summary_line exists, one sentence MUST use it. "
-        "Final sentence MUST match highlights.final_turn_moves for each creature's action. "
-        "Remove sunsets, dusk, campfires, fireflies, stars, journeys, travel, invented meals, "
-        "and place names. No villages, towns, or leaving the forest. Plain text only."
+        "Weave: weather/scarcity, language_evolution, glyph drift with two conflicting readings, "
+        "social_bonds (share/follow), trust_web trust and distrust, stranger_arc if present, "
+        "one deception_events line if present, and final_turn_moves in the last sentence. "
+        "Never claim signal/follow/share unless social_bonds or final_turn_moves prove it. "
+        "Remove sunsets, dusk, campfires, journeys, and place names. Plain text only."
     )
     payload = {"turn_count": turn_count, "highlights": highlights, "draft_to_fix": draft[:800]}
     user = f"Repair this epilogue:\n{json.dumps(payload, ensure_ascii=True)}"
